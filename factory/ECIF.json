@@ -1,0 +1,9 @@
+{
+	"name": "ECIF",
+	"location": "westus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "91ec2fa7-a83c-490b-b50e-2c294a5f715d",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}
