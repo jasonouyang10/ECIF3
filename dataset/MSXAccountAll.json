@@ -1,0 +1,19 @@
+{
+	"name": "MSXAccountAll",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azoedbisqlprod",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MSX General"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "MSXAccountAll"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

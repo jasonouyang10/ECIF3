@@ -1,0 +1,37 @@
+{
+	"name": "msx competitor",
+	"properties": {
+		"activities": [
+			{
+				"name": "MSX Engagement Competitor",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "msx competitor",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "Ad Hoc"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-04-28T16:53:33Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

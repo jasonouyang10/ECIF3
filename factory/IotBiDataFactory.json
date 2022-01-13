@@ -1,0 +1,9 @@
+{
+	"name": "IotBiDataFactory",
+	"location": "westus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "72b26da2-69b1-4861-abfc-62e7013596e4",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"name": "azsopportunity",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Azure Sphere Opportunity",
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=iotbireportingsql.database.windows.net;Initial Catalog=AzureSphereMSX",
+			"servicePrincipalId": "3c4bff2e-cd35-4ba1-9a95-476924a4693e",
+			"servicePrincipalKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "iotbiappreg"
+			},
+			"tenant": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		}
+	}
+}

@@ -1,0 +1,81 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "IotBiDataFactory"
+		},
+		"MSXSalesProgram_connectionString": {
+			"value": ""
+		},
+		"azoedbisqlprod_connectionString": {
+			"value": ""
+		},
+		"azoedbisqlprod_azuresphere_connectionString": {
+			"value": ""
+		},
+		"azoedbisqlprod_msx_edl_connectionString": {
+			"value": ""
+		},
+		"azoedbisqlprod_msx_fy21_connectionString": {
+			"value": ""
+		},
+		"azoedbisqlprod_msxbysalesprogram_connectionString": {
+			"value": ""
+		},
+		"azoedbisqlprod_msxbysalesprogram_password": {
+			"value": ""
+		},
+		"azoedbisqlprodvm_connectionString": {
+			"value": ""
+		},
+		"azsopportunity_connectionString": {
+			"value": ""
+		},
+		"AzureKeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://iotbikeyvault.vault.azure.net/"
+		},
+		"MSXSalesProgram_properties_typeProperties_servicePrincipalId": {
+			"value": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
+		"MSXSalesProgram_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"azoedbisqlprod_properties_typeProperties_servicePrincipalId": {
+			"value": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
+		"azoedbisqlprod_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"azoedbisqlprod_azuresphere_properties_typeProperties_userName": {
+			"value": "redmond\\v-jouyang"
+		},
+		"azoedbisqlprod_msx_edl_properties_typeProperties_userName": {
+			"value": "redmond\\v-jouyang"
+		},
+		"azoedbisqlprod_msx_fy21_properties_typeProperties_userName": {
+			"value": "redmond\\v-jouyang"
+		},
+		"azoedbisqlprod_msxbysalesprogram_properties_typeProperties_userName": {
+			"value": "redmond\\v-fouyang"
+		},
+		"azoedbisqlprodvm_properties_typeProperties_userName": {
+			"value": "redmond\\v-jouyang"
+		},
+		"azsopportunity_properties_typeProperties_servicePrincipalId": {
+			"value": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
+		"azsopportunity_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"msxdatalake_properties_typeProperties_url": {
+			"value": "https://cseoedlprodadlsg2wus201.dfs.core.windows.net/"
+		},
+		"msxdatalake_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"msxdatalake_properties_typeProperties_servicePrincipalId": {
+			"value": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		}
+	}
+}

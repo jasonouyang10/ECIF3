@@ -1,0 +1,1178 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "IotBiDataFactory"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/msxprocesssstage')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "IOT Engagments"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "msxprocessstage"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "msxprocessstage",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [],
+					"script": "source(output(\n\t\tStageID as string,\n\t\tStageName as string,\n\t\tProcessID as string,\n\t\tProcessName as string,\n\t\tActive as integer,\n\t\tOdsModifiedDate as timestamp,\n\t\tViewName as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\tStageCategory as string,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_processstage/v1/standard') ~> msxprocessstage\nmsxprocessstage sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msxproduct')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "IOT Engagments"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "msxproduct"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "msxproduct",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Filter1"
+						}
+					],
+					"script": "source(output(\n\t\tProductId as string,\n\t\tDefaultUoMId as string,\n\t\tDefaultUoMScheduleId as string,\n\t\tPriceLevelId as string,\n\t\tBusinessScenarioCode as integer,\n\t\tBusinessScenario as string,\n\t\tBusinessScenarioSeqNo as long,\n\t\tPoolCode as integer,\n\t\tPool as string,\n\t\tPoolSeqNo as long,\n\t\tPrimaryProductCode as integer,\n\t\tPrimaryProduct as string,\n\t\tPrimaryProductSeqNo as long,\n\t\tProductTypeCode as integer,\n\t\tProductType as string,\n\t\tProductTypeSeqNo as long,\n\t\tItemGroup as string,\n\t\tItemName as string,\n\t\tModel as string,\n\t\tProductName as string,\n\t\tProductFamily as string,\n\t\tProductNumber as string,\n\t\tQuantityDecimal as integer,\n\t\tRevSumCategory as string,\n\t\tRevSumDivision as string,\n\t\tSuperRevSumDivision as string,\n\t\tManufacturer as string,\n\t\tVersion as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tStateCode as integer,\n\t\tStatusSeqNo as long,\n\t\tStatus as string,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tVersionNumber as long,\n\t\tTenantId as integer,\n\t\tParentProductId as string,\n\t\tProductStructureCode as integer,\n\t\tProductStructure as string,\n\t\tProductStructureSeqNo as long,\n\t\tPfamSkid as string,\n\t\tProdSkid as string,\n\t\tOdsStatus as integer,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\tactivelyused as boolean,\n\t\tproductfriendlyname as string,\n\t\tSearchKeywords as string,\n\t\tsolutionareacode as integer,\n\t\tsolutionarea as string,\n\t\tsolutionareaSeqNo as long,\n\t\twhentouse as string,\n\t\tbaseproductcode as integer,\n\t\tbaseproductSeqNo as long,\n\t\tbaseproduct as string,\n\t\tvendorid as string,\n\t\tvendorpartnumber as string,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_product/v1/standard') ~> msxproduct\nmsxproduct filter(OdsStatus==0) ~> Filter1\nFilter1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msxsystemuser')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "IOT Engagments"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "MSXsystemuser"
+						},
+						{
+							"dataset": {
+								"referenceName": "oemuser",
+								"type": "DatasetReference"
+							},
+							"name": "oemuser"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "msxsystemuser",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Exists1"
+						}
+					],
+					"script": "source(output(\n\t\tSystemUserId as string,\n\t\tBusinessUnitId as string,\n\t\tDefaultMailbox as string,\n\t\tParentSystemUserId as string,\n\t\tQueueId as string,\n\t\tSiteId as string,\n\t\tTerritoryId as string,\n\t\tAccessModeCode as integer,\n\t\tAccessMode as string,\n\t\tAccessModeSeqNo as long,\n\t\tCalTypeCode as integer,\n\t\tCalTypeSeqNo as long,\n\t\tCalType as string,\n\t\tInviteStatusCode as integer,\n\t\tInviteStatus as string,\n\t\tInviteStatusSeqNo as long,\n\t\tIsNotificationSentCode as integer,\n\t\tIsNotificationSentSeqNo as long,\n\t\tIsNotificationSent as string,\n\t\tPreferredAddressCode as integer,\n\t\tPreferredAddress as string,\n\t\tPreferredAddressSeqNo as long,\n\t\tPreferredPhoneCode as integer,\n\t\tPreferredPhoneSeqNo as long,\n\t\tPreferredPhone as string,\n\t\tRoleCode as integer,\n\t\tRole as string,\n\t\tRoleSeqNo as long,\n\t\tAddress1_AddressId as string,\n\t\tAddress1_City as string,\n\t\tAddress1_Country as string,\n\t\tAddress1_Fax as string,\n\t\tAddress1_Line1 as string,\n\t\tAddress1_Line2 as string,\n\t\tAddress1_Line3 as string,\n\t\tAddress1_PostalCode as string,\n\t\tAddress1_StateOrProvince as string,\n\t\tAddress1_Telephone1 as string,\n\t\tAddress1_Telephone3 as string,\n\t\tDomainName as string,\n\t\tDPNSignDate as timestamp,\n\t\tFirstName as string,\n\t\tHomePhone as string,\n\t\tInternalEmailAddress as string,\n\t\tIsDisabled as boolean,\n\t\tLastName as string,\n\t\tMiddleName as string,\n\t\tMobileAlertEmail as string,\n\t\tMobilePhone as string,\n\t\tPersonalEmailAddress as string,\n\t\tTitle as string,\n\t\tWindowsLiveId as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tVersionNumber as long,\n\t\tTenantId as integer,\n\t\tOdsStatus as integer,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_systemuser/v1/sensitive') ~> MSXsystemuser\nsource(output(\n\t\tsystemuserid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> oemuser\nMSXsystemuser, oemuser exists(lower(MSXsystemuser@SystemUserId) == lower(oemuser@systemuserid),\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists1\nExists1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msxsystemuser_All')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "MSX General"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "MSXsystemuser"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "msxsystemuserAll",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [],
+					"script": "source(output(\n\t\tSystemUserId as string,\n\t\tBusinessUnitId as string,\n\t\tDefaultMailbox as string,\n\t\tParentSystemUserId as string,\n\t\tQueueId as string,\n\t\tSiteId as string,\n\t\tTerritoryId as string,\n\t\tAccessModeCode as integer,\n\t\tAccessMode as string,\n\t\tAccessModeSeqNo as long,\n\t\tCalTypeCode as integer,\n\t\tCalTypeSeqNo as long,\n\t\tCalType as string,\n\t\tInviteStatusCode as integer,\n\t\tInviteStatus as string,\n\t\tInviteStatusSeqNo as long,\n\t\tIsNotificationSentCode as integer,\n\t\tIsNotificationSentSeqNo as long,\n\t\tIsNotificationSent as string,\n\t\tPreferredAddressCode as integer,\n\t\tPreferredAddress as string,\n\t\tPreferredAddressSeqNo as long,\n\t\tPreferredPhoneCode as integer,\n\t\tPreferredPhoneSeqNo as long,\n\t\tPreferredPhone as string,\n\t\tRoleCode as integer,\n\t\tRole as string,\n\t\tRoleSeqNo as long,\n\t\tAddress1_AddressId as string,\n\t\tAddress1_City as string,\n\t\tAddress1_Country as string,\n\t\tAddress1_Fax as string,\n\t\tAddress1_Line1 as string,\n\t\tAddress1_Line2 as string,\n\t\tAddress1_Line3 as string,\n\t\tAddress1_PostalCode as string,\n\t\tAddress1_StateOrProvince as string,\n\t\tAddress1_Telephone1 as string,\n\t\tAddress1_Telephone3 as string,\n\t\tDomainName as string,\n\t\tDPNSignDate as timestamp,\n\t\tFirstName as string,\n\t\tHomePhone as string,\n\t\tInternalEmailAddress as string,\n\t\tIsDisabled as boolean,\n\t\tLastName as string,\n\t\tMiddleName as string,\n\t\tMobileAlertEmail as string,\n\t\tMobilePhone as string,\n\t\tPersonalEmailAddress as string,\n\t\tTitle as string,\n\t\tWindowsLiveId as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tVersionNumber as long,\n\t\tTenantId as integer,\n\t\tOdsStatus as integer,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_systemuser/v1/sensitive') ~> MSXsystemuser\nMSXsystemuser sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msxtask')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "IOT Engagments"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "msxtask"
+						},
+						{
+							"dataset": {
+								"referenceName": "MsxEngagement",
+								"type": "DatasetReference"
+							},
+							"name": "engagement"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "msxtask",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Filter1"
+						},
+						{
+							"name": "Exists1"
+						}
+					],
+					"script": "source(output(\n\t\tActivityId as string,\n\t\tOwnerId as string,\n\t\tRegardingObjectId as string,\n\t\tPriorityCode as integer,\n\t\tPriority as string,\n\t\tPrioritySeqNo as long,\n\t\tActualDurationMinutes as integer,\n\t\tDescription as string,\n\t\tRegardingEntityName as string,\n\t\tScheduledEnd as timestamp,\n\t\tSubject as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tStateCode as integer,\n\t\tStatus as string,\n\t\tStatusSeqNo as long,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tVersionNumber as long,\n\t\tTenantId as integer,\n\t\ttaskcategorycode as integer,\n\t\ttaskcategory as string,\n\t\ttaskcategorySeqNo as long,\n\t\tOdsStatus as integer,\n\t\towningBusinessUnit as string,\n\t\tactivitycategorycode as integer,\n\t\tactivitycategorySeqNo as long,\n\t\tactivitycategory as string,\n\t\tStartDate as timestamp,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\tdurationcode as integer,\n\t\tduration as string,\n\t\tdurationSeqNo as long,\n\t\tcustomercontactid as string,\n\t\tDurationGBB as integer,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_task/v1/standard') ~> msxtask\nsource(output(\n\t\tEngagementId as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tAccountId as string,\n\t\tBusinessInvestmentFunds as double,\n\t\tContactId as string,\n\t\tEngagementNumber as string,\n\t\tengagementstatuscode as integer,\n\t\tengagementstatus as string,\n\t\tengagementstatusSeqNo as long,\n\t\tEntitlementsActivated as boolean,\n\t\tEstCompletionDate as timestamp,\n\t\tEstStartDate as timestamp,\n\t\tIdentifyFutureLeads as boolean,\n\t\tEngagementName as string,\n\t\tNextSteps as string,\n\t\tOriginatingOpportunity as string,\n\t\tPartnerAccountId as string,\n\t\tProductId as string,\n\t\tRelatedOpportunity as string,\n\t\tSummary as string,\n\t\tValidateInitialUsage as boolean,\n\t\tWorkloadsActivated as boolean,\n\t\tworkloadtypecode as integer,\n\t\tworkloadtype as string,\n\t\tworkloadtypeSeqNo as long,\n\t\tOwnerId as string,\n\t\tTenantId as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tVersionNumber as long,\n\t\tstatecode as integer,\n\t\tStatusSeqNo as long,\n\t\tStatus as string,\n\t\tstatuscode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tTransactionCurrencyId as string,\n\t\tSubscriptionId as string,\n\t\tEngagementTenantId as string,\n\t\tOSS as boolean,\n\t\tNotificationBase as timestamp,\n\t\tCSPLink as string,\n\t\tengagementhealthcode as integer,\n\t\tengagementhealth as string,\n\t\tengagementhealthSeqNo as long,\n\t\tEngagementScore as integer,\n\t\tObjectivesmet as boolean,\n\t\tqualifyengagementid as string,\n\t\towningBusinessUnit as string,\n\t\tpreferredazureregioncode as integer,\n\t\tpreferredazureregion as string,\n\t\tpreferredazureregionSeqNo as long,\n\t\tsolutionareacode as integer,\n\t\tsolutionarea as string,\n\t\tsolutionareaSeqNo as long,\n\t\thealthcomments as string,\n\t\tlineofbusinessdivisioncode as integer,\n\t\tlineofbusinessdivision as string,\n\t\tlineofbusinessdivisionSeqNo as long,\n\t\tprimarycompetitor as string,\n\t\tcompetethreatlevelcode as integer,\n\t\tcompetethreatlevel as string,\n\t\tcompetethreatlevelSeqNo as long,\n\t\tothercompetitor as string,\n\t\tmsservicesinvolvedcode as integer,\n\t\tmsservicesinvolved as string,\n\t\tmsservicesinvolvedSeqNo as long,\n\t\tNonRecurringACR as double,\n\t\tNonRecurringUsersDevices as integer,\n\t\tPartnerReferral as string,\n\t\tcustomerimmersionexperiencecode as integer,\n\t\tcustomerimmersionexperience as string,\n\t\tcustomerimmersionexperienceSeqNo as long,\n\t\tdigitaltrainingcode as integer,\n\t\tdigitaltraining as string,\n\t\tdigitaltrainingSeqNo as long,\n\t\texcitementdayscode as integer,\n\t\texcitementdays as string,\n\t\texcitementdaysSeqNo as long,\n\t\tofficeofcxocode as integer,\n\t\tofficeofcxoSeqNo as long,\n\t\tofficeofcxo as string,\n\t\tPartnerEngagedBy as string,\n\t\tacmplancode as integer,\n\t\tacmplan as string,\n\t\tacmplanSeqNo as long,\n\t\tarchitecturedesignapprovedcode as integer,\n\t\tarchitecturedesignapproved as string,\n\t\tarchitecturedesignapprovedSeqNo as long,\n\t\tbusinessgovernanceplancode as integer,\n\t\tbusinessgovernanceplan as string,\n\t\tbusinessgovernanceplanSeqNo as long,\n\t\tcompleteworkshop as timestamp,\n\t\tconferencingenabledcode as integer,\n\t\tconferencingenabled as string,\n\t\tconferencingenabledSeqNo as long,\n\t\tconfirmdeliverysuccesscode as integer,\n\t\tconfirmdeliverysuccess as string,\n\t\tconfirmdeliverysuccessSeqNo as long,\n\t\tcreatebusinesscasecode as integer,\n\t\tcreatebusinesscase as string,\n\t\tcreatebusinesscaseSeqNo as long,\n\t\tcreatecsspcode as integer,\n\t\tcreatecssp as string,\n\t\tcreatecsspSeqNo as long,\n\t\tcreatesuccessplancode as integer,\n\t\tcreatesuccessplan as string,\n\t\tcreatesuccessplanSeqNo as long,\n\t\tcustomerreadinessassessmentcode as integer,\n\t\tcustomerreadinessassessment as string,\n\t\tcustomerreadinessassessmentSeqNo as long,\n\t\tdeliverinitialpitchcode as integer,\n\t\tdeliverinitialpitch as string,\n\t\tdeliverinitialpitchSeqNo as long,\n\t\tendusertrainingmwteamcode as integer,\n\t\tendusertrainingmwteam as string,\n\t\tendusertrainingmwteamSeqNo as long,\n\t\tengagefasttrackcode as integer,\n\t\tengagefasttrack as string,\n\t\tengagefasttrackSeqNo as long,\n\t\tgovernancebenchmarkcode as integer,\n\t\tgovernancebenchmark as string,\n\t\tgovernancebenchmarkSeqNo as long,\n\t\tidentifypriorityprojectscode as integer,\n\t\tidentifypriorityprojects as string,\n\t\tidentifypriorityprojectsSeqNo as long,\n\t\tinfrastructureassessmentcode as integer,\n\t\tinfrastructureassessment as string,\n\t\tinfrastructureassessmentSeqNo as long,\n\t\tmeetingroomsenabledcode as integer,\n\t\tmeetingroomsenabled as string,\n\t\tmeetingroomsenabledSeqNo as long,\n\t\tmigrationassessmentcode as integer,\n\t\tmigrationassessment as string,\n\t\tmigrationassessmentSeqNo as long,\n\t\toperationalreadinessassessmentcode as integer,\n\t\toperationalreadinessassessmentSeqNo as long,\n\t\toperationalreadinessassessment as string,\n\t\torgreadinessassessmentcode as integer,\n\t\torgreadinessassessment as string,\n\t\torgreadinessassessmentSeqNo as long,\n\t\tperformpilotcode as integer,\n\t\tperformpilotSeqNo as long,\n\t\tperformpilot as string,\n\t\tscalemigrationcode as integer,\n\t\tscalemigration as string,\n\t\tscalemigrationSeqNo as long,\n\t\tscenariocode as integer,\n\t\tscenarioSeqNo as long,\n\t\tscenario as string,\n\t\tselectsalesplaycode as integer,\n\t\tselectsalesplay as string,\n\t\tselectsalesplaySeqNo as long,\n\t\tsendfinalproposalcode as integer,\n\t\tsendfinalproposalSeqNo as long,\n\t\tsendfinalproposal as string,\n\t\tsendproposalcode as integer,\n\t\tsendproposal as string,\n\t\tsendproposalSeqNo as long,\n\t\tskillingplanagreementcode as integer,\n\t\tskillingplanagreementSeqNo as long,\n\t\tskillingplanagreement as string,\n\t\tskillsgapassessmentcode as integer,\n\t\tskillsgapassessment as string,\n\t\tskillsgapassessmentSeqNo as long,\n\t\tsuccesscriteriaagreedcode as integer,\n\t\tsuccesscriteriaagreed as string,\n\t\tsuccesscriteriaagreedSeqNo as long,\n\t\tsuccessplansignoffcode as integer,\n\t\tsuccessplansignoffSeqNo as long,\n\t\tsuccessplansignoff as string,\n\t\tteamsassessmentcode as integer,\n\t\tteamsassessment as string,\n\t\tteamsassessmentSeqNo as long,\n\t\tupdatesuccessplancode as integer,\n\t\tupdatesuccessplanSeqNo as long,\n\t\tupdatesuccessplan as string,\n\t\tsecondarypartner as string,\n\t\tadoptionmonitoring as string,\n\t\tadoptionmonitoringSeqNo as long,\n\t\tcomplexityassessment as string,\n\t\tcomplexityassessmentSeqNo as long,\n\t\tconductbusinessreview as string,\n\t\tconductbusinessreviewSeqNo as long,\n\t\tconsenttosendtopartner as string,\n\t\tconsenttosendtopartnerSeqNo as long,\n\t\tcreateactionplan as string,\n\t\tcreateactionplanSeqNo as long,\n\t\tcsmprogramorientation as string,\n\t\tcsmprogramorientationSeqNo as long,\n\t\tdefinebusinessoutcomes as string,\n\t\tdefinebusinessoutcomesSeqNo as long,\n\t\tdefineprojectvision as string,\n\t\tdefineprojectvisionSeqNo as long,\n\t\tgolive as string,\n\t\tgoliveSeqNo as long,\n\t\thealthmonitoring as string,\n\t\thealthmonitoringSeqNo as long,\n\t\tknowyourcustomer as string,\n\t\tknowyourcustomerSeqNo as long,\n\t\torgmaturityassessmentSeqNo as long,\n\t\torgmaturityassessment as string,\n\t\tprosciassessment as string,\n\t\tprosciassessmentSeqNo as long,\n\t\tsecurereference as string,\n\t\tsecurereferenceSeqNo as long,\n\t\tsolutioninnovationSeqNo as long,\n\t\tsolutioninnovation as string,\n\t\tactualclosedate as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string,\n\t\tbdmroundtableindustrySeqNo as long,\n\t\tbdmroundtablelobSeqNo as long,\n\t\tcustomersuccessworkshopSeqNo as long,\n\t\trollupestrevenue as decimal(10,0),\n\t\trollupestseats as integer,\n\t\tsecuremvpcommitment as string,\n\t\tsecuremvpcommitmentSeqNo as long,\n\t\tsendcustomeroutreach as string,\n\t\tsendcustomeroutreachcode as integer,\n\t\tsendcustomeroutreachSeqNo as long,\n\t\tspecialtycomputecapacityrequiredSeqNo as long,\n\t\tsuccessclinicSeqNo as long,\n\t\tbdmroundtableindustry as string,\n\t\tbdmroundtablelob as string,\n\t\tCJSDocumentLink as string,\n\t\tCJSDocumentLinkCreatedDate as timestamp,\n\t\tClosedReason as string,\n\t\tcustomersuccessworkshop as string,\n\t\tsalesplay as string,\n\t\tsalesplaySeqNo as long,\n\t\tspecialtycomputecapacityrequired as string,\n\t\tsuccessclinic as string,\n\t\ttechnicalcapability as string,\n\t\ttechnicalcapabilitySeqNo as long,\n\t\tnominatetoazureaccelerateSeqNo as long,\n\t\tsetupazureservicehealthalertsSeqNo as long,\n\t\tvalidateprojectresultSeqNo as long,\n\t\tagreekpisforproofofvalueSeqNo as long,\n\t\tapproveimplementationproposalSeqNo as long,\n\t\tbuildappmodernizationinnovationplanSeqNo as long,\n\t\tbuildcloudadoptionplanSeqNo as long,\n\t\tbuildmajorincidentresponseplanSeqNo as long,\n\t\tbuildmvpSeqNo as long,\n\t\tcompleteappassessmentSeqNo as long,\n\t\tcompletedevopsmaturityassessmentSeqNo as long,\n\t\tcompletehandoffSeqNo as long,\n\t\tcompleteproofofvalueSeqNo as long,\n\t\tconductwellarchitectedreviewSeqNo as long,\n\t\tcreateazuredevtestsubscriptionSeqNo as long,\n\t\tcreatecustomersuccessplanSeqNo as long,\n\t\tdefinemigrationplanSeqNo as long,\n\t\tdefinesupportplanSeqNo as long,\n\t\tdeliveraibusinessschoolSeqNo as long,\n\t\tdeliveraibusinessschooltrainingSeqNo as long,\n\t\tdeliverlandingzoneSeqNo as long,\n\t\tdeliverskillingplanSeqNo as long,\n\t\tdeliverstatementoffindingsSeqNo as long,\n\t\tdeploylandingzoneSeqNo as long,\n\t\tengagecosellprioritizedpartnerSeqNo as long,\n\t\tensuregithublicensesprocuredSeqNo as long,\n\t\testablishbusinessreviewrhythmSeqNo as long,\n\t\texecuteadoptionworkshopSeqNo as long,\n\t\texecutesuccessplanningworkshopSeqNo as long,\n\t\tidentifycosellopportunitySeqNo as long,\n\t\tidentifycustomerdecisionmakersSeqNo as long,\n\t\tidentifygithubsellerandservicesSeqNo as long,\n\t\tidentifynextazureprojectSeqNo as long,\n\t\tidentifypartnermicrosoftservicesSeqNo as long,\n\t\tnominateforampSeqNo as long,\n\t\tnominateforcetSeqNo as long,\n\t\tnominatetoanalyticsaiaccelerateprogramSeqNo as long,\n\t\tNonRecurringUsersDevicesModernWork as integer,\n\t\tpartnerconductspartnerworkshopSeqNo as long,\n\t\tpilotsthroughazureaccelerateSeqNo as long,\n\t\tprovisionapptestproductionenvironmentsSeqNo as long,\n\t\tremediatetechnicalblockersSeqNo as long,\n\t\tRollupEstActiveUsersDevicesModernWork as integer,\n\t\tsecurebdmapprovalofcsspSeqNo as long,\n\t\tsecurecustomercommitmentSeqNo as long,\n\t\tseekapprovalforlandingzoneSeqNo as long,\n\t\tsubmitecifrequestSeqNo as long,\n\t\tcompletechangemanagementworkshopSeqNo as long,\n\t\tcompletedeploymentSeqNo as long,\n\t\tconductenvisioningworkshoporcieSeqNo as long,\n\t\tcoordinatedeploymentplanSeqNo as long,\n\t\tdeliverinadayworkshopsSeqNo as long,\n\t\tdelivertrainingSeqNo as long,\n\t\tengagesolutionassessmentprogramSeqNo as long,\n\t\texecutecustomersuccessplanSeqNo as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> engagement\nExists1 filter(OdsStatus==0) ~> Filter1\nmsxtask, engagement exists(RegardingObjectId == EngagementId,\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists1\nFilter1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MSX Engagement from EDL TO AZSQL')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "MSX Engagement",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "EngagementTeam",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "msxEngagment",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Engagements": {},
+									"engagementteam": {},
+									"oemuser": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "EngagementTeam",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "EngagementTeam",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"EngagementTeam": {},
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "MSXmilestone",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "MSX Engagement",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MSXmilestone",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Milestone": {},
+									"engagment": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "MSXAccount",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "MSX Engagement",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MSXAccount",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"MSXAccount": {},
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 16,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "MSXStringMap",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MSXStringMap",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "msxbpf",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "MSX Engagement",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "msxbpf",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"bpf": {},
+									"engagement": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "msxnote",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "MSX Engagement",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "msxnote",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"msxnote": {},
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "msxcampaign",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "msxcampaign",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "MSXPartnerAccount",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MSXPartnerAccount",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"MSXPartner": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "msxprocesssstage",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "msxprocesssstage",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"msxprocessstage": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "msxtask",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "MSX Engagement",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "msxtask",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"msxtask": {},
+									"engagement": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "msxsystemuser",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "msxsystemuser",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"MSXsystemuser": {},
+									"oemuser": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "MSXOpportunity",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "MSX Engagement",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MSXOpportunity",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"msxopportunity": {},
+									"engagement": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "MSX"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-12-27T23:31:20Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/msxprocesssstage')]",
+				"[concat(variables('factoryId'), '/dataflows/msxtask')]",
+				"[concat(variables('factoryId'), '/dataflows/msxsystemuser')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MSXAllUsers')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "msxsystemuser_All",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "msxsystemuser_All",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"MSXsystemuser": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-03-24T02:39:15Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/msxsystemuser_All')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PartnerReferral')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "PartnerReferral",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "PartnerReferral",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"PartnerReferral": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Ad Hoc"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-04-28T16:53:32Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Sales Program related Engagement')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "SalesProgram",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "SalesProgram",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"SalesProgram": {},
+									"EngagementSalesProgram": {},
+									"sink1": {},
+									"sink2": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "Engagement",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "SalesProgram",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "EngagementRelated",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Engagement": {},
+									"engagementsaleprogram": {},
+									"Milestone": {},
+									"EngagementTeam": {},
+									"sink1": {},
+									"sink2": {},
+									"sink3": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "AccountRelated",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Engagement",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "AccountRelated",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Account": {},
+									"engagement": {},
+									"Partner": {},
+									"SystemUser": {},
+									"engagementteam": {},
+									"EngagementProcess": {},
+									"sink1": {},
+									"sink2": {},
+									"sink3": {},
+									"msxspEnagementTeam": {},
+									"msxspEngagementStage": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-11-26T16:16:16Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msx competitor')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "MSX Engagement Competitor",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "msx competitor",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"MSXcompetior": {},
+									"MSXEngagement": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Ad Hoc"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-04-28T16:53:33Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/salesProcess not in use')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "SalesProcess",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "SalesProcess",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"SalesProcessOEMIOT": {},
+									"SaleProcessLeadToOppOEMIOT": {},
+									"sink1": {},
+									"sink2": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-11-26T16:16:16Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Master pipeeline IOT Engagement')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute Pipeline1",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Engagement from EDL to AZ SQLDB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CopyMSXDatatoSQLVM",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Stored procedure1",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Execute Pipeline1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[SP_MSX_Run_EDL]"
+						},
+						"linkedServiceName": {
+							"referenceName": "azoedbisqlprod_msx_fy21",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Engagement from EDL to AZ SQLDB",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "MSX Engagement from EDL TO AZSQL",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "MSX"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-12-27T23:31:21Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/MSX Engagement from EDL TO AZSQL')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EngagementbySalesProgram')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Sales Program related Engagement",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2020-11-17T16:40:00",
+						"timeZone": "Pacific Standard Time",
+						"schedule": {
+							"minutes": [
+								30
+							],
+							"hours": [
+								5,
+								3
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Sales Program related Engagement')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MSX')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Master pipeeline IOT Engagement",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2020-08-25T00:30:00",
+						"timeZone": "Pacific Standard Time",
+						"schedule": {
+							"minutes": [
+								30
+							],
+							"hours": [
+								4
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Master pipeeline IOT Engagement')]"
+			]
+		}
+	]
+}

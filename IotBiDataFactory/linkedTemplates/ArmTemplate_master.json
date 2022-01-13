@@ -1,0 +1,290 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "IotBiDataFactory"
+		},
+		"MSXSalesProgram_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'MSXSalesProgram'"
+		},
+		"azoedbisqlprod_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod'"
+		},
+		"azoedbisqlprod_azuresphere_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod_azuresphere'"
+		},
+		"azoedbisqlprod_msx_edl_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod_msx_edl'"
+		},
+		"azoedbisqlprod_msx_fy21_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod_msx_fy21'"
+		},
+		"azoedbisqlprod_msxbysalesprogram_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod_msxbysalesprogram'"
+		},
+		"azoedbisqlprod_msxbysalesprogram_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'azoedbisqlprod_msxbysalesprogram'"
+		},
+		"azoedbisqlprodvm_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprodvm'"
+		},
+		"azsopportunity_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'azsopportunity'"
+		},
+		"AzureKeyVault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://iotbikeyvault.vault.azure.net/"
+		},
+		"MSXSalesProgram_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
+		"MSXSalesProgram_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"azoedbisqlprod_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
+		"azoedbisqlprod_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"azoedbisqlprod_azuresphere_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "redmond\\v-jouyang"
+		},
+		"azoedbisqlprod_msx_edl_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "redmond\\v-jouyang"
+		},
+		"azoedbisqlprod_msx_fy21_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "redmond\\v-jouyang"
+		},
+		"azoedbisqlprod_msxbysalesprogram_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "redmond\\v-fouyang"
+		},
+		"azoedbisqlprodvm_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "redmond\\v-jouyang"
+		},
+		"azsopportunity_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
+		"azsopportunity_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"msxdatalake_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://cseoedlprodadlsg2wus201.dfs.core.windows.net/"
+		},
+		"msxdatalake_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"msxdatalake_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "IotBiDataFactory_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"MSXSalesProgram_connectionString": {
+						"value": "[parameters('MSXSalesProgram_connectionString')]"
+					},
+					"azoedbisqlprod_connectionString": {
+						"value": "[parameters('azoedbisqlprod_connectionString')]"
+					},
+					"azoedbisqlprod_azuresphere_connectionString": {
+						"value": "[parameters('azoedbisqlprod_azuresphere_connectionString')]"
+					},
+					"azoedbisqlprod_msx_edl_connectionString": {
+						"value": "[parameters('azoedbisqlprod_msx_edl_connectionString')]"
+					},
+					"azoedbisqlprod_msx_fy21_connectionString": {
+						"value": "[parameters('azoedbisqlprod_msx_fy21_connectionString')]"
+					},
+					"azoedbisqlprod_msxbysalesprogram_connectionString": {
+						"value": "[parameters('azoedbisqlprod_msxbysalesprogram_connectionString')]"
+					},
+					"azoedbisqlprod_msxbysalesprogram_password": {
+						"value": "[parameters('azoedbisqlprod_msxbysalesprogram_password')]"
+					},
+					"azoedbisqlprodvm_connectionString": {
+						"value": "[parameters('azoedbisqlprodvm_connectionString')]"
+					},
+					"azsopportunity_connectionString": {
+						"value": "[parameters('azsopportunity_connectionString')]"
+					},
+					"AzureKeyVault_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault_properties_typeProperties_baseUrl')]"
+					},
+					"MSXSalesProgram_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('MSXSalesProgram_properties_typeProperties_servicePrincipalId')]"
+					},
+					"MSXSalesProgram_properties_typeProperties_tenant": {
+						"value": "[parameters('MSXSalesProgram_properties_typeProperties_tenant')]"
+					},
+					"azoedbisqlprod_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('azoedbisqlprod_properties_typeProperties_servicePrincipalId')]"
+					},
+					"azoedbisqlprod_properties_typeProperties_tenant": {
+						"value": "[parameters('azoedbisqlprod_properties_typeProperties_tenant')]"
+					},
+					"azoedbisqlprod_azuresphere_properties_typeProperties_userName": {
+						"value": "[parameters('azoedbisqlprod_azuresphere_properties_typeProperties_userName')]"
+					},
+					"azoedbisqlprod_msx_edl_properties_typeProperties_userName": {
+						"value": "[parameters('azoedbisqlprod_msx_edl_properties_typeProperties_userName')]"
+					},
+					"azoedbisqlprod_msx_fy21_properties_typeProperties_userName": {
+						"value": "[parameters('azoedbisqlprod_msx_fy21_properties_typeProperties_userName')]"
+					},
+					"azoedbisqlprod_msxbysalesprogram_properties_typeProperties_userName": {
+						"value": "[parameters('azoedbisqlprod_msxbysalesprogram_properties_typeProperties_userName')]"
+					},
+					"azoedbisqlprodvm_properties_typeProperties_userName": {
+						"value": "[parameters('azoedbisqlprodvm_properties_typeProperties_userName')]"
+					},
+					"azsopportunity_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('azsopportunity_properties_typeProperties_servicePrincipalId')]"
+					},
+					"azsopportunity_properties_typeProperties_tenant": {
+						"value": "[parameters('azsopportunity_properties_typeProperties_tenant')]"
+					},
+					"msxdatalake_properties_typeProperties_url": {
+						"value": "[parameters('msxdatalake_properties_typeProperties_url')]"
+					},
+					"msxdatalake_properties_typeProperties_tenant": {
+						"value": "[parameters('msxdatalake_properties_typeProperties_tenant')]"
+					},
+					"msxdatalake_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('msxdatalake_properties_typeProperties_servicePrincipalId')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "IotBiDataFactory_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'IotBiDataFactory_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "IotBiDataFactory_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'IotBiDataFactory_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "IotBiDataFactory_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'IotBiDataFactory_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "IotBiDataFactory_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'IotBiDataFactory_ArmTemplate_3')]"
+			]
+		}
+	]
+}

@@ -1,0 +1,877 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "IotBiDataFactory"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/msxspPartner')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "MSXSalesProgram",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "MSX Engagment By Sales Program"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"table": "msxspPartnerAccount"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msxspSalesProgram')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "MSXSalesProgram",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "MSX Engagment By Sales Program"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"table": "msxspSalesProgram"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msxspSystemuser')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "MSXSalesProgram",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "MSX Engagment By Sales Program"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "",
+					"table": "msxspSystemUser"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msxspprocessstage')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "MSXSalesProgram",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "MSX Engagment By Sales Program"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"table": "MSXspProcessStage"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msxsystemuser')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "azoedbisqlprod",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "MSX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "",
+					"table": "MSXsystemUser"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msxsystemuserAll')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "azoedbisqlprod",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "MSX General"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "",
+					"table": "MSXsystemUserAll"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msxtask')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "azoedbisqlprod",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "MSX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"table": "msxtask"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/oemuser')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "azoedbisqlprod",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "systemuserid",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "MSXOEMUser"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/partnerReferralVM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "azoedbisqlprodvm",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"table": "PartnerReferralSrc"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyMSXDatatoSQLVM')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "TableList",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "MSXtablelist",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEachtable",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "TableList",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('TableList').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy data1",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "AzureSqlSource",
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
+										},
+										"sink": {
+											"type": "SqlServerSink",
+											"preCopyScript": {
+												"value": "if object_id('@{ item().tablename}') is not null drop table  @{ item().tablename}",
+												"type": "Expression"
+											},
+											"tableOption": "autoCreate"
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "MSXSourceInAzureSQL",
+											"type": "DatasetReference",
+											"parameters": {
+												"tablename": {
+													"value": "@item().tablename",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "MSXtargetInMSX_EDL",
+											"type": "DatasetReference",
+											"parameters": {
+												"tablename": {
+													"value": "@item().tablename",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "MSX"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-11-26T16:16:15Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AccountRelated')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Sales Program related Engagement"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "Account"
+						},
+						{
+							"dataset": {
+								"referenceName": "msxspEngagement",
+								"type": "DatasetReference"
+							},
+							"name": "engagement"
+						},
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "Partner"
+						},
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "SystemUser"
+						},
+						{
+							"dataset": {
+								"referenceName": "msxspEngagementTeam",
+								"type": "DatasetReference"
+							},
+							"name": "engagementteam"
+						},
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "EngagementProcess"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "msxspAccount",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						},
+						{
+							"dataset": {
+								"referenceName": "msxspPartner",
+								"type": "DatasetReference"
+							},
+							"name": "sink2"
+						},
+						{
+							"dataset": {
+								"referenceName": "msxspSystemuser",
+								"type": "DatasetReference"
+							},
+							"name": "sink3"
+						},
+						{
+							"dataset": {
+								"referenceName": "msxspEngagementTeam",
+								"type": "DatasetReference"
+							},
+							"name": "msxspEnagementTeam"
+						},
+						{
+							"dataset": {
+								"referenceName": "msxspEngagementStage",
+								"type": "DatasetReference"
+							},
+							"name": "msxspEngagementStage"
+						}
+					],
+					"transformations": [
+						{
+							"name": "ExistsInEngagement"
+						},
+						{
+							"name": "PartnerExistsInEngagement"
+						},
+						{
+							"name": "UserExistsInEngagementTeam"
+						},
+						{
+							"name": "UserExistsInEngagement"
+						},
+						{
+							"name": "Union1"
+						},
+						{
+							"name": "Exists1"
+						},
+						{
+							"name": "Exists2"
+						}
+					],
+					"script": "source(output(\n\t\tAccountId as string,\n\t\tOwnerId as string,\n\t\tParentAccountId as string,\n\t\tTerritoryId as string,\n\t\tCurrencyId as string,\n\t\tCustomerSegment as integer,\n\t\tEndCustomerSegment as string,\n\t\tEndCustomerSegmentSeqNo as long,\n\t\tCustomerSubsegment as integer,\n\t\tEndCustomerSubsegment as string,\n\t\tEndCustomerSubsegmentSeqNo as long,\n\t\tIndustryCode as integer,\n\t\tIndustrySeqNo as long,\n\t\tIndustry as string,\n\t\tIndustryVerticalCode as integer,\n\t\tIndustryVertical as string,\n\t\tIndustryVerticalSeqNo as long,\n\t\tLicenseAgreementTypeCode as integer,\n\t\tLicenseAgreementTypeSeqNo as long,\n\t\tLicenseAgreementType as string,\n\t\tManagedstatusCode as integer,\n\t\tManagedstatus as string,\n\t\tManagedstatusSeqNo as long,\n\t\tParentingLevelCode as integer,\n\t\tParentingLevel as string,\n\t\tParentingLevelSeqNo as long,\n\t\tVerticalCategoryCode as integer,\n\t\tVerticalCategory as string,\n\t\tVerticalCategorySeqNo as long,\n\t\tAddressId as string,\n\t\tCity as string,\n\t\tCountry as string,\n\t\tLine1 as string,\n\t\tLine2 as string,\n\t\tLine3 as string,\n\t\tPostalCode as string,\n\t\tStateOrProvince as string,\n\t\tAccountNumber as string,\n\t\tDescription as string,\n\t\tFax as string,\n\t\tMDMOrganizationId as string,\n\t\tMSSalesId as string,\n\t\tMSSalesTopParentId as string,\n\t\tAccountName as string,\n\t\tNumberOfEmployees as integer,\n\t\tPcCount as integer,\n\t\tServerCount as integer,\n\t\tServicesEngagement as boolean,\n\t\tSmartphoneCount as integer,\n\t\tTabletCount as integer,\n\t\tTaxId as string,\n\t\tMainPhone as string,\n\t\tWebsiteUrl as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tStateCode as integer,\n\t\tStatus as string,\n\t\tStatusSeqNo as long,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tVersionNumber as long,\n\t\tTenantId as integer,\n\t\tCID as string,\n\t\tFYStartMonthcode as integer,\n\t\tFYStartMonth as string,\n\t\tFYStartMonthSeqNo as long,\n\t\tGPID as string,\n\t\tGPName as string,\n\t\tMSP_HQ as boolean,\n\t\tOdsStatus as integer,\n\t\tOEMManaged as boolean,\n\t\toemorganizationtypecode as integer,\n\t\toemorganizationtypeSeqNo as long,\n\t\toemorganizationtype as string,\n\t\toemsegmenttypecode as integer,\n\t\toemsegmenttype as string,\n\t\toemsegmenttypeSeqNo as long,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tclanumber as string,\n\t\towningBusinessUnit as string,\n\t\tcreatedonbehalfby as string,\n\t\tmodifiedonbehalfby as string,\n\t\tenglishtranslatedaccountname as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\taccountcreatedby as string,\n\t\taccountmodifiedby as string,\n\t\tpreviousaccountowner as string,\n\t\tmcapi as string,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string,\n\t\tpevcinvestors as string,\n\t\tpevcownedSeqNo as long,\n\t\tEligibleForUnifiedSupport as boolean,\n\t\tDunsID as string,\n\t\tHardwareBuyingStrategy as string,\n\t\tHardwareDecisionMaker as string,\n\t\tmsp_IncomingATS as string,\n\t\tmsp_OutgoingATS as string,\n\t\tPonId as string,\n\t\tisvtechaptitudecode as integer,\n\t\tisvtechaptitudeSeqNo as long,\n\t\tisvtechaptitude as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_account/v1/standard') ~> Account\nsource(output(\n\t\tEngagementId as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tAccountId as string,\n\t\tBusinessInvestmentFunds as double,\n\t\tContactId as string,\n\t\tEngagementNumber as string,\n\t\tengagementstatuscode as integer,\n\t\tengagementstatus as string,\n\t\tengagementstatusSeqNo as long,\n\t\tEntitlementsActivated as boolean,\n\t\tEstCompletionDate as timestamp,\n\t\tEstStartDate as timestamp,\n\t\tIdentifyFutureLeads as boolean,\n\t\tEngagementName as string,\n\t\tNextSteps as string,\n\t\tOriginatingOpportunity as string,\n\t\tPartnerAccountId as string,\n\t\tProductId as string,\n\t\tRelatedOpportunity as string,\n\t\tSummary as string,\n\t\tValidateInitialUsage as boolean,\n\t\tWorkloadsActivated as boolean,\n\t\tworkloadtypecode as integer,\n\t\tworkloadtype as string,\n\t\tworkloadtypeSeqNo as long,\n\t\tOwnerId as string,\n\t\tTenantId as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tVersionNumber as long,\n\t\tstatecode as integer,\n\t\tStatusSeqNo as long,\n\t\tStatus as string,\n\t\tstatuscode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tTransactionCurrencyId as string,\n\t\tSubscriptionId as string,\n\t\tEngagementTenantId as string,\n\t\tOSS as boolean,\n\t\tNotificationBase as timestamp,\n\t\tCSPLink as string,\n\t\tengagementhealthcode as integer,\n\t\tengagementhealth as string,\n\t\tengagementhealthSeqNo as long,\n\t\tEngagementScore as integer,\n\t\tObjectivesmet as boolean,\n\t\tqualifyengagementid as string,\n\t\towningBusinessUnit as string,\n\t\tpreferredazureregioncode as integer,\n\t\tpreferredazureregion as string,\n\t\tpreferredazureregionSeqNo as long,\n\t\tsolutionareacode as integer,\n\t\tsolutionarea as string,\n\t\tsolutionareaSeqNo as long,\n\t\thealthcomments as string,\n\t\tlineofbusinessdivisioncode as integer,\n\t\tlineofbusinessdivision as string,\n\t\tlineofbusinessdivisionSeqNo as long,\n\t\tprimarycompetitor as string,\n\t\tcompetethreatlevelcode as integer,\n\t\tcompetethreatlevel as string,\n\t\tcompetethreatlevelSeqNo as long,\n\t\tothercompetitor as string,\n\t\tmsservicesinvolvedcode as integer,\n\t\tmsservicesinvolved as string,\n\t\tmsservicesinvolvedSeqNo as long,\n\t\tNonRecurringACR as double,\n\t\tNonRecurringUsersDevices as integer,\n\t\tPartnerReferral as string,\n\t\tcustomerimmersionexperiencecode as integer,\n\t\tcustomerimmersionexperience as string,\n\t\tcustomerimmersionexperienceSeqNo as long,\n\t\tdigitaltrainingcode as integer,\n\t\tdigitaltraining as string,\n\t\tdigitaltrainingSeqNo as long,\n\t\texcitementdayscode as integer,\n\t\texcitementdays as string,\n\t\texcitementdaysSeqNo as long,\n\t\tofficeofcxocode as integer,\n\t\tofficeofcxoSeqNo as long,\n\t\tofficeofcxo as string,\n\t\tPartnerEngagedBy as string,\n\t\tacmplancode as integer,\n\t\tacmplan as string,\n\t\tacmplanSeqNo as long,\n\t\tarchitecturedesignapprovedcode as integer,\n\t\tarchitecturedesignapproved as string,\n\t\tarchitecturedesignapprovedSeqNo as long,\n\t\tbusinessgovernanceplancode as integer,\n\t\tbusinessgovernanceplan as string,\n\t\tbusinessgovernanceplanSeqNo as long,\n\t\tcompleteworkshop as timestamp,\n\t\tconferencingenabledcode as integer,\n\t\tconferencingenabled as string,\n\t\tconferencingenabledSeqNo as long,\n\t\tconfirmdeliverysuccesscode as integer,\n\t\tconfirmdeliverysuccess as string,\n\t\tconfirmdeliverysuccessSeqNo as long,\n\t\tcreatebusinesscasecode as integer,\n\t\tcreatebusinesscase as string,\n\t\tcreatebusinesscaseSeqNo as long,\n\t\tcreatecsspcode as integer,\n\t\tcreatecssp as string,\n\t\tcreatecsspSeqNo as long,\n\t\tcreatesuccessplancode as integer,\n\t\tcreatesuccessplan as string,\n\t\tcreatesuccessplanSeqNo as long,\n\t\tcustomerreadinessassessmentcode as integer,\n\t\tcustomerreadinessassessment as string,\n\t\tcustomerreadinessassessmentSeqNo as long,\n\t\tdeliverinitialpitchcode as integer,\n\t\tdeliverinitialpitch as string,\n\t\tdeliverinitialpitchSeqNo as long,\n\t\tendusertrainingmwteamcode as integer,\n\t\tendusertrainingmwteam as string,\n\t\tendusertrainingmwteamSeqNo as long,\n\t\tengagefasttrackcode as integer,\n\t\tengagefasttrack as string,\n\t\tengagefasttrackSeqNo as long,\n\t\tgovernancebenchmarkcode as integer,\n\t\tgovernancebenchmark as string,\n\t\tgovernancebenchmarkSeqNo as long,\n\t\tidentifypriorityprojectscode as integer,\n\t\tidentifypriorityprojects as string,\n\t\tidentifypriorityprojectsSeqNo as long,\n\t\tinfrastructureassessmentcode as integer,\n\t\tinfrastructureassessment as string,\n\t\tinfrastructureassessmentSeqNo as long,\n\t\tmeetingroomsenabledcode as integer,\n\t\tmeetingroomsenabled as string,\n\t\tmeetingroomsenabledSeqNo as long,\n\t\tmigrationassessmentcode as integer,\n\t\tmigrationassessment as string,\n\t\tmigrationassessmentSeqNo as long,\n\t\toperationalreadinessassessmentcode as integer,\n\t\toperationalreadinessassessmentSeqNo as long,\n\t\toperationalreadinessassessment as string,\n\t\torgreadinessassessmentcode as integer,\n\t\torgreadinessassessment as string,\n\t\torgreadinessassessmentSeqNo as long,\n\t\tperformpilotcode as integer,\n\t\tperformpilotSeqNo as long,\n\t\tperformpilot as string,\n\t\tscalemigrationcode as integer,\n\t\tscalemigration as string,\n\t\tscalemigrationSeqNo as long,\n\t\tscenariocode as integer,\n\t\tscenarioSeqNo as long,\n\t\tscenario as string,\n\t\tselectsalesplaycode as integer,\n\t\tselectsalesplay as string,\n\t\tselectsalesplaySeqNo as long,\n\t\tsendfinalproposalcode as integer,\n\t\tsendfinalproposalSeqNo as long,\n\t\tsendfinalproposal as string,\n\t\tsendproposalcode as integer,\n\t\tsendproposal as string,\n\t\tsendproposalSeqNo as long,\n\t\tskillingplanagreementcode as integer,\n\t\tskillingplanagreementSeqNo as long,\n\t\tskillingplanagreement as string,\n\t\tskillsgapassessmentcode as integer,\n\t\tskillsgapassessment as string,\n\t\tskillsgapassessmentSeqNo as long,\n\t\tsuccesscriteriaagreedcode as integer,\n\t\tsuccesscriteriaagreed as string,\n\t\tsuccesscriteriaagreedSeqNo as long,\n\t\tsuccessplansignoffcode as integer,\n\t\tsuccessplansignoffSeqNo as long,\n\t\tsuccessplansignoff as string,\n\t\tteamsassessmentcode as integer,\n\t\tteamsassessment as string,\n\t\tteamsassessmentSeqNo as long,\n\t\tupdatesuccessplancode as integer,\n\t\tupdatesuccessplanSeqNo as long,\n\t\tupdatesuccessplan as string,\n\t\tsecondarypartner as string,\n\t\tadoptionmonitoring as string,\n\t\tadoptionmonitoringSeqNo as long,\n\t\tcomplexityassessment as string,\n\t\tcomplexityassessmentSeqNo as long,\n\t\tconductbusinessreview as string,\n\t\tconductbusinessreviewSeqNo as long,\n\t\tconsenttosendtopartner as string,\n\t\tconsenttosendtopartnerSeqNo as long,\n\t\tcreateactionplan as string,\n\t\tcreateactionplanSeqNo as long,\n\t\tcsmprogramorientation as string,\n\t\tcsmprogramorientationSeqNo as long,\n\t\tdefinebusinessoutcomes as string,\n\t\tdefinebusinessoutcomesSeqNo as long,\n\t\tdefineprojectvision as string,\n\t\tdefineprojectvisionSeqNo as long,\n\t\tgolive as string,\n\t\tgoliveSeqNo as long,\n\t\thealthmonitoring as string,\n\t\thealthmonitoringSeqNo as long,\n\t\tknowyourcustomer as string,\n\t\tknowyourcustomerSeqNo as long,\n\t\torgmaturityassessmentSeqNo as long,\n\t\torgmaturityassessment as string,\n\t\tprosciassessment as string,\n\t\tprosciassessmentSeqNo as long,\n\t\tsecurereference as string,\n\t\tsecurereferenceSeqNo as long,\n\t\tsolutioninnovationSeqNo as long,\n\t\tsolutioninnovation as string,\n\t\tactualclosedate as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string,\n\t\tbdmroundtableindustrySeqNo as long,\n\t\tbdmroundtablelobSeqNo as long,\n\t\tcustomersuccessworkshopSeqNo as long,\n\t\trollupestrevenue as decimal(10,0),\n\t\trollupestseats as integer,\n\t\tsecuremvpcommitment as string,\n\t\tsecuremvpcommitmentSeqNo as long,\n\t\tsendcustomeroutreach as string,\n\t\tsendcustomeroutreachcode as integer,\n\t\tsendcustomeroutreachSeqNo as long,\n\t\tspecialtycomputecapacityrequiredSeqNo as long,\n\t\tsuccessclinicSeqNo as long,\n\t\tbdmroundtableindustry as string,\n\t\tbdmroundtablelob as string,\n\t\tCJSDocumentLink as string,\n\t\tCJSDocumentLinkCreatedDate as timestamp,\n\t\tClosedReason as string,\n\t\tcustomersuccessworkshop as string,\n\t\tsalesplay as string,\n\t\tsalesplaySeqNo as long,\n\t\tspecialtycomputecapacityrequired as string,\n\t\tsuccessclinic as string,\n\t\ttechnicalcapability as string,\n\t\ttechnicalcapabilitySeqNo as long,\n\t\tnominatetoazureaccelerateSeqNo as long,\n\t\tsetupazureservicehealthalertsSeqNo as long,\n\t\tvalidateprojectresultSeqNo as long,\n\t\tagreekpisforproofofvalueSeqNo as long,\n\t\tapproveimplementationproposalSeqNo as long,\n\t\tbuildappmodernizationinnovationplanSeqNo as long,\n\t\tbuildcloudadoptionplanSeqNo as long,\n\t\tbuildmajorincidentresponseplanSeqNo as long,\n\t\tbuildmvpSeqNo as long,\n\t\tcompleteappassessmentSeqNo as long,\n\t\tcompletedevopsmaturityassessmentSeqNo as long,\n\t\tcompletehandoffSeqNo as long,\n\t\tcompleteproofofvalueSeqNo as long,\n\t\tconductwellarchitectedreviewSeqNo as long,\n\t\tcreateazuredevtestsubscriptionSeqNo as long,\n\t\tcreatecustomersuccessplanSeqNo as long,\n\t\tdefinemigrationplanSeqNo as long,\n\t\tdefinesupportplanSeqNo as long,\n\t\tdeliveraibusinessschoolSeqNo as long,\n\t\tdeliveraibusinessschooltrainingSeqNo as long,\n\t\tdeliverlandingzoneSeqNo as long,\n\t\tdeliverskillingplanSeqNo as long,\n\t\tdeliverstatementoffindingsSeqNo as long,\n\t\tdeploylandingzoneSeqNo as long,\n\t\tengagecosellprioritizedpartnerSeqNo as long,\n\t\tensuregithublicensesprocuredSeqNo as long,\n\t\testablishbusinessreviewrhythmSeqNo as long,\n\t\texecuteadoptionworkshopSeqNo as long,\n\t\texecutesuccessplanningworkshopSeqNo as long,\n\t\tidentifycosellopportunitySeqNo as long,\n\t\tidentifycustomerdecisionmakersSeqNo as long,\n\t\tidentifygithubsellerandservicesSeqNo as long,\n\t\tidentifynextazureprojectSeqNo as long,\n\t\tidentifypartnermicrosoftservicesSeqNo as long,\n\t\tnominateforampSeqNo as long,\n\t\tnominateforcetSeqNo as long,\n\t\tnominatetoanalyticsaiaccelerateprogramSeqNo as long,\n\t\tNonRecurringUsersDevicesModernWork as integer,\n\t\tpartnerconductspartnerworkshopSeqNo as long,\n\t\tpilotsthroughazureaccelerateSeqNo as long,\n\t\tprovisionapptestproductionenvironmentsSeqNo as long,\n\t\tremediatetechnicalblockersSeqNo as long,\n\t\tRollupEstActiveUsersDevicesModernWork as integer,\n\t\tsecurebdmapprovalofcsspSeqNo as long,\n\t\tsecurecustomercommitmentSeqNo as long,\n\t\tseekapprovalforlandingzoneSeqNo as long,\n\t\tsubmitecifrequestSeqNo as long,\n\t\tcompletechangemanagementworkshopSeqNo as long,\n\t\tcompletedeploymentSeqNo as long,\n\t\tconductenvisioningworkshoporcieSeqNo as long,\n\t\tcoordinatedeploymentplanSeqNo as long,\n\t\tdeliverinadayworkshopsSeqNo as long,\n\t\tdelivertrainingSeqNo as long,\n\t\tengagesolutionassessmentprogramSeqNo as long,\n\t\texecutecustomersuccessplanSeqNo as long,\n\t\tSourceCampaignID as string,\n\t\tActiveSalesProcess as string,\n\t\tActiveSalesStage as string,\n\t\tdelivercieSeqNo as long,\n\t\tdeliverplatformroadshowSeqNo as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> engagement\nsource(output(\n\t\tEDLPExtractId as string,\n\t\tAddress as string,\n\t\tAddress1_AddressId as string,\n\t\tAddress1_City as string,\n\t\taddress1_Country as string,\n\t\tAddress1_Line1 as string,\n\t\tAddress1_Line2 as string,\n\t\tAddress1_Line3 as string,\n\t\tAddress1_PostalCode as string,\n\t\tAddress1_StateOrProvince as string,\n\t\tC2PCEnabled as boolean,\n\t\tcosellready as boolean,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tDetailEngagementType as string,\n\t\tDetailEngagementTypeCode as integer,\n\t\tDetailEngagementTypeSeqNo as long,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tEngagementType as string,\n\t\tEngagementTypeCode as integer,\n\t\tEngagementTypeSeqNo as long,\n\t\tExternalSystemID as string,\n\t\tFax as string,\n\t\tIncentiveId as string,\n\t\tIsPSXEnabled as boolean,\n\t\tMainPhone as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tMojaEnabled as string,\n\t\tMojaEnabledCode as integer,\n\t\tMojaEnabledSeqNo as long,\n\t\tMPLId as string,\n\t\tMPLName as string,\n\t\tMplPartnerType as string,\n\t\tMPLPartnerTypeCode as integer,\n\t\tMplPartnerTypeSeqNo as long,\n\t\tMPLPracticeName as string,\n\t\tMPNHeadQuartersId as string,\n\t\tMPNLocationId as string,\n\t\tMPNOrganizationId as string,\n\t\tMPNOrganizationName as string,\n\t\tMPNOrganizationPartnerType as string,\n\t\tMPNOrganizationPartnerTypeCode as integer,\n\t\tMPNOrganizationPartnerTypeSeqNo as long,\n\t\tMPNOrganizationSubsidiary as string,\n\t\tMPNOrganizationSubsidiaryCode as integer,\n\t\tMPNOrganizationSubsidiarySeqNo as long,\n\t\tMPNPartnerType as string,\n\t\tMPNPartnerTypeCode as integer,\n\t\tMPNPartnerTypeSeqNo as long,\n\t\tMPNSubsidiary as string,\n\t\tMPNSubsidiaryCode as integer,\n\t\tMPNSubsidiarySeqNo as long,\n\t\tMSSalesId as string,\n\t\tocpid as string,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOwnerId as string,\n\t\towningBusinessUnit as string,\n\t\tPartnerAccountId as string,\n\t\tpartnercenterid as string,\n\t\tPartnerNumber as string,\n\t\tpartneroneid as string,\n\t\tpartnersegment as string,\n\t\tpartnersegmentcode as integer,\n\t\tpartnersegmentSeqNo as long,\n\t\tpartnertier as string,\n\t\tpartnertiercode as integer,\n\t\tpartnertierSeqNo as long,\n\t\tpcenabled as boolean,\n\t\tPrimaryPracticeCode as boolean,\n\t\tStateCode as integer,\n\t\tStatus as string,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tStatusSeqNo as long,\n\t\tTenantId as integer,\n\t\tVersionNumber as long,\n\t\tVoiceId as string,\n\t\tWebsite as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_partneraccount/v1/standard') ~> Partner\nsource(output(\n\t\tEDLPExtractId as string,\n\t\tAccessMode as string,\n\t\tAccessModeCode as integer,\n\t\tAccessModeSeqNo as long,\n\t\tAddress1_AddressId as string,\n\t\tAddress1_City as string,\n\t\tAddress1_Country as string,\n\t\tAddress1_Fax as string,\n\t\tAddress1_Line1 as string,\n\t\tAddress1_Line2 as string,\n\t\tAddress1_Line3 as string,\n\t\tAddress1_PostalCode as string,\n\t\tAddress1_StateOrProvince as string,\n\t\tAddress1_Telephone1 as string,\n\t\tAddress1_Telephone3 as string,\n\t\tBusinessUnitId as string,\n\t\tCalType as string,\n\t\tCalTypeCode as integer,\n\t\tCalTypeSeqNo as long,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tDefaultMailbox as string,\n\t\tDomainName as string,\n\t\tDPNSignDate as timestamp,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tFirstName as string,\n\t\tHomePhone as string,\n\t\tInternalEmailAddress as string,\n\t\tInviteStatus as string,\n\t\tInviteStatusCode as integer,\n\t\tInviteStatusSeqNo as long,\n\t\tIsDisabled as boolean,\n\t\tIsNotificationSent as string,\n\t\tIsNotificationSentCode as integer,\n\t\tIsNotificationSentSeqNo as long,\n\t\tLastName as string,\n\t\tMiddleName as string,\n\t\tMobileAlertEmail as string,\n\t\tMobilePhone as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tParentSystemUserId as string,\n\t\tPersonalEmailAddress as string,\n\t\tPreferredAddress as string,\n\t\tPreferredAddressCode as integer,\n\t\tPreferredAddressSeqNo as long,\n\t\tPreferredPhone as string,\n\t\tPreferredPhoneCode as integer,\n\t\tPreferredPhoneSeqNo as long,\n\t\tQueueId as string,\n\t\tRole as string,\n\t\tRoleCode as integer,\n\t\tRoleSeqNo as long,\n\t\tSiteId as string,\n\t\tSystemUserId as string,\n\t\tTenantId as integer,\n\t\tTerritoryId as string,\n\t\tTitle as string,\n\t\tVersionNumber as long,\n\t\tWindowsLiveId as string,\n\t\tareaname as string,\n\t\tdiscipline as string,\n\t\tGTMPosition as string,\n\t\tindustry as string,\n\t\torg as string,\n\t\torgdetail as string,\n\t\torgsummary as string,\n\t\tprofession as string,\n\t\tqualifier1 as string,\n\t\tqualifier2 as string,\n\t\tregionname as string,\n\t\trolegroup as string,\n\t\troleidentity as string,\n\t\tRoleSummary as string,\n\t\tsalesdistrictname as string,\n\t\tsaleslocationname as string,\n\t\tsolutionarea as string,\n\t\tsubregionname as string,\n\t\tsystemusertype as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_systemuser/v1/sensitive') ~> SystemUser\nsource(output(\n\t\tEngagementId as string,\n\t\tCrmInstanceId as string,\n\t\tSystemUserId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tTenantId as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tVersionNumber as long,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> engagementteam\nsource(output(\n\t\tBusinessProcessFlowInstanceId as string,\n\t\tCrmInstanceId as string,\n\t\tActiveStageId as string,\n\t\tActiveStageStartedOn as timestamp,\n\t\tbpf_engagementid as string,\n\t\tbpf_name as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tImportSequenceNumber as integer,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOverriddenCreatedOn as timestamp,\n\t\tProcessId as string,\n\t\tstatecode as integer,\n\t\tStatus as string,\n\t\tStatusSeqNo as long,\n\t\tstatuscode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tTimeZoneRuleVersionNumber as integer,\n\t\tTraversedPath as string,\n\t\tUTCConversionTimeZoneCode as integer,\n\t\tTenantId as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tVersionNumber as long,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/msx/hub_vw_bpf_55d45daf65e74177b809a2c97c2afed7/v1/standard') ~> EngagementProcess\nAccount, engagement exists(Account@AccountId == engagement@AccountId,\n\tnegate:false,\n\tbroadcast: 'auto')~> ExistsInEngagement\nPartner, engagement exists(Partner@PartnerAccountId == engagement@PartnerAccountId,\n\tnegate:false,\n\tbroadcast: 'auto')~> PartnerExistsInEngagement\nSystemUser, engagementteam exists(SystemUser@SystemUserId == engagementteam@SystemUserId,\n\tnegate:false,\n\tbroadcast: 'auto')~> UserExistsInEngagementTeam\nSystemUser, engagement exists(SystemUserId == OwnerId,\n\tnegate:false,\n\tbroadcast: 'auto')~> UserExistsInEngagement\nUserExistsInEngagementTeam, UserExistsInEngagement union(byName: true)~> Union1\nengagementteam, engagement exists(engagementteam@EngagementId == engagement@EngagementId,\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists1\nEngagementProcess, engagement exists(bpf_engagementid == EngagementId,\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists2\nExistsInEngagement sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1\nPartnerExistsInEngagement sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink2\nUnion1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink3\nExists1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> msxspEnagementTeam\nExists2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> msxspEngagementStage"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/msxspPartner')]",
+				"[concat(variables('factoryId'), '/datasets/msxspSystemuser')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EngagementRelated')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Sales Program related Engagement"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "Engagement"
+						},
+						{
+							"dataset": {
+								"referenceName": "msxspEngagementSalesProgram",
+								"type": "DatasetReference"
+							},
+							"name": "engagementsaleprogram"
+						},
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "Milestone"
+						},
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "EngagementTeam"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "msxspEngagement",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						},
+						{
+							"dataset": {
+								"referenceName": "msxspMilestone",
+								"type": "DatasetReference"
+							},
+							"name": "sink2"
+						},
+						{
+							"dataset": {
+								"referenceName": "msxspEngagementTeam",
+								"type": "DatasetReference"
+							},
+							"name": "sink3"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Exists1"
+						},
+						{
+							"name": "Exists2"
+						},
+						{
+							"name": "Exists4"
+						}
+					],
+					"script": "source(output(\n\t\tEngagementId as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tAccountId as string,\n\t\tBusinessInvestmentFunds as double,\n\t\tContactId as string,\n\t\tEngagementNumber as string,\n\t\tengagementstatuscode as integer,\n\t\tengagementstatus as string,\n\t\tengagementstatusSeqNo as long,\n\t\tEntitlementsActivated as boolean,\n\t\tEstCompletionDate as timestamp,\n\t\tEstStartDate as timestamp,\n\t\tIdentifyFutureLeads as boolean,\n\t\tEngagementName as string,\n\t\tNextSteps as string,\n\t\tOriginatingOpportunity as string,\n\t\tPartnerAccountId as string,\n\t\tProductId as string,\n\t\tRelatedOpportunity as string,\n\t\tSummary as string,\n\t\tValidateInitialUsage as boolean,\n\t\tWorkloadsActivated as boolean,\n\t\tworkloadtypecode as integer,\n\t\tworkloadtype as string,\n\t\tworkloadtypeSeqNo as long,\n\t\tOwnerId as string,\n\t\tTenantId as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tVersionNumber as long,\n\t\tstatecode as integer,\n\t\tStatusSeqNo as long,\n\t\tStatus as string,\n\t\tstatuscode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tTransactionCurrencyId as string,\n\t\tSubscriptionId as string,\n\t\tEngagementTenantId as string,\n\t\tOSS as boolean,\n\t\tNotificationBase as timestamp,\n\t\tCSPLink as string,\n\t\tengagementhealthcode as integer,\n\t\tengagementhealth as string,\n\t\tengagementhealthSeqNo as long,\n\t\tEngagementScore as integer,\n\t\tObjectivesmet as boolean,\n\t\tqualifyengagementid as string,\n\t\towningBusinessUnit as string,\n\t\tpreferredazureregioncode as integer,\n\t\tpreferredazureregion as string,\n\t\tpreferredazureregionSeqNo as long,\n\t\tsolutionareacode as integer,\n\t\tsolutionarea as string,\n\t\tsolutionareaSeqNo as long,\n\t\thealthcomments as string,\n\t\tlineofbusinessdivisioncode as integer,\n\t\tlineofbusinessdivision as string,\n\t\tlineofbusinessdivisionSeqNo as long,\n\t\tprimarycompetitor as string,\n\t\tcompetethreatlevelcode as integer,\n\t\tcompetethreatlevel as string,\n\t\tcompetethreatlevelSeqNo as long,\n\t\tothercompetitor as string,\n\t\tmsservicesinvolvedcode as integer,\n\t\tmsservicesinvolved as string,\n\t\tmsservicesinvolvedSeqNo as long,\n\t\tNonRecurringACR as double,\n\t\tNonRecurringUsersDevices as integer,\n\t\tPartnerReferral as string,\n\t\tcustomerimmersionexperiencecode as integer,\n\t\tcustomerimmersionexperience as string,\n\t\tcustomerimmersionexperienceSeqNo as long,\n\t\tdigitaltrainingcode as integer,\n\t\tdigitaltraining as string,\n\t\tdigitaltrainingSeqNo as long,\n\t\texcitementdayscode as integer,\n\t\texcitementdays as string,\n\t\texcitementdaysSeqNo as long,\n\t\tofficeofcxocode as integer,\n\t\tofficeofcxoSeqNo as long,\n\t\tofficeofcxo as string,\n\t\tPartnerEngagedBy as string,\n\t\tacmplancode as integer,\n\t\tacmplan as string,\n\t\tacmplanSeqNo as long,\n\t\tarchitecturedesignapprovedcode as integer,\n\t\tarchitecturedesignapproved as string,\n\t\tarchitecturedesignapprovedSeqNo as long,\n\t\tbusinessgovernanceplancode as integer,\n\t\tbusinessgovernanceplan as string,\n\t\tbusinessgovernanceplanSeqNo as long,\n\t\tcompleteworkshop as timestamp,\n\t\tconferencingenabledcode as integer,\n\t\tconferencingenabled as string,\n\t\tconferencingenabledSeqNo as long,\n\t\tconfirmdeliverysuccesscode as integer,\n\t\tconfirmdeliverysuccess as string,\n\t\tconfirmdeliverysuccessSeqNo as long,\n\t\tcreatebusinesscasecode as integer,\n\t\tcreatebusinesscase as string,\n\t\tcreatebusinesscaseSeqNo as long,\n\t\tcreatecsspcode as integer,\n\t\tcreatecssp as string,\n\t\tcreatecsspSeqNo as long,\n\t\tcreatesuccessplancode as integer,\n\t\tcreatesuccessplan as string,\n\t\tcreatesuccessplanSeqNo as long,\n\t\tcustomerreadinessassessmentcode as integer,\n\t\tcustomerreadinessassessment as string,\n\t\tcustomerreadinessassessmentSeqNo as long,\n\t\tdeliverinitialpitchcode as integer,\n\t\tdeliverinitialpitch as string,\n\t\tdeliverinitialpitchSeqNo as long,\n\t\tendusertrainingmwteamcode as integer,\n\t\tendusertrainingmwteam as string,\n\t\tendusertrainingmwteamSeqNo as long,\n\t\tengagefasttrackcode as integer,\n\t\tengagefasttrack as string,\n\t\tengagefasttrackSeqNo as long,\n\t\tgovernancebenchmarkcode as integer,\n\t\tgovernancebenchmark as string,\n\t\tgovernancebenchmarkSeqNo as long,\n\t\tidentifypriorityprojectscode as integer,\n\t\tidentifypriorityprojects as string,\n\t\tidentifypriorityprojectsSeqNo as long,\n\t\tinfrastructureassessmentcode as integer,\n\t\tinfrastructureassessment as string,\n\t\tinfrastructureassessmentSeqNo as long,\n\t\tmeetingroomsenabledcode as integer,\n\t\tmeetingroomsenabled as string,\n\t\tmeetingroomsenabledSeqNo as long,\n\t\tmigrationassessmentcode as integer,\n\t\tmigrationassessment as string,\n\t\tmigrationassessmentSeqNo as long,\n\t\toperationalreadinessassessmentcode as integer,\n\t\toperationalreadinessassessmentSeqNo as long,\n\t\toperationalreadinessassessment as string,\n\t\torgreadinessassessmentcode as integer,\n\t\torgreadinessassessment as string,\n\t\torgreadinessassessmentSeqNo as long,\n\t\tperformpilotcode as integer,\n\t\tperformpilotSeqNo as long,\n\t\tperformpilot as string,\n\t\tscalemigrationcode as integer,\n\t\tscalemigration as string,\n\t\tscalemigrationSeqNo as long,\n\t\tscenariocode as integer,\n\t\tscenarioSeqNo as long,\n\t\tscenario as string,\n\t\tselectsalesplaycode as integer,\n\t\tselectsalesplay as string,\n\t\tselectsalesplaySeqNo as long,\n\t\tsendfinalproposalcode as integer,\n\t\tsendfinalproposalSeqNo as long,\n\t\tsendfinalproposal as string,\n\t\tsendproposalcode as integer,\n\t\tsendproposal as string,\n\t\tsendproposalSeqNo as long,\n\t\tskillingplanagreementcode as integer,\n\t\tskillingplanagreementSeqNo as long,\n\t\tskillingplanagreement as string,\n\t\tskillsgapassessmentcode as integer,\n\t\tskillsgapassessment as string,\n\t\tskillsgapassessmentSeqNo as long,\n\t\tsuccesscriteriaagreedcode as integer,\n\t\tsuccesscriteriaagreed as string,\n\t\tsuccesscriteriaagreedSeqNo as long,\n\t\tsuccessplansignoffcode as integer,\n\t\tsuccessplansignoffSeqNo as long,\n\t\tsuccessplansignoff as string,\n\t\tteamsassessmentcode as integer,\n\t\tteamsassessment as string,\n\t\tteamsassessmentSeqNo as long,\n\t\tupdatesuccessplancode as integer,\n\t\tupdatesuccessplanSeqNo as long,\n\t\tupdatesuccessplan as string,\n\t\tsecondarypartner as string,\n\t\tadoptionmonitoring as string,\n\t\tadoptionmonitoringSeqNo as long,\n\t\tcomplexityassessment as string,\n\t\tcomplexityassessmentSeqNo as long,\n\t\tconductbusinessreview as string,\n\t\tconductbusinessreviewSeqNo as long,\n\t\tconsenttosendtopartner as string,\n\t\tconsenttosendtopartnerSeqNo as long,\n\t\tcreateactionplan as string,\n\t\tcreateactionplanSeqNo as long,\n\t\tcsmprogramorientation as string,\n\t\tcsmprogramorientationSeqNo as long,\n\t\tdefinebusinessoutcomes as string,\n\t\tdefinebusinessoutcomesSeqNo as long,\n\t\tdefineprojectvision as string,\n\t\tdefineprojectvisionSeqNo as long,\n\t\tgolive as string,\n\t\tgoliveSeqNo as long,\n\t\thealthmonitoring as string,\n\t\thealthmonitoringSeqNo as long,\n\t\tknowyourcustomer as string,\n\t\tknowyourcustomerSeqNo as long,\n\t\torgmaturityassessmentSeqNo as long,\n\t\torgmaturityassessment as string,\n\t\tprosciassessment as string,\n\t\tprosciassessmentSeqNo as long,\n\t\tsecurereference as string,\n\t\tsecurereferenceSeqNo as long,\n\t\tsolutioninnovationSeqNo as long,\n\t\tsolutioninnovation as string,\n\t\tactualclosedate as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string,\n\t\tbdmroundtableindustrySeqNo as long,\n\t\tbdmroundtablelobSeqNo as long,\n\t\tcustomersuccessworkshopSeqNo as long,\n\t\trollupestrevenue as decimal(10,0),\n\t\trollupestseats as integer,\n\t\tsecuremvpcommitment as string,\n\t\tsecuremvpcommitmentSeqNo as long,\n\t\tsendcustomeroutreach as string,\n\t\tsendcustomeroutreachcode as integer,\n\t\tsendcustomeroutreachSeqNo as long,\n\t\tspecialtycomputecapacityrequiredSeqNo as long,\n\t\tsuccessclinicSeqNo as long,\n\t\tbdmroundtableindustry as string,\n\t\tbdmroundtablelob as string,\n\t\tCJSDocumentLink as string,\n\t\tCJSDocumentLinkCreatedDate as timestamp,\n\t\tClosedReason as string,\n\t\tcustomersuccessworkshop as string,\n\t\tsalesplay as string,\n\t\tsalesplaySeqNo as long,\n\t\tspecialtycomputecapacityrequired as string,\n\t\tsuccessclinic as string,\n\t\ttechnicalcapability as string,\n\t\ttechnicalcapabilitySeqNo as long,\n\t\tnominatetoazureaccelerateSeqNo as long,\n\t\tsetupazureservicehealthalertsSeqNo as long,\n\t\tvalidateprojectresultSeqNo as long,\n\t\tagreekpisforproofofvalueSeqNo as long,\n\t\tapproveimplementationproposalSeqNo as long,\n\t\tbuildappmodernizationinnovationplanSeqNo as long,\n\t\tbuildcloudadoptionplanSeqNo as long,\n\t\tbuildmajorincidentresponseplanSeqNo as long,\n\t\tbuildmvpSeqNo as long,\n\t\tcompleteappassessmentSeqNo as long,\n\t\tcompletedevopsmaturityassessmentSeqNo as long,\n\t\tcompletehandoffSeqNo as long,\n\t\tcompleteproofofvalueSeqNo as long,\n\t\tconductwellarchitectedreviewSeqNo as long,\n\t\tcreateazuredevtestsubscriptionSeqNo as long,\n\t\tcreatecustomersuccessplanSeqNo as long,\n\t\tdefinemigrationplanSeqNo as long,\n\t\tdefinesupportplanSeqNo as long,\n\t\tdeliveraibusinessschoolSeqNo as long,\n\t\tdeliveraibusinessschooltrainingSeqNo as long,\n\t\tdeliverlandingzoneSeqNo as long,\n\t\tdeliverskillingplanSeqNo as long,\n\t\tdeliverstatementoffindingsSeqNo as long,\n\t\tdeploylandingzoneSeqNo as long,\n\t\tengagecosellprioritizedpartnerSeqNo as long,\n\t\tensuregithublicensesprocuredSeqNo as long,\n\t\testablishbusinessreviewrhythmSeqNo as long,\n\t\texecuteadoptionworkshopSeqNo as long,\n\t\texecutesuccessplanningworkshopSeqNo as long,\n\t\tidentifycosellopportunitySeqNo as long,\n\t\tidentifycustomerdecisionmakersSeqNo as long,\n\t\tidentifygithubsellerandservicesSeqNo as long,\n\t\tidentifynextazureprojectSeqNo as long,\n\t\tidentifypartnermicrosoftservicesSeqNo as long,\n\t\tnominateforampSeqNo as long,\n\t\tnominateforcetSeqNo as long,\n\t\tnominatetoanalyticsaiaccelerateprogramSeqNo as long,\n\t\tNonRecurringUsersDevicesModernWork as integer,\n\t\tpartnerconductspartnerworkshopSeqNo as long,\n\t\tpilotsthroughazureaccelerateSeqNo as long,\n\t\tprovisionapptestproductionenvironmentsSeqNo as long,\n\t\tremediatetechnicalblockersSeqNo as long,\n\t\tRollupEstActiveUsersDevicesModernWork as integer,\n\t\tsecurebdmapprovalofcsspSeqNo as long,\n\t\tsecurecustomercommitmentSeqNo as long,\n\t\tseekapprovalforlandingzoneSeqNo as long,\n\t\tsubmitecifrequestSeqNo as long,\n\t\tcompletechangemanagementworkshopSeqNo as long,\n\t\tcompletedeploymentSeqNo as long,\n\t\tconductenvisioningworkshoporcieSeqNo as long,\n\t\tcoordinatedeploymentplanSeqNo as long,\n\t\tdeliverinadayworkshopsSeqNo as long,\n\t\tdelivertrainingSeqNo as long,\n\t\tengagesolutionassessmentprogramSeqNo as long,\n\t\texecutecustomersuccessplanSeqNo as long,\n\t\tSourceCampaignID as string,\n\t\tActiveSalesProcess as string,\n\t\tActiveSalesStage as string,\n\t\tdelivercieSeqNo as long,\n\t\tdeliverplatformroadshowSeqNo as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/msx/hub_vw_engagement/v1/standard') ~> Engagement\nsource(output(\n\t\tEngagementId as string,\n\t\tCrmInstanceId as string,\n\t\tSalesProgramId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tTenantId as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tVersionNumber as long,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> engagementsaleprogram\nsource(output(\n\t\tEngagementMilestoneID as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tEngagementID as string,\n\t\tComments as string,\n\t\tEstDate as timestamp,\n\t\tworkloadtypecode as integer,\n\t\tworkloadtypeSeqNo as long,\n\t\tworkloadtype as string,\n\t\tEstMonthlyUsage as double,\n\t\tName as string,\n\t\tEstNoOfActivations as integer,\n\t\tTransactionCurrencyId as string,\n\t\tTenantId as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tVersionNumber as long,\n\t\tMilestoneNumber as string,\n\t\tstatecode as integer,\n\t\tStatus as string,\n\t\tStatusSeqNo as long,\n\t\tstatuscode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\towningBusinessUnit as string,\n\t\tSeatsEntitlements as integer,\n\t\tworkloadcode as integer,\n\t\tworkload as string,\n\t\tworkloadSeqNo as long,\n\t\tcompletedcode as integer,\n\t\tcompleted as string,\n\t\tcompletedSeqNo as long,\n\t\tnonrecurringcode as integer,\n\t\tnonrecurring as string,\n\t\tnonrecurringSeqNo as long,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\thelpneededcode as integer,\n\t\thelpneeded as string,\n\t\thelpneededSeqNo as long,\n\t\tmilestonecategorycode as integer,\n\t\tmilestonecategory as string,\n\t\tmilestonecategorySeqNo as long,\n\t\tmilestonestatuscode as integer,\n\t\tmilestonestatus as string,\n\t\tmilestonestatusSeqNo as long,\n\t\tcommitmentrecommendationcode as integer,\n\t\tcommitmentrecommendation as string,\n\t\tcommitmentrecommendationSeqNo as long,\n\t\tmilestonestatusreasoncode as integer,\n\t\tmilestonestatusreason as string,\n\t\tmilestonestatusreasonSeqNo as long,\n\t\tOwnerId as string,\n\t\tscrumescalationcode as integer,\n\t\tscrumescalationSeqNo as long,\n\t\tscrumescalation as string,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string,\n\t\tmilestonesolutionareaSeqNo as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/msx/hub_vw_engagementmilestone/v1/standard') ~> Milestone\nsource(output(\n\t\tEngagementId as string,\n\t\tCrmInstanceId as string,\n\t\tSystemUserId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tTenantId as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tVersionNumber as long,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/msx/hub_vw_engagementteam/v1/standard') ~> EngagementTeam\nEngagement, engagementsaleprogram exists(Engagement@EngagementId == engagementsaleprogram@EngagementId,\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists1\nMilestone, engagementsaleprogram exists(Milestone@EngagementID == engagementsaleprogram@EngagementId,\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists2\nEngagementTeam, engagementsaleprogram exists(EngagementTeam@EngagementId == engagementsaleprogram@EngagementId,\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists4\nExists1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1\nExists2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink2\nExists4 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink3"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EngagementTeam')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "IOT Engagments"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "EngagementTeam"
+						},
+						{
+							"dataset": {
+								"referenceName": "oemuser",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "MSXEngagementTeam",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Exists1"
+						},
+						{
+							"name": "Filter1"
+						}
+					],
+					"script": "source(output(\n\t\tEngagementId as string,\n\t\tCrmInstanceId as string,\n\t\tSystemUserId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tTenantId as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tVersionNumber as long,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/msx/hub_vw_engagementteam/v1/standard') ~> EngagementTeam\nsource(output(\n\t\tsystemuserid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1\nEngagementTeam, source1 exists(lower(EngagementTeam@SystemUserId) == lower(source1@systemuserid),\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists1\nExists1 filter(OdsStatus==0) ~> Filter1\nFilter1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/oemuser')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MSXAccount')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "IOT Engagments"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "MSXAccount"
+						},
+						{
+							"dataset": {
+								"referenceName": "MsxEngagement",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "MSXAccount",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Filter1"
+						},
+						{
+							"name": "Exists1"
+						}
+					],
+					"script": "source(output(\n\t\tAccountId as string,\n\t\tOwnerId as string,\n\t\tParentAccountId as string,\n\t\tTerritoryId as string,\n\t\tCurrencyId as string,\n\t\tCustomerSegment as integer,\n\t\tEndCustomerSegment as string,\n\t\tEndCustomerSegmentSeqNo as long,\n\t\tCustomerSubsegment as integer,\n\t\tEndCustomerSubsegment as string,\n\t\tEndCustomerSubsegmentSeqNo as long,\n\t\tIndustryCode as integer,\n\t\tIndustrySeqNo as long,\n\t\tIndustry as string,\n\t\tIndustryVerticalCode as integer,\n\t\tIndustryVertical as string,\n\t\tIndustryVerticalSeqNo as long,\n\t\tLicenseAgreementTypeCode as integer,\n\t\tLicenseAgreementTypeSeqNo as long,\n\t\tLicenseAgreementType as string,\n\t\tManagedstatusCode as integer,\n\t\tManagedstatus as string,\n\t\tManagedstatusSeqNo as long,\n\t\tParentingLevelCode as integer,\n\t\tParentingLevel as string,\n\t\tParentingLevelSeqNo as long,\n\t\tVerticalCategoryCode as integer,\n\t\tVerticalCategory as string,\n\t\tVerticalCategorySeqNo as long,\n\t\tAddressId as string,\n\t\tCity as string,\n\t\tCountry as string,\n\t\tLine1 as string,\n\t\tLine2 as string,\n\t\tLine3 as string,\n\t\tPostalCode as string,\n\t\tStateOrProvince as string,\n\t\tAccountNumber as string,\n\t\tDescription as string,\n\t\tFax as string,\n\t\tMDMOrganizationId as string,\n\t\tMSSalesId as string,\n\t\tMSSalesTopParentId as string,\n\t\tAccountName as string,\n\t\tNumberOfEmployees as integer,\n\t\tPcCount as integer,\n\t\tServerCount as integer,\n\t\tServicesEngagement as boolean,\n\t\tSmartphoneCount as integer,\n\t\tTabletCount as integer,\n\t\tTaxId as string,\n\t\tMainPhone as string,\n\t\tWebsiteUrl as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tStateCode as integer,\n\t\tStatus as string,\n\t\tStatusSeqNo as long,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tVersionNumber as long,\n\t\tTenantId as integer,\n\t\tCID as string,\n\t\tFYStartMonthcode as integer,\n\t\tFYStartMonth as string,\n\t\tFYStartMonthSeqNo as long,\n\t\tGPID as string,\n\t\tGPName as string,\n\t\tMSP_HQ as boolean,\n\t\tOdsStatus as integer,\n\t\tOEMManaged as boolean,\n\t\toemorganizationtypecode as integer,\n\t\toemorganizationtypeSeqNo as long,\n\t\toemorganizationtype as string,\n\t\toemsegmenttypecode as integer,\n\t\toemsegmenttype as string,\n\t\toemsegmenttypeSeqNo as long,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tclanumber as string,\n\t\towningBusinessUnit as string,\n\t\tcreatedonbehalfby as string,\n\t\tmodifiedonbehalfby as string,\n\t\tenglishtranslatedaccountname as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\taccountcreatedby as string,\n\t\taccountmodifiedby as string,\n\t\tpreviousaccountowner as string,\n\t\tmcapi as string,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string,\n\t\tpevcinvestors as string,\n\t\tpevcownedSeqNo as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_account/v1/standard',\n\tpartitionBy('roundRobin', 4)) ~> MSXAccount\nsource(output(\n\t\tEngagementId as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tAccountId as string,\n\t\tBusinessInvestmentFunds as double,\n\t\tContactId as string,\n\t\tEngagementNumber as string,\n\t\tengagementstatuscode as integer,\n\t\tengagementstatus as string,\n\t\tengagementstatusSeqNo as long,\n\t\tEntitlementsActivated as boolean,\n\t\tEstCompletionDate as timestamp,\n\t\tEstStartDate as timestamp,\n\t\tIdentifyFutureLeads as boolean,\n\t\tEngagementName as string,\n\t\tNextSteps as string,\n\t\tOriginatingOpportunity as string,\n\t\tPartnerAccountId as string,\n\t\tProductId as string,\n\t\tRelatedOpportunity as string,\n\t\tSummary as string,\n\t\tValidateInitialUsage as boolean,\n\t\tWorkloadsActivated as boolean,\n\t\tworkloadtypecode as integer,\n\t\tworkloadtype as string,\n\t\tworkloadtypeSeqNo as long,\n\t\tOwnerId as string,\n\t\tTenantId as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tVersionNumber as long,\n\t\tstatecode as integer,\n\t\tStatusSeqNo as long,\n\t\tStatus as string,\n\t\tstatuscode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tTransactionCurrencyId as string,\n\t\tSubscriptionId as string,\n\t\tEngagementTenantId as string,\n\t\tOSS as boolean,\n\t\tNotificationBase as timestamp,\n\t\tCSPLink as string,\n\t\tengagementhealthcode as integer,\n\t\tengagementhealth as string,\n\t\tengagementhealthSeqNo as long,\n\t\tEngagementScore as integer,\n\t\tObjectivesmet as boolean,\n\t\tqualifyengagementid as string,\n\t\towningBusinessUnit as string,\n\t\tpreferredazureregioncode as integer,\n\t\tpreferredazureregion as string,\n\t\tpreferredazureregionSeqNo as long,\n\t\tsolutionareacode as integer,\n\t\tsolutionarea as string,\n\t\tsolutionareaSeqNo as long,\n\t\thealthcomments as string,\n\t\tlineofbusinessdivisioncode as integer,\n\t\tlineofbusinessdivision as string,\n\t\tlineofbusinessdivisionSeqNo as long,\n\t\tprimarycompetitor as string,\n\t\tcompetethreatlevelcode as integer,\n\t\tcompetethreatlevel as string,\n\t\tcompetethreatlevelSeqNo as long,\n\t\tothercompetitor as string,\n\t\tmsservicesinvolvedcode as integer,\n\t\tmsservicesinvolved as string,\n\t\tmsservicesinvolvedSeqNo as long,\n\t\tNonRecurringACR as double,\n\t\tNonRecurringUsersDevices as integer,\n\t\tPartnerReferral as string,\n\t\tcustomerimmersionexperiencecode as integer,\n\t\tcustomerimmersionexperience as string,\n\t\tcustomerimmersionexperienceSeqNo as long,\n\t\tdigitaltrainingcode as integer,\n\t\tdigitaltraining as string,\n\t\tdigitaltrainingSeqNo as long,\n\t\texcitementdayscode as integer,\n\t\texcitementdays as string,\n\t\texcitementdaysSeqNo as long,\n\t\tofficeofcxocode as integer,\n\t\tofficeofcxoSeqNo as long,\n\t\tofficeofcxo as string,\n\t\tPartnerEngagedBy as string,\n\t\tacmplancode as integer,\n\t\tacmplan as string,\n\t\tacmplanSeqNo as long,\n\t\tarchitecturedesignapprovedcode as integer,\n\t\tarchitecturedesignapproved as string,\n\t\tarchitecturedesignapprovedSeqNo as long,\n\t\tbusinessgovernanceplancode as integer,\n\t\tbusinessgovernanceplan as string,\n\t\tbusinessgovernanceplanSeqNo as long,\n\t\tcompleteworkshop as timestamp,\n\t\tconferencingenabledcode as integer,\n\t\tconferencingenabled as string,\n\t\tconferencingenabledSeqNo as long,\n\t\tconfirmdeliverysuccesscode as integer,\n\t\tconfirmdeliverysuccess as string,\n\t\tconfirmdeliverysuccessSeqNo as long,\n\t\tcreatebusinesscasecode as integer,\n\t\tcreatebusinesscase as string,\n\t\tcreatebusinesscaseSeqNo as long,\n\t\tcreatecsspcode as integer,\n\t\tcreatecssp as string,\n\t\tcreatecsspSeqNo as long,\n\t\tcreatesuccessplancode as integer,\n\t\tcreatesuccessplan as string,\n\t\tcreatesuccessplanSeqNo as long,\n\t\tcustomerreadinessassessmentcode as integer,\n\t\tcustomerreadinessassessment as string,\n\t\tcustomerreadinessassessmentSeqNo as long,\n\t\tdeliverinitialpitchcode as integer,\n\t\tdeliverinitialpitch as string,\n\t\tdeliverinitialpitchSeqNo as long,\n\t\tendusertrainingmwteamcode as integer,\n\t\tendusertrainingmwteam as string,\n\t\tendusertrainingmwteamSeqNo as long,\n\t\tengagefasttrackcode as integer,\n\t\tengagefasttrack as string,\n\t\tengagefasttrackSeqNo as long,\n\t\tgovernancebenchmarkcode as integer,\n\t\tgovernancebenchmark as string,\n\t\tgovernancebenchmarkSeqNo as long,\n\t\tidentifypriorityprojectscode as integer,\n\t\tidentifypriorityprojects as string,\n\t\tidentifypriorityprojectsSeqNo as long,\n\t\tinfrastructureassessmentcode as integer,\n\t\tinfrastructureassessment as string,\n\t\tinfrastructureassessmentSeqNo as long,\n\t\tmeetingroomsenabledcode as integer,\n\t\tmeetingroomsenabled as string,\n\t\tmeetingroomsenabledSeqNo as long,\n\t\tmigrationassessmentcode as integer,\n\t\tmigrationassessment as string,\n\t\tmigrationassessmentSeqNo as long,\n\t\toperationalreadinessassessmentcode as integer,\n\t\toperationalreadinessassessmentSeqNo as long,\n\t\toperationalreadinessassessment as string,\n\t\torgreadinessassessmentcode as integer,\n\t\torgreadinessassessment as string,\n\t\torgreadinessassessmentSeqNo as long,\n\t\tperformpilotcode as integer,\n\t\tperformpilotSeqNo as long,\n\t\tperformpilot as string,\n\t\tscalemigrationcode as integer,\n\t\tscalemigration as string,\n\t\tscalemigrationSeqNo as long,\n\t\tscenariocode as integer,\n\t\tscenarioSeqNo as long,\n\t\tscenario as string,\n\t\tselectsalesplaycode as integer,\n\t\tselectsalesplay as string,\n\t\tselectsalesplaySeqNo as long,\n\t\tsendfinalproposalcode as integer,\n\t\tsendfinalproposalSeqNo as long,\n\t\tsendfinalproposal as string,\n\t\tsendproposalcode as integer,\n\t\tsendproposal as string,\n\t\tsendproposalSeqNo as long,\n\t\tskillingplanagreementcode as integer,\n\t\tskillingplanagreementSeqNo as long,\n\t\tskillingplanagreement as string,\n\t\tskillsgapassessmentcode as integer,\n\t\tskillsgapassessment as string,\n\t\tskillsgapassessmentSeqNo as long,\n\t\tsuccesscriteriaagreedcode as integer,\n\t\tsuccesscriteriaagreed as string,\n\t\tsuccesscriteriaagreedSeqNo as long,\n\t\tsuccessplansignoffcode as integer,\n\t\tsuccessplansignoffSeqNo as long,\n\t\tsuccessplansignoff as string,\n\t\tteamsassessmentcode as integer,\n\t\tteamsassessment as string,\n\t\tteamsassessmentSeqNo as long,\n\t\tupdatesuccessplancode as integer,\n\t\tupdatesuccessplanSeqNo as long,\n\t\tupdatesuccessplan as string,\n\t\tsecondarypartner as string,\n\t\tadoptionmonitoring as string,\n\t\tadoptionmonitoringSeqNo as long,\n\t\tcomplexityassessment as string,\n\t\tcomplexityassessmentSeqNo as long,\n\t\tconductbusinessreview as string,\n\t\tconductbusinessreviewSeqNo as long,\n\t\tconsenttosendtopartner as string,\n\t\tconsenttosendtopartnerSeqNo as long,\n\t\tcreateactionplan as string,\n\t\tcreateactionplanSeqNo as long,\n\t\tcsmprogramorientation as string,\n\t\tcsmprogramorientationSeqNo as long,\n\t\tdefinebusinessoutcomes as string,\n\t\tdefinebusinessoutcomesSeqNo as long,\n\t\tdefineprojectvision as string,\n\t\tdefineprojectvisionSeqNo as long,\n\t\tgolive as string,\n\t\tgoliveSeqNo as long,\n\t\thealthmonitoring as string,\n\t\thealthmonitoringSeqNo as long,\n\t\tknowyourcustomer as string,\n\t\tknowyourcustomerSeqNo as long,\n\t\torgmaturityassessmentSeqNo as long,\n\t\torgmaturityassessment as string,\n\t\tprosciassessment as string,\n\t\tprosciassessmentSeqNo as long,\n\t\tsecurereference as string,\n\t\tsecurereferenceSeqNo as long,\n\t\tsolutioninnovationSeqNo as long,\n\t\tsolutioninnovation as string,\n\t\tactualclosedate as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string,\n\t\tbdmroundtableindustrySeqNo as long,\n\t\tbdmroundtablelobSeqNo as long,\n\t\tcustomersuccessworkshopSeqNo as long,\n\t\trollupestrevenue as decimal(10,0),\n\t\trollupestseats as integer,\n\t\tsecuremvpcommitment as string,\n\t\tsecuremvpcommitmentSeqNo as long,\n\t\tsendcustomeroutreach as string,\n\t\tsendcustomeroutreachcode as integer,\n\t\tsendcustomeroutreachSeqNo as long,\n\t\tspecialtycomputecapacityrequiredSeqNo as long,\n\t\tsuccessclinicSeqNo as long,\n\t\tbdmroundtableindustry as string,\n\t\tbdmroundtablelob as string,\n\t\tCJSDocumentLink as string,\n\t\tCJSDocumentLinkCreatedDate as timestamp,\n\t\tClosedReason as string,\n\t\tcustomersuccessworkshop as string,\n\t\tsalesplay as string,\n\t\tsalesplaySeqNo as long,\n\t\tspecialtycomputecapacityrequired as string,\n\t\tsuccessclinic as string,\n\t\ttechnicalcapability as string,\n\t\ttechnicalcapabilitySeqNo as long,\n\t\tnominatetoazureaccelerateSeqNo as long,\n\t\tsetupazureservicehealthalertsSeqNo as long,\n\t\tvalidateprojectresultSeqNo as long,\n\t\tagreekpisforproofofvalueSeqNo as long,\n\t\tapproveimplementationproposalSeqNo as long,\n\t\tbuildappmodernizationinnovationplanSeqNo as long,\n\t\tbuildcloudadoptionplanSeqNo as long,\n\t\tbuildmajorincidentresponseplanSeqNo as long,\n\t\tbuildmvpSeqNo as long,\n\t\tcompleteappassessmentSeqNo as long,\n\t\tcompletedevopsmaturityassessmentSeqNo as long,\n\t\tcompletehandoffSeqNo as long,\n\t\tcompleteproofofvalueSeqNo as long,\n\t\tconductwellarchitectedreviewSeqNo as long,\n\t\tcreateazuredevtestsubscriptionSeqNo as long,\n\t\tcreatecustomersuccessplanSeqNo as long,\n\t\tdefinemigrationplanSeqNo as long,\n\t\tdefinesupportplanSeqNo as long,\n\t\tdeliveraibusinessschoolSeqNo as long,\n\t\tdeliveraibusinessschooltrainingSeqNo as long,\n\t\tdeliverlandingzoneSeqNo as long,\n\t\tdeliverskillingplanSeqNo as long,\n\t\tdeliverstatementoffindingsSeqNo as long,\n\t\tdeploylandingzoneSeqNo as long,\n\t\tengagecosellprioritizedpartnerSeqNo as long,\n\t\tensuregithublicensesprocuredSeqNo as long,\n\t\testablishbusinessreviewrhythmSeqNo as long,\n\t\texecuteadoptionworkshopSeqNo as long,\n\t\texecutesuccessplanningworkshopSeqNo as long,\n\t\tidentifycosellopportunitySeqNo as long,\n\t\tidentifycustomerdecisionmakersSeqNo as long,\n\t\tidentifygithubsellerandservicesSeqNo as long,\n\t\tidentifynextazureprojectSeqNo as long,\n\t\tidentifypartnermicrosoftservicesSeqNo as long,\n\t\tnominateforampSeqNo as long,\n\t\tnominateforcetSeqNo as long,\n\t\tnominatetoanalyticsaiaccelerateprogramSeqNo as long,\n\t\tNonRecurringUsersDevicesModernWork as integer,\n\t\tpartnerconductspartnerworkshopSeqNo as long,\n\t\tpilotsthroughazureaccelerateSeqNo as long,\n\t\tprovisionapptestproductionenvironmentsSeqNo as long,\n\t\tremediatetechnicalblockersSeqNo as long,\n\t\tRollupEstActiveUsersDevicesModernWork as integer,\n\t\tsecurebdmapprovalofcsspSeqNo as long,\n\t\tsecurecustomercommitmentSeqNo as long,\n\t\tseekapprovalforlandingzoneSeqNo as long,\n\t\tsubmitecifrequestSeqNo as long,\n\t\tcompletechangemanagementworkshopSeqNo as long,\n\t\tcompletedeploymentSeqNo as long,\n\t\tconductenvisioningworkshoporcieSeqNo as long,\n\t\tcoordinatedeploymentplanSeqNo as long,\n\t\tdeliverinadayworkshopsSeqNo as long,\n\t\tdelivertrainingSeqNo as long,\n\t\tengagesolutionassessmentprogramSeqNo as long,\n\t\texecutecustomersuccessplanSeqNo as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1\nExists1 filter(OdsStatus==0) ~> Filter1\nMSXAccount, source1 exists(MSXAccount@AccountId == source1@AccountId,\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists1\nFilter1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MSXCurrencyData')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "IOT Engagments"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "MSXCurrencySource"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "MSXCurrencydata",
+								"type": "DatasetReference"
+							},
+							"name": "currencydata"
+						}
+					],
+					"transformations": [],
+					"script": "source(output(\n\t\tEDLPExtractId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tCurrencyId as string,\n\t\tCurrencyName as string,\n\t\tCurrencyPrecision as integer,\n\t\tCurrencySymbol as string,\n\t\tExchangeRate as double,\n\t\tIsoCurrencyCode as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tStateCode as integer,\n\t\tStatus as string,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tStatusSeqNo as long,\n\t\tTenantId as integer,\n\t\tVersionNumber as long,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_currency/v1/standard') ~> MSXCurrencySource\nMSXCurrencySource sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> currencydata"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MSXOpportunity')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "IOT Engagments"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "msxopportunity"
+						},
+						{
+							"dataset": {
+								"referenceName": "MsxEngagement",
+								"type": "DatasetReference"
+							},
+							"name": "engagement"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "MSXOpportunity",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Exists1"
+						},
+						{
+							"name": "Exists2"
+						},
+						{
+							"name": "Union1"
+						}
+					],
+					"script": "source(output(\n\t\tOpportunityId as string,\n\t\tAntipiracyEngagementTypeId as string,\n\t\tCampaignId as string,\n\t\tConsentToSendToPartnerBy as string,\n\t\tLicensingProgramId as string,\n\t\tOriginatingLeadId as string,\n\t\tOwnerId as string,\n\t\tAccountId as string,\n\t\tPrimarySponsorContactId as string,\n\t\tParentOpportunityId as string,\n\t\tPartnerAccountId as string,\n\t\tPriceLevelId as string,\n\t\tCurrencyId as string,\n\t\tConsentToSendToPartnerCode as integer,\n\t\tConsentToSendToPartner as string,\n\t\tConsentToSendToPartnerSeqNo as long,\n\t\tOpportunitySourceCode as integer,\n\t\tOpportunitySource as string,\n\t\tOpportunitySourceSeqNo as long,\n\t\tPurchaseTimeFrameCode as integer,\n\t\tPurchaseTimeFrame as string,\n\t\tPurchaseTimeFrameSeqNo as long,\n\t\tRecommendationCode as integer,\n\t\tRecommendation as string,\n\t\tRecommendationSeqNo as long,\n\t\tSourceSubTypeCode as integer,\n\t\tSourceSubType as string,\n\t\tSourceSubTypeSeqNo as long,\n\t\tActualCloseDate as timestamp,\n\t\tActualvalue as double,\n\t\tAgreedToBuy as boolean,\n\t\tBudgetAmount as double,\n\t\tCompleteFinalProposal as boolean,\n\t\tIsOrderComplete as boolean,\n\t\tIsQuoteComplete as boolean,\n\t\tIsConclusionLetterSent as boolean,\n\t\tHasCustomerAgreedToBuy as boolean,\n\t\tNeed as string,\n\t\tIsELPAgreementSecured as boolean,\n\t\tIsELPUploaded as boolean,\n\t\tEstimatedCloseDate as timestamp,\n\t\tEstimatedValue as double,\n\t\tEvaluationPlan as boolean,\n\t\tFinalConsumptionPlan as boolean,\n\t\tForecastComments as string,\n\t\tHighLevelSolutionDesign as boolean,\n\t\tIsIdentifyCompetitorsComplete as boolean,\n\t\tIsIdentifyBuyingTeamComplete as boolean,\n\t\tIsIdentifyLineItemsComplete as boolean,\n\t\tIsIdentifySalesTeamComplete as boolean,\n\t\tInitialBusinessCase as boolean,\n\t\tIsInternalAgreementSecured as boolean,\n\t\tIsRevenueSystemCalculated as boolean,\n\t\tIsLetterOfEngagementAccepted as boolean,\n\t\tTopic as string,\n\t\tOpportunityNumber as string,\n\t\tIsPartnerFundingSecured as boolean,\n\t\tPrelimConsumptionPlan as boolean,\n\t\tIsPurchaseArrangementSecured as boolean,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tStateCode as integer,\n\t\tStatus as string,\n\t\tStatusSeqNo as long,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tVersionNumber as long,\n\t\tTenantId as integer,\n\t\tNumberOfDials as integer,\n\t\tOpportunityTenantId as string,\n\t\tPriorityCode as integer,\n\t\tPriority as string,\n\t\tPrioritySeqNo as long,\n\t\tProductSKU as string,\n\t\tRegistrationDate as timestamp,\n\t\tSubscriptionId as string,\n\t\tOriginalPartnerModifiedBy as string,\n\t\tOpportunityCopyTypeCode as integer,\n\t\tOpportunityCopyType as string,\n\t\tOpportunityCopyTypeSeqNo as long,\n\t\tOriginatingOpportunity as string,\n\t\tSendToPartner as boolean,\n\t\tcosellcode as integer,\n\t\tcosell as string,\n\t\tcosellSeqNo as long,\n\t\tPullForwardDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOpportunityScore as double,\n\t\tpartnermotioncode as integer,\n\t\tpartnermotion as string,\n\t\tpartnermotionSeqNo as long,\n\t\tclosestatuscode as integer,\n\t\tclosestatus as string,\n\t\tclosestatusSeqNo as long,\n\t\tPricePointDetails as string,\n\t\tBilledRevenue as double,\n\t\tcomplexitycode as integer,\n\t\tcomplexity as string,\n\t\tcomplexitySeqNo as long,\n\t\tCriticalDeal as boolean,\n\t\tdealtypecode as integer,\n\t\tdealtype as string,\n\t\tdealtypeSeqNo as long,\n\t\tEnrollmentNumber as string,\n\t\tEstROCArrivalDate as timestamp,\n\t\tLicensingContact as string,\n\t\tLSSODMComments as string,\n\t\tNoofTenants as integer,\n\t\ttransactiontypecode as integer,\n\t\ttransactiontype as string,\n\t\ttransactiontypeSeqNo as long,\n\t\toperationscontact as string,\n\t\tattachedservices as boolean,\n\t\tclanumber as string,\n\t\tcloseplan as string,\n\t\tcpumodelseriescode as integer,\n\t\tcpumodelseries as string,\n\t\tcpumodelseriesSeqNo as long,\n\t\tdevicecategorycode as integer,\n\t\tdevicecategory as string,\n\t\tdevicecategorySeqNo as long,\n\t\tmicrosoftazureiotcertifieddevice as boolean,\n\t\tsolutiondesignindate as timestamp,\n\t\tsolutionstartdate as timestamp,\n\t\towningBusinessUnit as string,\n\t\tfinaldecisiondate as timestamp,\n\t\tIsQualified as integer,\n\t\tcompetethreatlevelcode as integer,\n\t\tcompetethreatlevel as string,\n\t\tcompetethreatlevelSeqNo as long,\n\t\tprimarycompetitor as string,\n\t\tothercompetitor as string,\n\t\trvtvalidationready as boolean,\n\t\tCurrentSalesStageModifiedOn as timestamp,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\tcorrectedecid as string,\n\t\tPartnerReferral as string,\n\t\trvtstatuscode as integer,\n\t\trvtstatus as string,\n\t\trvtstatusSeqNo as long,\n\t\tnewenrollmentnumber as string,\n\t\tlastshipmentdate as timestamp,\n\t\tbaseopportunitycode as integer,\n\t\tbaseopportunity as string,\n\t\tbaseopportunitySeqNo as long,\n\t\tAdhocSurvey as integer,\n\t\tSurveyResponseRejectionCounts as integer,\n\t\taccessecifcode as integer,\n\t\taccessecif as string,\n\t\taccessecifSeqNo as long,\n\t\tCompleteTechnicalClosePlan as timestamp,\n\t\tCompleteWorkshop as timestamp,\n\t\tConfirmTrial as timestamp,\n\t\tdeliverinitialpitchcode as integer,\n\t\tdeliverinitialpitch as string,\n\t\tdeliverinitialpitchSeqNo as long,\n\t\tdelivertechnicalcasecode as integer,\n\t\tdelivertechnicalcase as string,\n\t\tdelivertechnicalcaseSeqNo as long,\n\t\tdemonstrateroicode as integer,\n\t\tdemonstrateroi as string,\n\t\tdemonstrateroiSeqNo as long,\n\t\tengagefasttrackcode as integer,\n\t\tengagefasttrack as string,\n\t\tengagefasttrackSeqNo as long,\n\t\tEngageServices as string,\n\t\tselectsalesplaycode as integer,\n\t\tselectsalesplay as string,\n\t\tselectsalesplaySeqNo as long,\n\t\tsharebompricingcode as integer,\n\t\tsharebompricing as string,\n\t\tsharebompricingSeqNo as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string,\n\t\tbizappssalesplay as string,\n\t\tbizappssalesplaycode as integer,\n\t\tbizappssalesplaySeqNo as long,\n\t\tcommercialconstructapprovedbycustomer as string,\n\t\tcommercialconstructapprovedbycustomercode as integer,\n\t\tcommercialconstructapprovedbycustomerSeqNo as long,\n\t\tCompleteClosePlan as boolean,\n\t\tcompletejointcatalystengagementplan as string,\n\t\tcompletejointcatalystengagementplancode as integer,\n\t\tcompletejointcatalystengagementplanSeqNo as long,\n\t\tcompletetechnicalassessment as string,\n\t\tcompletetechnicalassessmentcode as integer,\n\t\tcompletetechnicalassessmentSeqNo as long,\n\t\tcontractsignaturetype as string,\n\t\tcontractsignaturetypecode as integer,\n\t\tcontractsignaturetypeSeqNo as long,\n\t\tcreatebusinessvalueassessment as string,\n\t\tcreatebusinessvalueassessmentcode as integer,\n\t\tcreatebusinessvalueassessmentSeqNo as long,\n\t\tcustomersignoffonassessments as string,\n\t\tcustomersignoffonassessmentscode as integer,\n\t\tcustomersignoffonassessmentsSeqNo as long,\n\t\tcustomersuccessplanworkshopcomplete as string,\n\t\tcustomersuccessplanworkshopcompletecode as integer,\n\t\tcustomersuccessplanworkshopcompleteSeqNo as long,\n\t\tdeliverbusinessvalueenlighten as string,\n\t\tdeliverbusinessvalueenlightencode as integer,\n\t\tdeliverbusinessvalueenlightenSeqNo as long,\n\t\tdeliverenvisioningworkshop as string,\n\t\tdeliverenvisioningworkshopcode as integer,\n\t\tdeliverenvisioningworkshopSeqNo as long,\n\t\tdelivertailoreddemonstration as string,\n\t\tdelivertailoreddemonstrationcode as integer,\n\t\tdelivertailoreddemonstrationSeqNo as long,\n\t\tdelivertransformationplan as string,\n\t\tdelivertransformationplancode as integer,\n\t\tdelivertransformationplanSeqNo as long,\n\t\tengagedwrawrforecif as string,\n\t\tengagedwrawrforecifcode as integer,\n\t\tengagedwrawrforecifSeqNo as long,\n\t\tengagegbb as string,\n\t\tengagegbbcode as integer,\n\t\tengagegbbSeqNo as long,\n\t\tengagemicrosoftexecutivewithcustomercxo as string,\n\t\tengagemicrosoftexecutivewithcustomercxocode as integer,\n\t\tengagemicrosoftexecutivewithcustomercxoSeqNo as long,\n\t\tHandovertoCSMorPCSM as boolean,\n\t\tsalesplay as string,\n\t\tsalesplaySeqNo as long,\n\t\tsolutionarea as string,\n\t\tsolutionareaSeqNo as long,\n\t\ttechnicalcapability as string,\n\t\ttechnicalcapabilitySeqNo as long,\n\t\tpilotsolutionSeqNo as long,\n\t\tpresentbusinesscaseSeqNo as long,\n\t\tpresentdealoptionsSeqNo as long,\n\t\tRapidResponse as boolean,\n\t\ttransitiontocsupartnerSeqNo as long,\n\t\talignonbusinessimpactSeqNo as long,\n\t\talignonsolutionapproachSeqNo as long,\n\t\tClaimTPID as string,\n\t\tCompleteDeploymentWorkshop as timestamp,\n\t\tcompletepredeploymentworkshopSeqNo as long,\n\t\tcompletetrialSeqNo as long,\n\t\tconductpocSeqNo as long,\n\t\tengagecosellprioritizedpartnerSeqNo as long,\n\t\texecutedigitalimmersionSeqNo as long,\n\t\tidentifybusinessdecisionmakersSeqNo as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_opportunity/v1/standard') ~> msxopportunity\nsource(output(\n\t\tEngagementId as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tAccountId as string,\n\t\tBusinessInvestmentFunds as double,\n\t\tContactId as string,\n\t\tEngagementNumber as string,\n\t\tengagementstatuscode as integer,\n\t\tengagementstatus as string,\n\t\tengagementstatusSeqNo as long,\n\t\tEntitlementsActivated as boolean,\n\t\tEstCompletionDate as timestamp,\n\t\tEstStartDate as timestamp,\n\t\tIdentifyFutureLeads as boolean,\n\t\tEngagementName as string,\n\t\tNextSteps as string,\n\t\tOriginatingOpportunity as string,\n\t\tPartnerAccountId as string,\n\t\tProductId as string,\n\t\tRelatedOpportunity as string,\n\t\tSummary as string,\n\t\tValidateInitialUsage as boolean,\n\t\tWorkloadsActivated as boolean,\n\t\tworkloadtypecode as integer,\n\t\tworkloadtype as string,\n\t\tworkloadtypeSeqNo as long,\n\t\tOwnerId as string,\n\t\tTenantId as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tVersionNumber as long,\n\t\tstatecode as integer,\n\t\tStatusSeqNo as long,\n\t\tStatus as string,\n\t\tstatuscode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tTransactionCurrencyId as string,\n\t\tSubscriptionId as string,\n\t\tEngagementTenantId as string,\n\t\tOSS as boolean,\n\t\tNotificationBase as timestamp,\n\t\tCSPLink as string,\n\t\tengagementhealthcode as integer,\n\t\tengagementhealth as string,\n\t\tengagementhealthSeqNo as long,\n\t\tEngagementScore as integer,\n\t\tObjectivesmet as boolean,\n\t\tqualifyengagementid as string,\n\t\towningBusinessUnit as string,\n\t\tpreferredazureregioncode as integer,\n\t\tpreferredazureregion as string,\n\t\tpreferredazureregionSeqNo as long,\n\t\tsolutionareacode as integer,\n\t\tsolutionarea as string,\n\t\tsolutionareaSeqNo as long,\n\t\thealthcomments as string,\n\t\tlineofbusinessdivisioncode as integer,\n\t\tlineofbusinessdivision as string,\n\t\tlineofbusinessdivisionSeqNo as long,\n\t\tprimarycompetitor as string,\n\t\tcompetethreatlevelcode as integer,\n\t\tcompetethreatlevel as string,\n\t\tcompetethreatlevelSeqNo as long,\n\t\tothercompetitor as string,\n\t\tmsservicesinvolvedcode as integer,\n\t\tmsservicesinvolved as string,\n\t\tmsservicesinvolvedSeqNo as long,\n\t\tNonRecurringACR as double,\n\t\tNonRecurringUsersDevices as integer,\n\t\tPartnerReferral as string,\n\t\tcustomerimmersionexperiencecode as integer,\n\t\tcustomerimmersionexperience as string,\n\t\tcustomerimmersionexperienceSeqNo as long,\n\t\tdigitaltrainingcode as integer,\n\t\tdigitaltraining as string,\n\t\tdigitaltrainingSeqNo as long,\n\t\texcitementdayscode as integer,\n\t\texcitementdays as string,\n\t\texcitementdaysSeqNo as long,\n\t\tofficeofcxocode as integer,\n\t\tofficeofcxoSeqNo as long,\n\t\tofficeofcxo as string,\n\t\tPartnerEngagedBy as string,\n\t\tacmplancode as integer,\n\t\tacmplan as string,\n\t\tacmplanSeqNo as long,\n\t\tarchitecturedesignapprovedcode as integer,\n\t\tarchitecturedesignapproved as string,\n\t\tarchitecturedesignapprovedSeqNo as long,\n\t\tbusinessgovernanceplancode as integer,\n\t\tbusinessgovernanceplan as string,\n\t\tbusinessgovernanceplanSeqNo as long,\n\t\tcompleteworkshop as timestamp,\n\t\tconferencingenabledcode as integer,\n\t\tconferencingenabled as string,\n\t\tconferencingenabledSeqNo as long,\n\t\tconfirmdeliverysuccesscode as integer,\n\t\tconfirmdeliverysuccess as string,\n\t\tconfirmdeliverysuccessSeqNo as long,\n\t\tcreatebusinesscasecode as integer,\n\t\tcreatebusinesscase as string,\n\t\tcreatebusinesscaseSeqNo as long,\n\t\tcreatecsspcode as integer,\n\t\tcreatecssp as string,\n\t\tcreatecsspSeqNo as long,\n\t\tcreatesuccessplancode as integer,\n\t\tcreatesuccessplan as string,\n\t\tcreatesuccessplanSeqNo as long,\n\t\tcustomerreadinessassessmentcode as integer,\n\t\tcustomerreadinessassessment as string,\n\t\tcustomerreadinessassessmentSeqNo as long,\n\t\tdeliverinitialpitchcode as integer,\n\t\tdeliverinitialpitch as string,\n\t\tdeliverinitialpitchSeqNo as long,\n\t\tendusertrainingmwteamcode as integer,\n\t\tendusertrainingmwteam as string,\n\t\tendusertrainingmwteamSeqNo as long,\n\t\tengagefasttrackcode as integer,\n\t\tengagefasttrack as string,\n\t\tengagefasttrackSeqNo as long,\n\t\tgovernancebenchmarkcode as integer,\n\t\tgovernancebenchmark as string,\n\t\tgovernancebenchmarkSeqNo as long,\n\t\tidentifypriorityprojectscode as integer,\n\t\tidentifypriorityprojects as string,\n\t\tidentifypriorityprojectsSeqNo as long,\n\t\tinfrastructureassessmentcode as integer,\n\t\tinfrastructureassessment as string,\n\t\tinfrastructureassessmentSeqNo as long,\n\t\tmeetingroomsenabledcode as integer,\n\t\tmeetingroomsenabled as string,\n\t\tmeetingroomsenabledSeqNo as long,\n\t\tmigrationassessmentcode as integer,\n\t\tmigrationassessment as string,\n\t\tmigrationassessmentSeqNo as long,\n\t\toperationalreadinessassessmentcode as integer,\n\t\toperationalreadinessassessmentSeqNo as long,\n\t\toperationalreadinessassessment as string,\n\t\torgreadinessassessmentcode as integer,\n\t\torgreadinessassessment as string,\n\t\torgreadinessassessmentSeqNo as long,\n\t\tperformpilotcode as integer,\n\t\tperformpilotSeqNo as long,\n\t\tperformpilot as string,\n\t\tscalemigrationcode as integer,\n\t\tscalemigration as string,\n\t\tscalemigrationSeqNo as long,\n\t\tscenariocode as integer,\n\t\tscenarioSeqNo as long,\n\t\tscenario as string,\n\t\tselectsalesplaycode as integer,\n\t\tselectsalesplay as string,\n\t\tselectsalesplaySeqNo as long,\n\t\tsendfinalproposalcode as integer,\n\t\tsendfinalproposalSeqNo as long,\n\t\tsendfinalproposal as string,\n\t\tsendproposalcode as integer,\n\t\tsendproposal as string,\n\t\tsendproposalSeqNo as long,\n\t\tskillingplanagreementcode as integer,\n\t\tskillingplanagreementSeqNo as long,\n\t\tskillingplanagreement as string,\n\t\tskillsgapassessmentcode as integer,\n\t\tskillsgapassessment as string,\n\t\tskillsgapassessmentSeqNo as long,\n\t\tsuccesscriteriaagreedcode as integer,\n\t\tsuccesscriteriaagreed as string,\n\t\tsuccesscriteriaagreedSeqNo as long,\n\t\tsuccessplansignoffcode as integer,\n\t\tsuccessplansignoffSeqNo as long,\n\t\tsuccessplansignoff as string,\n\t\tteamsassessmentcode as integer,\n\t\tteamsassessment as string,\n\t\tteamsassessmentSeqNo as long,\n\t\tupdatesuccessplancode as integer,\n\t\tupdatesuccessplanSeqNo as long,\n\t\tupdatesuccessplan as string,\n\t\tsecondarypartner as string,\n\t\tadoptionmonitoring as string,\n\t\tadoptionmonitoringSeqNo as long,\n\t\tcomplexityassessment as string,\n\t\tcomplexityassessmentSeqNo as long,\n\t\tconductbusinessreview as string,\n\t\tconductbusinessreviewSeqNo as long,\n\t\tconsenttosendtopartner as string,\n\t\tconsenttosendtopartnerSeqNo as long,\n\t\tcreateactionplan as string,\n\t\tcreateactionplanSeqNo as long,\n\t\tcsmprogramorientation as string,\n\t\tcsmprogramorientationSeqNo as long,\n\t\tdefinebusinessoutcomes as string,\n\t\tdefinebusinessoutcomesSeqNo as long,\n\t\tdefineprojectvision as string,\n\t\tdefineprojectvisionSeqNo as long,\n\t\tgolive as string,\n\t\tgoliveSeqNo as long,\n\t\thealthmonitoring as string,\n\t\thealthmonitoringSeqNo as long,\n\t\tknowyourcustomer as string,\n\t\tknowyourcustomerSeqNo as long,\n\t\torgmaturityassessmentSeqNo as long,\n\t\torgmaturityassessment as string,\n\t\tprosciassessment as string,\n\t\tprosciassessmentSeqNo as long,\n\t\tsecurereference as string,\n\t\tsecurereferenceSeqNo as long,\n\t\tsolutioninnovationSeqNo as long,\n\t\tsolutioninnovation as string,\n\t\tactualclosedate as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string,\n\t\tbdmroundtableindustrySeqNo as long,\n\t\tbdmroundtablelobSeqNo as long,\n\t\tcustomersuccessworkshopSeqNo as long,\n\t\trollupestrevenue as decimal(10,0),\n\t\trollupestseats as integer,\n\t\tsecuremvpcommitment as string,\n\t\tsecuremvpcommitmentSeqNo as long,\n\t\tsendcustomeroutreach as string,\n\t\tsendcustomeroutreachcode as integer,\n\t\tsendcustomeroutreachSeqNo as long,\n\t\tspecialtycomputecapacityrequiredSeqNo as long,\n\t\tsuccessclinicSeqNo as long,\n\t\tbdmroundtableindustry as string,\n\t\tbdmroundtablelob as string,\n\t\tCJSDocumentLink as string,\n\t\tCJSDocumentLinkCreatedDate as timestamp,\n\t\tClosedReason as string,\n\t\tcustomersuccessworkshop as string,\n\t\tsalesplay as string,\n\t\tsalesplaySeqNo as long,\n\t\tspecialtycomputecapacityrequired as string,\n\t\tsuccessclinic as string,\n\t\ttechnicalcapability as string,\n\t\ttechnicalcapabilitySeqNo as long,\n\t\tnominatetoazureaccelerateSeqNo as long,\n\t\tsetupazureservicehealthalertsSeqNo as long,\n\t\tvalidateprojectresultSeqNo as long,\n\t\tagreekpisforproofofvalueSeqNo as long,\n\t\tapproveimplementationproposalSeqNo as long,\n\t\tbuildappmodernizationinnovationplanSeqNo as long,\n\t\tbuildcloudadoptionplanSeqNo as long,\n\t\tbuildmajorincidentresponseplanSeqNo as long,\n\t\tbuildmvpSeqNo as long,\n\t\tcompleteappassessmentSeqNo as long,\n\t\tcompletedevopsmaturityassessmentSeqNo as long,\n\t\tcompletehandoffSeqNo as long,\n\t\tcompleteproofofvalueSeqNo as long,\n\t\tconductwellarchitectedreviewSeqNo as long,\n\t\tcreateazuredevtestsubscriptionSeqNo as long,\n\t\tcreatecustomersuccessplanSeqNo as long,\n\t\tdefinemigrationplanSeqNo as long,\n\t\tdefinesupportplanSeqNo as long,\n\t\tdeliveraibusinessschoolSeqNo as long,\n\t\tdeliveraibusinessschooltrainingSeqNo as long,\n\t\tdeliverlandingzoneSeqNo as long,\n\t\tdeliverskillingplanSeqNo as long,\n\t\tdeliverstatementoffindingsSeqNo as long,\n\t\tdeploylandingzoneSeqNo as long,\n\t\tengagecosellprioritizedpartnerSeqNo as long,\n\t\tensuregithublicensesprocuredSeqNo as long,\n\t\testablishbusinessreviewrhythmSeqNo as long,\n\t\texecuteadoptionworkshopSeqNo as long,\n\t\texecutesuccessplanningworkshopSeqNo as long,\n\t\tidentifycosellopportunitySeqNo as long,\n\t\tidentifycustomerdecisionmakersSeqNo as long,\n\t\tidentifygithubsellerandservicesSeqNo as long,\n\t\tidentifynextazureprojectSeqNo as long,\n\t\tidentifypartnermicrosoftservicesSeqNo as long,\n\t\tnominateforampSeqNo as long,\n\t\tnominateforcetSeqNo as long,\n\t\tnominatetoanalyticsaiaccelerateprogramSeqNo as long,\n\t\tNonRecurringUsersDevicesModernWork as integer,\n\t\tpartnerconductspartnerworkshopSeqNo as long,\n\t\tpilotsthroughazureaccelerateSeqNo as long,\n\t\tprovisionapptestproductionenvironmentsSeqNo as long,\n\t\tremediatetechnicalblockersSeqNo as long,\n\t\tRollupEstActiveUsersDevicesModernWork as integer,\n\t\tsecurebdmapprovalofcsspSeqNo as long,\n\t\tsecurecustomercommitmentSeqNo as long,\n\t\tseekapprovalforlandingzoneSeqNo as long,\n\t\tsubmitecifrequestSeqNo as long,\n\t\tcompletechangemanagementworkshopSeqNo as long,\n\t\tcompletedeploymentSeqNo as long,\n\t\tconductenvisioningworkshoporcieSeqNo as long,\n\t\tcoordinatedeploymentplanSeqNo as long,\n\t\tdeliverinadayworkshopsSeqNo as long,\n\t\tdelivertrainingSeqNo as long,\n\t\tengagesolutionassessmentprogramSeqNo as long,\n\t\texecutecustomersuccessplanSeqNo as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> engagement\nmsxopportunity, engagement exists(OpportunityId == engagement@OriginatingOpportunity,\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists1\nmsxopportunity, engagement exists(OpportunityId == RelatedOpportunity,\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists2\nExists1, Exists2 union(byName: true)~> Union1\nUnion1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tOpportunityId as string,\n\t\tAntipiracyEngagementTypeId as string,\n\t\tCampaignId as string,\n\t\tConsentToSendToPartnerBy as string,\n\t\tLicensingProgramId as string,\n\t\tOriginatingLeadId as string,\n\t\tOwnerId as string,\n\t\tAccountId as string,\n\t\tPrimarySponsorContactId as string,\n\t\tParentOpportunityId as string,\n\t\tPartnerAccountId as string,\n\t\tPriceLevelId as string,\n\t\tCurrencyId as string,\n\t\tConsentToSendToPartnerCode as integer,\n\t\tConsentToSendToPartner as string,\n\t\tConsentToSendToPartnerSeqNo as long,\n\t\tOpportunitySourceCode as integer,\n\t\tOpportunitySource as string,\n\t\tOpportunitySourceSeqNo as long,\n\t\tPurchaseTimeFrameCode as integer,\n\t\tPurchaseTimeFrame as string,\n\t\tPurchaseTimeFrameSeqNo as long,\n\t\tRecommendationCode as integer,\n\t\tRecommendation as string,\n\t\tRecommendationSeqNo as long,\n\t\tSourceSubTypeCode as integer,\n\t\tSourceSubType as string,\n\t\tSourceSubTypeSeqNo as long,\n\t\tActualCloseDate as timestamp,\n\t\tActualvalue as double,\n\t\tAgreedToBuy as boolean,\n\t\tBudgetAmount as double,\n\t\tCompleteFinalProposal as boolean,\n\t\tIsOrderComplete as boolean,\n\t\tIsQuoteComplete as boolean,\n\t\tIsConclusionLetterSent as boolean,\n\t\tHasCustomerAgreedToBuy as boolean,\n\t\tNeed as string,\n\t\tIsELPAgreementSecured as boolean,\n\t\tIsELPUploaded as boolean,\n\t\tEstimatedCloseDate as timestamp,\n\t\tEstimatedValue as double,\n\t\tEvaluationPlan as boolean,\n\t\tFinalConsumptionPlan as boolean,\n\t\tForecastComments as string,\n\t\tHighLevelSolutionDesign as boolean,\n\t\tIsIdentifyCompetitorsComplete as boolean,\n\t\tIsIdentifyBuyingTeamComplete as boolean,\n\t\tIsIdentifyLineItemsComplete as boolean,\n\t\tIsIdentifySalesTeamComplete as boolean,\n\t\tInitialBusinessCase as boolean,\n\t\tIsInternalAgreementSecured as boolean,\n\t\tIsRevenueSystemCalculated as boolean,\n\t\tIsLetterOfEngagementAccepted as boolean,\n\t\tTopic as string,\n\t\tOpportunityNumber as string,\n\t\tIsPartnerFundingSecured as boolean,\n\t\tPrelimConsumptionPlan as boolean,\n\t\tIsPurchaseArrangementSecured as boolean,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tStateCode as integer,\n\t\tStatus as string,\n\t\tStatusSeqNo as long,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tVersionNumber as long,\n\t\tTenantId as integer,\n\t\tNumberOfDials as integer,\n\t\tOpportunityTenantId as string,\n\t\tPriorityCode as integer,\n\t\tPriority as string,\n\t\tPrioritySeqNo as long,\n\t\tProductSKU as string,\n\t\tRegistrationDate as timestamp,\n\t\tSubscriptionId as string,\n\t\tOriginalPartnerModifiedBy as string,\n\t\tOpportunityCopyTypeCode as integer,\n\t\tOpportunityCopyType as string,\n\t\tOpportunityCopyTypeSeqNo as long,\n\t\tOriginatingOpportunity as string,\n\t\tSendToPartner as boolean,\n\t\tcosellcode as integer,\n\t\tcosell as string,\n\t\tcosellSeqNo as long,\n\t\tPullForwardDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOpportunityScore as double,\n\t\tpartnermotioncode as integer,\n\t\tpartnermotion as string,\n\t\tpartnermotionSeqNo as long,\n\t\tclosestatuscode as integer,\n\t\tclosestatus as string,\n\t\tclosestatusSeqNo as long,\n\t\tPricePointDetails as string,\n\t\tBilledRevenue as double,\n\t\tcomplexitycode as integer,\n\t\tcomplexity as string,\n\t\tcomplexitySeqNo as long,\n\t\tCriticalDeal as boolean,\n\t\tdealtypecode as integer,\n\t\tdealtype as string,\n\t\tdealtypeSeqNo as long,\n\t\tEnrollmentNumber as string,\n\t\tEstROCArrivalDate as timestamp,\n\t\tLicensingContact as string,\n\t\tLSSODMComments as string,\n\t\tNoofTenants as integer,\n\t\ttransactiontypecode as integer,\n\t\ttransactiontype as string,\n\t\ttransactiontypeSeqNo as long,\n\t\toperationscontact as string,\n\t\tattachedservices as boolean,\n\t\tclanumber as string,\n\t\tcloseplan as string,\n\t\tcpumodelseriescode as integer,\n\t\tcpumodelseries as string,\n\t\tcpumodelseriesSeqNo as long,\n\t\tdevicecategorycode as integer,\n\t\tdevicecategory as string,\n\t\tdevicecategorySeqNo as long,\n\t\tmicrosoftazureiotcertifieddevice as boolean,\n\t\tsolutiondesignindate as timestamp,\n\t\tsolutionstartdate as timestamp,\n\t\towningBusinessUnit as string,\n\t\tfinaldecisiondate as timestamp,\n\t\tIsQualified as integer,\n\t\tcompetethreatlevelcode as integer,\n\t\tcompetethreatlevel as string,\n\t\tcompetethreatlevelSeqNo as long,\n\t\tprimarycompetitor as string,\n\t\tothercompetitor as string,\n\t\trvtvalidationready as boolean,\n\t\tCurrentSalesStageModifiedOn as timestamp,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\tcorrectedecid as string,\n\t\tPartnerReferral as string,\n\t\trvtstatuscode as integer,\n\t\trvtstatus as string,\n\t\trvtstatusSeqNo as long,\n\t\tnewenrollmentnumber as string,\n\t\tlastshipmentdate as timestamp,\n\t\tbaseopportunitycode as integer,\n\t\tbaseopportunity as string,\n\t\tbaseopportunitySeqNo as long,\n\t\tAdhocSurvey as integer,\n\t\tSurveyResponseRejectionCounts as integer,\n\t\taccessecifcode as integer,\n\t\taccessecif as string,\n\t\taccessecifSeqNo as long,\n\t\tCompleteTechnicalClosePlan as timestamp,\n\t\tCompleteWorkshop as timestamp,\n\t\tConfirmTrial as timestamp,\n\t\tdeliverinitialpitchcode as integer,\n\t\tdeliverinitialpitch as string,\n\t\tdeliverinitialpitchSeqNo as long,\n\t\tdelivertechnicalcasecode as integer,\n\t\tdelivertechnicalcase as string,\n\t\tdelivertechnicalcaseSeqNo as long,\n\t\tdemonstrateroicode as integer,\n\t\tdemonstrateroi as string,\n\t\tdemonstrateroiSeqNo as long,\n\t\tengagefasttrackcode as integer,\n\t\tengagefasttrack as string,\n\t\tengagefasttrackSeqNo as long,\n\t\tEngageServices as string,\n\t\tselectsalesplaycode as integer,\n\t\tselectsalesplay as string,\n\t\tselectsalesplaySeqNo as long,\n\t\tsharebompricingcode as integer,\n\t\tsharebompricing as string,\n\t\tsharebompricingSeqNo as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string,\n\t\tbizappssalesplay as string,\n\t\tbizappssalesplaycode as integer,\n\t\tbizappssalesplaySeqNo as long,\n\t\tcommercialconstructapprovedbycustomer as string,\n\t\tcommercialconstructapprovedbycustomercode as integer,\n\t\tcommercialconstructapprovedbycustomerSeqNo as long,\n\t\tCompleteClosePlan as boolean,\n\t\tcompletejointcatalystengagementplan as string,\n\t\tcompletejointcatalystengagementplancode as integer,\n\t\tcompletejointcatalystengagementplanSeqNo as long,\n\t\tcompletetechnicalassessment as string,\n\t\tcompletetechnicalassessmentcode as integer,\n\t\tcompletetechnicalassessmentSeqNo as long,\n\t\tcontractsignaturetype as string,\n\t\tcontractsignaturetypecode as integer,\n\t\tcontractsignaturetypeSeqNo as long,\n\t\tcreatebusinessvalueassessment as string,\n\t\tcreatebusinessvalueassessmentcode as integer,\n\t\tcreatebusinessvalueassessmentSeqNo as long,\n\t\tcustomersignoffonassessments as string,\n\t\tcustomersignoffonassessmentscode as integer,\n\t\tcustomersignoffonassessmentsSeqNo as long,\n\t\tcustomersuccessplanworkshopcomplete as string,\n\t\tcustomersuccessplanworkshopcompletecode as integer,\n\t\tcustomersuccessplanworkshopcompleteSeqNo as long,\n\t\tdeliverbusinessvalueenlighten as string,\n\t\tdeliverbusinessvalueenlightencode as integer,\n\t\tdeliverbusinessvalueenlightenSeqNo as long,\n\t\tdeliverenvisioningworkshop as string,\n\t\tdeliverenvisioningworkshopcode as integer,\n\t\tdeliverenvisioningworkshopSeqNo as long,\n\t\tdelivertailoreddemonstration as string,\n\t\tdelivertailoreddemonstrationcode as integer,\n\t\tdelivertailoreddemonstrationSeqNo as long,\n\t\tdelivertransformationplan as string,\n\t\tdelivertransformationplancode as integer,\n\t\tdelivertransformationplanSeqNo as long,\n\t\tengagedwrawrforecif as string,\n\t\tengagedwrawrforecifcode as integer,\n\t\tengagedwrawrforecifSeqNo as long,\n\t\tengagegbb as string,\n\t\tengagegbbcode as integer,\n\t\tengagegbbSeqNo as long,\n\t\tengagemicrosoftexecutivewithcustomercxo as string,\n\t\tengagemicrosoftexecutivewithcustomercxocode as integer,\n\t\tengagemicrosoftexecutivewithcustomercxoSeqNo as long,\n\t\tHandovertoCSMorPCSM as boolean,\n\t\tsalesplay as string,\n\t\tsalesplaySeqNo as long,\n\t\tsolutionarea as string,\n\t\tsolutionareaSeqNo as long,\n\t\ttechnicalcapability as string,\n\t\ttechnicalcapabilitySeqNo as long,\n\t\tpilotsolutionSeqNo as long,\n\t\tpresentbusinesscaseSeqNo as long,\n\t\tpresentdealoptionsSeqNo as long,\n\t\tRapidResponse as boolean,\n\t\ttransitiontocsupartnerSeqNo as long,\n\t\talignonbusinessimpactSeqNo as long,\n\t\talignonsolutionapproachSeqNo as long,\n\t\tClaimTPID as string,\n\t\tCompleteDeploymentWorkshop as timestamp,\n\t\tcompletepredeploymentworkshopSeqNo as long,\n\t\tcompletetrialSeqNo as long,\n\t\tconductpocSeqNo as long,\n\t\tengagecosellprioritizedpartnerSeqNo as long,\n\t\texecutedigitalimmersionSeqNo as long,\n\t\tidentifybusinessdecisionmakersSeqNo as long\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MSXPartnerAccount')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "IOT Engagments"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "MSXPartner"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "MSXPartnerAccount",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Filter2"
+						}
+					],
+					"script": "source(output(\n\t\tEDLPExtractId as string,\n\t\tAddress as string,\n\t\tAddress1_AddressId as string,\n\t\tAddress1_City as string,\n\t\taddress1_Country as string,\n\t\tAddress1_Line1 as string,\n\t\tAddress1_Line2 as string,\n\t\tAddress1_Line3 as string,\n\t\tAddress1_PostalCode as string,\n\t\tAddress1_StateOrProvince as string,\n\t\tC2PCEnabled as boolean,\n\t\tcosellready as boolean,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tDetailEngagementType as string,\n\t\tDetailEngagementTypeCode as integer,\n\t\tDetailEngagementTypeSeqNo as long,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tEngagementType as string,\n\t\tEngagementTypeCode as integer,\n\t\tEngagementTypeSeqNo as long,\n\t\tExternalSystemID as string,\n\t\tFax as string,\n\t\tIncentiveId as string,\n\t\tIsPSXEnabled as boolean,\n\t\tMainPhone as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tMojaEnabled as string,\n\t\tMojaEnabledCode as integer,\n\t\tMojaEnabledSeqNo as long,\n\t\tMPLId as string,\n\t\tMPLName as string,\n\t\tMplPartnerType as string,\n\t\tMPLPartnerTypeCode as integer,\n\t\tMplPartnerTypeSeqNo as long,\n\t\tMPLPracticeName as string,\n\t\tMPNHeadQuartersId as string,\n\t\tMPNLocationId as string,\n\t\tMPNOrganizationId as string,\n\t\tMPNOrganizationName as string,\n\t\tMPNOrganizationPartnerType as string,\n\t\tMPNOrganizationPartnerTypeCode as integer,\n\t\tMPNOrganizationPartnerTypeSeqNo as long,\n\t\tMPNOrganizationSubsidiary as string,\n\t\tMPNOrganizationSubsidiaryCode as integer,\n\t\tMPNOrganizationSubsidiarySeqNo as long,\n\t\tMPNPartnerType as string,\n\t\tMPNPartnerTypeCode as integer,\n\t\tMPNPartnerTypeSeqNo as long,\n\t\tMPNSubsidiary as string,\n\t\tMPNSubsidiaryCode as integer,\n\t\tMPNSubsidiarySeqNo as long,\n\t\tMSSalesId as string,\n\t\tocpid as string,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOwnerId as string,\n\t\towningBusinessUnit as string,\n\t\tPartnerAccountId as string,\n\t\tpartnercenterid as string,\n\t\tPartnerNumber as string,\n\t\tpartneroneid as string,\n\t\tpartnersegment as string,\n\t\tpartnersegmentcode as integer,\n\t\tpartnersegmentSeqNo as long,\n\t\tpartnertier as string,\n\t\tpartnertiercode as integer,\n\t\tpartnertierSeqNo as long,\n\t\tpcenabled as boolean,\n\t\tPrimaryPracticeCode as boolean,\n\t\tStateCode as integer,\n\t\tStatus as string,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tStatusSeqNo as long,\n\t\tTenantId as integer,\n\t\tVersionNumber as long,\n\t\tVoiceId as string,\n\t\tWebsite as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_partneraccount/v1/standard') ~> MSXPartner\nMSXPartner filter(OdsStatus==0) ~> Filter2\nFilter2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MSXStringMap')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "IOT Engagments"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "MSXStringMap",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [],
+					"script": "source(output(\n\t\tStringMapSeqNo as long,\n\t\tStringMapId as string,\n\t\tEntityId as integer,\n\t\tEntityName as string,\n\t\tViewName as string,\n\t\tAttributeName as string,\n\t\tViewAttributeName as string,\n\t\tAttributeValue as integer,\n\t\tValue as string,\n\t\tPreviousAttributeValue as integer,\n\t\tPreviousValue as string,\n\t\tIsActive as boolean,\n\t\tOdsModifiedDate as timestamp,\n\t\tTenantId as integer,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_stringmap/v1/standard') ~> source1\nsource1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MSXmilestone')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "IOT Engagments"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "Milestone"
+						},
+						{
+							"dataset": {
+								"referenceName": "MsxEngagement",
+								"type": "DatasetReference"
+							},
+							"name": "engagment"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "MSXEngagementMilestone",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Filter1"
+						},
+						{
+							"name": "Exists1"
+						}
+					],
+					"script": "source(output(\n\t\tEngagementMilestoneID as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tEngagementID as string,\n\t\tComments as string,\n\t\tEstDate as timestamp,\n\t\tworkloadtypecode as integer,\n\t\tworkloadtypeSeqNo as long,\n\t\tworkloadtype as string,\n\t\tEstMonthlyUsage as double,\n\t\tName as string,\n\t\tEstNoOfActivations as integer,\n\t\tTransactionCurrencyId as string,\n\t\tTenantId as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tVersionNumber as long,\n\t\tMilestoneNumber as string,\n\t\tstatecode as integer,\n\t\tStatus as string,\n\t\tStatusSeqNo as long,\n\t\tstatuscode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\towningBusinessUnit as string,\n\t\tSeatsEntitlements as integer,\n\t\tworkloadcode as integer,\n\t\tworkload as string,\n\t\tworkloadSeqNo as long,\n\t\tcompletedcode as integer,\n\t\tcompleted as string,\n\t\tcompletedSeqNo as long,\n\t\tnonrecurringcode as integer,\n\t\tnonrecurring as string,\n\t\tnonrecurringSeqNo as long,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\thelpneededcode as integer,\n\t\thelpneeded as string,\n\t\thelpneededSeqNo as long,\n\t\tmilestonecategorycode as integer,\n\t\tmilestonecategory as string,\n\t\tmilestonecategorySeqNo as long,\n\t\tmilestonestatuscode as integer,\n\t\tmilestonestatus as string,\n\t\tmilestonestatusSeqNo as long,\n\t\tcommitmentrecommendationcode as integer,\n\t\tcommitmentrecommendation as string,\n\t\tcommitmentrecommendationSeqNo as long,\n\t\tmilestonestatusreasoncode as integer,\n\t\tmilestonestatusreason as string,\n\t\tmilestonestatusreasonSeqNo as long,\n\t\tOwnerId as string,\n\t\tscrumescalationcode as integer,\n\t\tscrumescalationSeqNo as long,\n\t\tscrumescalation as string,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string,\n\t\tmilestonesolutionareaSeqNo as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/msx/hub_vw_engagementmilestone/v1/standard') ~> Milestone\nsource(output(\n\t\tEngagementId as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tAccountId as string,\n\t\tBusinessInvestmentFunds as double,\n\t\tContactId as string,\n\t\tEngagementNumber as string,\n\t\tengagementstatuscode as integer,\n\t\tengagementstatus as string,\n\t\tengagementstatusSeqNo as long,\n\t\tEntitlementsActivated as boolean,\n\t\tEstCompletionDate as timestamp,\n\t\tEstStartDate as timestamp,\n\t\tIdentifyFutureLeads as boolean,\n\t\tEngagementName as string,\n\t\tNextSteps as string,\n\t\tOriginatingOpportunity as string,\n\t\tPartnerAccountId as string,\n\t\tProductId as string,\n\t\tRelatedOpportunity as string,\n\t\tSummary as string,\n\t\tValidateInitialUsage as boolean,\n\t\tWorkloadsActivated as boolean,\n\t\tworkloadtypecode as integer,\n\t\tworkloadtype as string,\n\t\tworkloadtypeSeqNo as long,\n\t\tOwnerId as string,\n\t\tTenantId as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tVersionNumber as long,\n\t\tstatecode as integer,\n\t\tStatusSeqNo as long,\n\t\tStatus as string,\n\t\tstatuscode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tTransactionCurrencyId as string,\n\t\tSubscriptionId as string,\n\t\tEngagementTenantId as string,\n\t\tOSS as boolean,\n\t\tNotificationBase as timestamp,\n\t\tCSPLink as string,\n\t\tengagementhealthcode as integer,\n\t\tengagementhealth as string,\n\t\tengagementhealthSeqNo as long,\n\t\tEngagementScore as integer,\n\t\tObjectivesmet as boolean,\n\t\tqualifyengagementid as string,\n\t\towningBusinessUnit as string,\n\t\tpreferredazureregioncode as integer,\n\t\tpreferredazureregion as string,\n\t\tpreferredazureregionSeqNo as long,\n\t\tsolutionareacode as integer,\n\t\tsolutionarea as string,\n\t\tsolutionareaSeqNo as long,\n\t\thealthcomments as string,\n\t\tlineofbusinessdivisioncode as integer,\n\t\tlineofbusinessdivision as string,\n\t\tlineofbusinessdivisionSeqNo as long,\n\t\tprimarycompetitor as string,\n\t\tcompetethreatlevelcode as integer,\n\t\tcompetethreatlevel as string,\n\t\tcompetethreatlevelSeqNo as long,\n\t\tothercompetitor as string,\n\t\tmsservicesinvolvedcode as integer,\n\t\tmsservicesinvolved as string,\n\t\tmsservicesinvolvedSeqNo as long,\n\t\tNonRecurringACR as double,\n\t\tNonRecurringUsersDevices as integer,\n\t\tPartnerReferral as string,\n\t\tcustomerimmersionexperiencecode as integer,\n\t\tcustomerimmersionexperience as string,\n\t\tcustomerimmersionexperienceSeqNo as long,\n\t\tdigitaltrainingcode as integer,\n\t\tdigitaltraining as string,\n\t\tdigitaltrainingSeqNo as long,\n\t\texcitementdayscode as integer,\n\t\texcitementdays as string,\n\t\texcitementdaysSeqNo as long,\n\t\tofficeofcxocode as integer,\n\t\tofficeofcxoSeqNo as long,\n\t\tofficeofcxo as string,\n\t\tPartnerEngagedBy as string,\n\t\tacmplancode as integer,\n\t\tacmplan as string,\n\t\tacmplanSeqNo as long,\n\t\tarchitecturedesignapprovedcode as integer,\n\t\tarchitecturedesignapproved as string,\n\t\tarchitecturedesignapprovedSeqNo as long,\n\t\tbusinessgovernanceplancode as integer,\n\t\tbusinessgovernanceplan as string,\n\t\tbusinessgovernanceplanSeqNo as long,\n\t\tcompleteworkshop as timestamp,\n\t\tconferencingenabledcode as integer,\n\t\tconferencingenabled as string,\n\t\tconferencingenabledSeqNo as long,\n\t\tconfirmdeliverysuccesscode as integer,\n\t\tconfirmdeliverysuccess as string,\n\t\tconfirmdeliverysuccessSeqNo as long,\n\t\tcreatebusinesscasecode as integer,\n\t\tcreatebusinesscase as string,\n\t\tcreatebusinesscaseSeqNo as long,\n\t\tcreatecsspcode as integer,\n\t\tcreatecssp as string,\n\t\tcreatecsspSeqNo as long,\n\t\tcreatesuccessplancode as integer,\n\t\tcreatesuccessplan as string,\n\t\tcreatesuccessplanSeqNo as long,\n\t\tcustomerreadinessassessmentcode as integer,\n\t\tcustomerreadinessassessment as string,\n\t\tcustomerreadinessassessmentSeqNo as long,\n\t\tdeliverinitialpitchcode as integer,\n\t\tdeliverinitialpitch as string,\n\t\tdeliverinitialpitchSeqNo as long,\n\t\tendusertrainingmwteamcode as integer,\n\t\tendusertrainingmwteam as string,\n\t\tendusertrainingmwteamSeqNo as long,\n\t\tengagefasttrackcode as integer,\n\t\tengagefasttrack as string,\n\t\tengagefasttrackSeqNo as long,\n\t\tgovernancebenchmarkcode as integer,\n\t\tgovernancebenchmark as string,\n\t\tgovernancebenchmarkSeqNo as long,\n\t\tidentifypriorityprojectscode as integer,\n\t\tidentifypriorityprojects as string,\n\t\tidentifypriorityprojectsSeqNo as long,\n\t\tinfrastructureassessmentcode as integer,\n\t\tinfrastructureassessment as string,\n\t\tinfrastructureassessmentSeqNo as long,\n\t\tmeetingroomsenabledcode as integer,\n\t\tmeetingroomsenabled as string,\n\t\tmeetingroomsenabledSeqNo as long,\n\t\tmigrationassessmentcode as integer,\n\t\tmigrationassessment as string,\n\t\tmigrationassessmentSeqNo as long,\n\t\toperationalreadinessassessmentcode as integer,\n\t\toperationalreadinessassessmentSeqNo as long,\n\t\toperationalreadinessassessment as string,\n\t\torgreadinessassessmentcode as integer,\n\t\torgreadinessassessment as string,\n\t\torgreadinessassessmentSeqNo as long,\n\t\tperformpilotcode as integer,\n\t\tperformpilotSeqNo as long,\n\t\tperformpilot as string,\n\t\tscalemigrationcode as integer,\n\t\tscalemigration as string,\n\t\tscalemigrationSeqNo as long,\n\t\tscenariocode as integer,\n\t\tscenarioSeqNo as long,\n\t\tscenario as string,\n\t\tselectsalesplaycode as integer,\n\t\tselectsalesplay as string,\n\t\tselectsalesplaySeqNo as long,\n\t\tsendfinalproposalcode as integer,\n\t\tsendfinalproposalSeqNo as long,\n\t\tsendfinalproposal as string,\n\t\tsendproposalcode as integer,\n\t\tsendproposal as string,\n\t\tsendproposalSeqNo as long,\n\t\tskillingplanagreementcode as integer,\n\t\tskillingplanagreementSeqNo as long,\n\t\tskillingplanagreement as string,\n\t\tskillsgapassessmentcode as integer,\n\t\tskillsgapassessment as string,\n\t\tskillsgapassessmentSeqNo as long,\n\t\tsuccesscriteriaagreedcode as integer,\n\t\tsuccesscriteriaagreed as string,\n\t\tsuccesscriteriaagreedSeqNo as long,\n\t\tsuccessplansignoffcode as integer,\n\t\tsuccessplansignoffSeqNo as long,\n\t\tsuccessplansignoff as string,\n\t\tteamsassessmentcode as integer,\n\t\tteamsassessment as string,\n\t\tteamsassessmentSeqNo as long,\n\t\tupdatesuccessplancode as integer,\n\t\tupdatesuccessplanSeqNo as long,\n\t\tupdatesuccessplan as string,\n\t\tsecondarypartner as string,\n\t\tadoptionmonitoring as string,\n\t\tadoptionmonitoringSeqNo as long,\n\t\tcomplexityassessment as string,\n\t\tcomplexityassessmentSeqNo as long,\n\t\tconductbusinessreview as string,\n\t\tconductbusinessreviewSeqNo as long,\n\t\tconsenttosendtopartner as string,\n\t\tconsenttosendtopartnerSeqNo as long,\n\t\tcreateactionplan as string,\n\t\tcreateactionplanSeqNo as long,\n\t\tcsmprogramorientation as string,\n\t\tcsmprogramorientationSeqNo as long,\n\t\tdefinebusinessoutcomes as string,\n\t\tdefinebusinessoutcomesSeqNo as long,\n\t\tdefineprojectvision as string,\n\t\tdefineprojectvisionSeqNo as long,\n\t\tgolive as string,\n\t\tgoliveSeqNo as long,\n\t\thealthmonitoring as string,\n\t\thealthmonitoringSeqNo as long,\n\t\tknowyourcustomer as string,\n\t\tknowyourcustomerSeqNo as long,\n\t\torgmaturityassessmentSeqNo as long,\n\t\torgmaturityassessment as string,\n\t\tprosciassessment as string,\n\t\tprosciassessmentSeqNo as long,\n\t\tsecurereference as string,\n\t\tsecurereferenceSeqNo as long,\n\t\tsolutioninnovationSeqNo as long,\n\t\tsolutioninnovation as string,\n\t\tactualclosedate as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string,\n\t\tbdmroundtableindustrySeqNo as long,\n\t\tbdmroundtablelobSeqNo as long,\n\t\tcustomersuccessworkshopSeqNo as long,\n\t\trollupestrevenue as decimal(10,0),\n\t\trollupestseats as integer,\n\t\tsecuremvpcommitment as string,\n\t\tsecuremvpcommitmentSeqNo as long,\n\t\tsendcustomeroutreach as string,\n\t\tsendcustomeroutreachcode as integer,\n\t\tsendcustomeroutreachSeqNo as long,\n\t\tspecialtycomputecapacityrequiredSeqNo as long,\n\t\tsuccessclinicSeqNo as long,\n\t\tbdmroundtableindustry as string,\n\t\tbdmroundtablelob as string,\n\t\tCJSDocumentLink as string,\n\t\tCJSDocumentLinkCreatedDate as timestamp,\n\t\tClosedReason as string,\n\t\tcustomersuccessworkshop as string,\n\t\tsalesplay as string,\n\t\tsalesplaySeqNo as long,\n\t\tspecialtycomputecapacityrequired as string,\n\t\tsuccessclinic as string,\n\t\ttechnicalcapability as string,\n\t\ttechnicalcapabilitySeqNo as long,\n\t\tnominatetoazureaccelerateSeqNo as long,\n\t\tsetupazureservicehealthalertsSeqNo as long,\n\t\tvalidateprojectresultSeqNo as long,\n\t\tagreekpisforproofofvalueSeqNo as long,\n\t\tapproveimplementationproposalSeqNo as long,\n\t\tbuildappmodernizationinnovationplanSeqNo as long,\n\t\tbuildcloudadoptionplanSeqNo as long,\n\t\tbuildmajorincidentresponseplanSeqNo as long,\n\t\tbuildmvpSeqNo as long,\n\t\tcompleteappassessmentSeqNo as long,\n\t\tcompletedevopsmaturityassessmentSeqNo as long,\n\t\tcompletehandoffSeqNo as long,\n\t\tcompleteproofofvalueSeqNo as long,\n\t\tconductwellarchitectedreviewSeqNo as long,\n\t\tcreateazuredevtestsubscriptionSeqNo as long,\n\t\tcreatecustomersuccessplanSeqNo as long,\n\t\tdefinemigrationplanSeqNo as long,\n\t\tdefinesupportplanSeqNo as long,\n\t\tdeliveraibusinessschoolSeqNo as long,\n\t\tdeliveraibusinessschooltrainingSeqNo as long,\n\t\tdeliverlandingzoneSeqNo as long,\n\t\tdeliverskillingplanSeqNo as long,\n\t\tdeliverstatementoffindingsSeqNo as long,\n\t\tdeploylandingzoneSeqNo as long,\n\t\tengagecosellprioritizedpartnerSeqNo as long,\n\t\tensuregithublicensesprocuredSeqNo as long,\n\t\testablishbusinessreviewrhythmSeqNo as long,\n\t\texecuteadoptionworkshopSeqNo as long,\n\t\texecutesuccessplanningworkshopSeqNo as long,\n\t\tidentifycosellopportunitySeqNo as long,\n\t\tidentifycustomerdecisionmakersSeqNo as long,\n\t\tidentifygithubsellerandservicesSeqNo as long,\n\t\tidentifynextazureprojectSeqNo as long,\n\t\tidentifypartnermicrosoftservicesSeqNo as long,\n\t\tnominateforampSeqNo as long,\n\t\tnominateforcetSeqNo as long,\n\t\tnominatetoanalyticsaiaccelerateprogramSeqNo as long,\n\t\tNonRecurringUsersDevicesModernWork as integer,\n\t\tpartnerconductspartnerworkshopSeqNo as long,\n\t\tpilotsthroughazureaccelerateSeqNo as long,\n\t\tprovisionapptestproductionenvironmentsSeqNo as long,\n\t\tremediatetechnicalblockersSeqNo as long,\n\t\tRollupEstActiveUsersDevicesModernWork as integer,\n\t\tsecurebdmapprovalofcsspSeqNo as long,\n\t\tsecurecustomercommitmentSeqNo as long,\n\t\tseekapprovalforlandingzoneSeqNo as long,\n\t\tsubmitecifrequestSeqNo as long,\n\t\tcompletechangemanagementworkshopSeqNo as long,\n\t\tcompletedeploymentSeqNo as long,\n\t\tconductenvisioningworkshoporcieSeqNo as long,\n\t\tcoordinatedeploymentplanSeqNo as long,\n\t\tdeliverinadayworkshopsSeqNo as long,\n\t\tdelivertrainingSeqNo as long,\n\t\tengagesolutionassessmentprogramSeqNo as long,\n\t\texecutecustomersuccessplanSeqNo as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> engagment\nExists1 filter(OdsStatus==0) ~> Filter1\nMilestone, engagment exists(Milestone@EngagementID == engagment@EngagementId,\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists1\nFilter1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PartnerReferral')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "MSX General"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PartnerReferral"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "PartnerReferral",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Filter1"
+						}
+					],
+					"script": "source(output(\n\t\tEDLPExtractId as string,\n\t\tReferralId as string,\n\t\tEngagementId as string,\n\t\tEngagementName as string,\n\t\tAccountId as string,\n\t\tReferralOrganizationId as string,\n\t\tBusinessProfileId as string,\n\t\tOrganizationName as string,\n\t\tExternalReferenceId as string,\n\t\tCreatedDateTime as timestamp,\n\t\tUpdatedDateTime as timestamp,\n\t\tExpirationDateTime as timestamp,\n\t\tStatus as string,\n\t\tSubStatus as string,\n\t\tReferralType as string,\n\t\tConsentToToShareInfoWithOthers as boolean,\n\t\tConsentToContact as boolean,\n\t\tConsentToMicrosoftToContactSpecificPartners as boolean,\n\t\tNotes as string,\n\t\tDealValue as double,\n\t\tCurrency as string,\n\t\tClosingDateTime as timestamp,\n\t\tServiceDescription as string,\n\t\tIndustries as string,\n\t\tProducts as string,\n\t\tServices as string,\n\t\tSolutions as string,\n\t\tCustomerRequestedContact as boolean,\n\t\tInviteContext_Notes as string,\n\t\tInvitedByAccountId as string,\n\t\tInvitedByOrganizationId as string,\n\t\tInvitedByOrganizationName as string,\n\t\tReferralQualification as string,\n\t\tStatusReason as string,\n\t\tStatusComments as string,\n\t\tCustomerOrgName as string,\n\t\tCustomerOrgSize as string,\n\t\tCity as string,\n\t\tState as string,\n\t\tPostalCode as string,\n\t\tCountryCode as string,\n\t\tCustomerDunsId as string,\n\t\tCustomerExternalId as string,\n\t\tIsCreatedByAgent as boolean,\n\t\tIsTest as boolean,\n\t\tCampaignId as string,\n\t\tMPNId as string,\n\t\tSalesStage as string,\n\t\tTrackingInfo as string,\n\t\tAssistanceRequestCode as string,\n\t\tReferralProgram as string,\n\t\tCreatedVia as string,\n\t\tLastModifiedVia as string,\n\t\tIncentiveType as string,\n\t\tIncentiveLevel as string,\n\t\tAcceptedDateTime as timestamp,\n\t\tTags as string,\n\t\tIot as string,\n\t\tConsentToShareReferralWithMicrosoftSellers as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPDeltaActionCode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/partnercenter/partnerreferral_referralmaster/v1/standard') ~> PartnerReferral\nPartnerReferral filter(instr(lower(Tags), 'oemiot') > 0) ~> Filter1\nFilter1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

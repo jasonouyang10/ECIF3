@@ -1,0 +1,31 @@
+{
+	"name": "msxprocesssstage",
+	"properties": {
+		"folder": {
+			"name": "IOT Engagments"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "msxdatalake",
+						"type": "LinkedServiceReference"
+					},
+					"name": "msxprocessstage"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "msxprocessstage",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"script": "source(output(\n\t\tStageID as string,\n\t\tStageName as string,\n\t\tProcessID as string,\n\t\tProcessName as string,\n\t\tActive as integer,\n\t\tOdsModifiedDate as timestamp,\n\t\tViewName as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\tStageCategory as string,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_processstage/v1/standard') ~> msxprocessstage\nmsxprocessstage sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+		}
+	}
+}

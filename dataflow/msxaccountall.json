@@ -1,0 +1,31 @@
+{
+	"name": "msxaccountall",
+	"properties": {
+		"folder": {
+			"name": "MSX General"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "msxdatalake",
+						"type": "LinkedServiceReference"
+					},
+					"name": "msxaccount"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "MSXAccountAll",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"script": "source(output(\n\t\tAccountId as string,\n\t\tOwnerId as string,\n\t\tParentAccountId as string,\n\t\tTerritoryId as string,\n\t\tCurrencyId as string,\n\t\tCustomerSegment as integer,\n\t\tEndCustomerSegment as string,\n\t\tEndCustomerSegmentSeqNo as long,\n\t\tCustomerSubsegment as integer,\n\t\tEndCustomerSubsegment as string,\n\t\tEndCustomerSubsegmentSeqNo as long,\n\t\tIndustryCode as integer,\n\t\tIndustrySeqNo as long,\n\t\tIndustry as string,\n\t\tIndustryVerticalCode as integer,\n\t\tIndustryVertical as string,\n\t\tIndustryVerticalSeqNo as long,\n\t\tLicenseAgreementTypeCode as integer,\n\t\tLicenseAgreementTypeSeqNo as long,\n\t\tLicenseAgreementType as string,\n\t\tManagedstatusCode as integer,\n\t\tManagedstatus as string,\n\t\tManagedstatusSeqNo as long,\n\t\tParentingLevelCode as integer,\n\t\tParentingLevel as string,\n\t\tParentingLevelSeqNo as long,\n\t\tVerticalCategoryCode as integer,\n\t\tVerticalCategory as string,\n\t\tVerticalCategorySeqNo as long,\n\t\tAddressId as string,\n\t\tCity as string,\n\t\tCountry as string,\n\t\tLine1 as string,\n\t\tLine2 as string,\n\t\tLine3 as string,\n\t\tPostalCode as string,\n\t\tStateOrProvince as string,\n\t\tAccountNumber as string,\n\t\tDescription as string,\n\t\tFax as string,\n\t\tMDMOrganizationId as string,\n\t\tMSSalesId as string,\n\t\tMSSalesTopParentId as string,\n\t\tAccountName as string,\n\t\tNumberOfEmployees as integer,\n\t\tPcCount as integer,\n\t\tServerCount as integer,\n\t\tServicesEngagement as boolean,\n\t\tSmartphoneCount as integer,\n\t\tTabletCount as integer,\n\t\tTaxId as string,\n\t\tMainPhone as string,\n\t\tWebsiteUrl as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tStateCode as integer,\n\t\tStatus as string,\n\t\tStatusSeqNo as long,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tVersionNumber as long,\n\t\tTenantId as integer,\n\t\tCID as string,\n\t\tFYStartMonthcode as integer,\n\t\tFYStartMonth as string,\n\t\tFYStartMonthSeqNo as long,\n\t\tGPID as string,\n\t\tGPName as string,\n\t\tMSP_HQ as boolean,\n\t\tOdsStatus as integer,\n\t\tOEMManaged as boolean,\n\t\toemorganizationtypecode as integer,\n\t\toemorganizationtypeSeqNo as long,\n\t\toemorganizationtype as string,\n\t\toemsegmenttypecode as integer,\n\t\toemsegmenttype as string,\n\t\toemsegmenttypeSeqNo as long,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tclanumber as string,\n\t\towningBusinessUnit as string,\n\t\tcreatedonbehalfby as string,\n\t\tmodifiedonbehalfby as string,\n\t\tenglishtranslatedaccountname as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\taccountcreatedby as string,\n\t\taccountmodifiedby as string,\n\t\tpreviousaccountowner as string,\n\t\tmcapi as string,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string,\n\t\tpevcinvestors as string,\n\t\tpevcownedSeqNo as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_account/v1/standard') ~> msxaccount\nmsxaccount sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+		}
+	}
+}

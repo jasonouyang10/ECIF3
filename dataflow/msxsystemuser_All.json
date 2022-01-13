@@ -1,0 +1,31 @@
+{
+	"name": "msxsystemuser_All",
+	"properties": {
+		"folder": {
+			"name": "MSX General"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "msxdatalake",
+						"type": "LinkedServiceReference"
+					},
+					"name": "MSXsystemuser"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "msxsystemuserAll",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"script": "source(output(\n\t\tSystemUserId as string,\n\t\tBusinessUnitId as string,\n\t\tDefaultMailbox as string,\n\t\tParentSystemUserId as string,\n\t\tQueueId as string,\n\t\tSiteId as string,\n\t\tTerritoryId as string,\n\t\tAccessModeCode as integer,\n\t\tAccessMode as string,\n\t\tAccessModeSeqNo as long,\n\t\tCalTypeCode as integer,\n\t\tCalTypeSeqNo as long,\n\t\tCalType as string,\n\t\tInviteStatusCode as integer,\n\t\tInviteStatus as string,\n\t\tInviteStatusSeqNo as long,\n\t\tIsNotificationSentCode as integer,\n\t\tIsNotificationSentSeqNo as long,\n\t\tIsNotificationSent as string,\n\t\tPreferredAddressCode as integer,\n\t\tPreferredAddress as string,\n\t\tPreferredAddressSeqNo as long,\n\t\tPreferredPhoneCode as integer,\n\t\tPreferredPhoneSeqNo as long,\n\t\tPreferredPhone as string,\n\t\tRoleCode as integer,\n\t\tRole as string,\n\t\tRoleSeqNo as long,\n\t\tAddress1_AddressId as string,\n\t\tAddress1_City as string,\n\t\tAddress1_Country as string,\n\t\tAddress1_Fax as string,\n\t\tAddress1_Line1 as string,\n\t\tAddress1_Line2 as string,\n\t\tAddress1_Line3 as string,\n\t\tAddress1_PostalCode as string,\n\t\tAddress1_StateOrProvince as string,\n\t\tAddress1_Telephone1 as string,\n\t\tAddress1_Telephone3 as string,\n\t\tDomainName as string,\n\t\tDPNSignDate as timestamp,\n\t\tFirstName as string,\n\t\tHomePhone as string,\n\t\tInternalEmailAddress as string,\n\t\tIsDisabled as boolean,\n\t\tLastName as string,\n\t\tMiddleName as string,\n\t\tMobileAlertEmail as string,\n\t\tMobilePhone as string,\n\t\tPersonalEmailAddress as string,\n\t\tTitle as string,\n\t\tWindowsLiveId as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tVersionNumber as long,\n\t\tTenantId as integer,\n\t\tOdsStatus as integer,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_systemuser/v1/sensitive') ~> MSXsystemuser\nMSXsystemuser sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+		}
+	}
+}

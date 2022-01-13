@@ -1,0 +1,31 @@
+{
+	"name": "msxcampaign",
+	"properties": {
+		"folder": {
+			"name": "IOT Engagments"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "msxdatalake",
+						"type": "LinkedServiceReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "msxcampaign",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"script": "source(output(\n\t\tCampaignId as string,\n\t\tOwnerId as string,\n\t\tMarketingVehicleTacticCode as integer,\n\t\tMarketingTactic as string,\n\t\tMarketingTacticSeqNo as long,\n\t\tOriginCode as integer,\n\t\tOrigin as string,\n\t\tOriginSeqNo as long,\n\t\tTypeCode as integer,\n\t\tMarketingVehicle as string,\n\t\tMarketingVehicleSeqNo as long,\n\t\tTacticEndDate as timestamp,\n\t\tTacticStartDate as timestamp,\n\t\tTacticName as string,\n\t\tComments as string,\n\t\tPromotionCode as string,\n\t\tCrmInstanceId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tStateCode as integer,\n\t\tStatus as string,\n\t\tStatusSeqNo as long,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tVersionNumber as long,\n\t\tTenantId as integer,\n\t\tOdsStatus as integer,\n\t\tGEPName as string,\n\t\tGEPScenario as string,\n\t\tProgramId as string,\n\t\tCodeName as string,\n\t\towningBusinessUnit as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/msx/hub_vw_campaign/v1/standard') ~> source1\nsource1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+		}
+	}
+}

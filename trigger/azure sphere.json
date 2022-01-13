@@ -1,0 +1,23 @@
+{
+	"name": "azure sphere",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2020-10-05T13:00:00",
+				"timeZone": "Pacific Standard Time",
+				"schedule": {
+					"hours": [
+						5,
+						6
+					]
+				}
+			}
+		}
+	}
+}

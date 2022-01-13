@@ -1,0 +1,21 @@
+{
+	"name": "msxdatalake",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://cseoedlprodadlsg2wus201.dfs.core.windows.net/",
+			"tenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+			"servicePrincipalId": "3c4bff2e-cd35-4ba1-9a95-476924a4693e",
+			"servicePrincipalKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "iotbiappreg"
+			}
+		}
+	}
+}

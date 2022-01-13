@@ -1,0 +1,19 @@
+{
+	"name": "msxtask",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azoedbisqlprod",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MSX"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "msxtask"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

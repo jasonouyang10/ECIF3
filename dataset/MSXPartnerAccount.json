@@ -1,0 +1,19 @@
+{
+	"name": "MSXPartnerAccount",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azoedbisqlprod",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MSX"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "MSXPartnerAccount"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

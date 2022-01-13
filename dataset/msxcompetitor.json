@@ -1,0 +1,19 @@
+{
+	"name": "msxcompetitor",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azoedbisqlprod",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MSX General"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "msxcompetitor"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

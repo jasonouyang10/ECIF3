@@ -1,0 +1,31 @@
+{
+	"name": "MSXCurrencyData",
+	"properties": {
+		"folder": {
+			"name": "IOT Engagments"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "msxdatalake",
+						"type": "LinkedServiceReference"
+					},
+					"name": "MSXCurrencySource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "MSXCurrencydata",
+						"type": "DatasetReference"
+					},
+					"name": "currencydata"
+				}
+			],
+			"transformations": [],
+			"script": "source(output(\n\t\tEDLPExtractId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tCurrencyId as string,\n\t\tCurrencyName as string,\n\t\tCurrencyPrecision as integer,\n\t\tCurrencySymbol as string,\n\t\tExchangeRate as double,\n\t\tIsoCurrencyCode as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tStateCode as integer,\n\t\tStatus as string,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tStatusSeqNo as long,\n\t\tTenantId as integer,\n\t\tVersionNumber as long,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_currency/v1/standard') ~> MSXCurrencySource\nMSXCurrencySource sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> currencydata"
+		}
+	}
+}

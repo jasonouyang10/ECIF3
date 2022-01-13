@@ -1,0 +1,100 @@
+{
+	"name": "Sales Program related Engagement",
+	"properties": {
+		"activities": [
+			{
+				"name": "SalesProgram",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "SalesProgram",
+						"type": "DataFlowReference",
+						"parameters": {
+							"SalesProgramID1": "'4267d304-831d-eb11-a813-000d3a8ccf2f'",
+							"SalesProgramID2": "'45dde65e-831d-eb11-a813-000d3a8ccf2f'"
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Engagement",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "SalesProgram",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "EngagementRelated",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "AccountRelated",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "Engagement",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "AccountRelated",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2020-11-26T16:16:16Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

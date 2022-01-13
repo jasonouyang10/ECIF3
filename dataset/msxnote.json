@@ -1,0 +1,19 @@
+{
+	"name": "msxnote",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azoedbisqlprod",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MSX"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "MSXNote"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

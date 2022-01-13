@@ -1,0 +1,31 @@
+{
+	"name": "MSXStringMap",
+	"properties": {
+		"folder": {
+			"name": "IOT Engagments"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "msxdatalake",
+						"type": "LinkedServiceReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "MSXStringMap",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"script": "source(output(\n\t\tStringMapSeqNo as long,\n\t\tStringMapId as string,\n\t\tEntityId as integer,\n\t\tEntityName as string,\n\t\tViewName as string,\n\t\tAttributeName as string,\n\t\tViewAttributeName as string,\n\t\tAttributeValue as integer,\n\t\tValue as string,\n\t\tPreviousAttributeValue as integer,\n\t\tPreviousValue as string,\n\t\tIsActive as boolean,\n\t\tOdsModifiedDate as timestamp,\n\t\tTenantId as integer,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\textractid as string,\n\t\textractdatetime as timestamp,\n\t\tloadts as timestamp,\n\t\tdeltaactioncode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_stringmap/v1/standard') ~> source1\nsource1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"name": "msxcampaign",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azoedbisqlprod",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MSX"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "msxcampaign"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,15 @@
+{
+	"name": "partnerReferralVM",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azoedbisqlprodvm",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "PartnerReferralSrc"
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"name": "MSXCurrencydata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azoedbisqlprod",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MSX"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "MSXCurrencyData"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

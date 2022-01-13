@@ -1,0 +1,19 @@
+{
+	"name": "msxspEngagementTeam",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MSXSalesProgram",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MSX Engagment By Sales Program"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "msxspEngagementTeam"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,19 @@
+{
+	"name": "MSXStringMap",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azoedbisqlprod",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MSX"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "msxstringmap"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

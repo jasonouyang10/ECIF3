@@ -1,0 +1,19 @@
+{
+	"name": "msxprocessstage",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azoedbisqlprod",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MSX"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "MSXProcessStage"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
