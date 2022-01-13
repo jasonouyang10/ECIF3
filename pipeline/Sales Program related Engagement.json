@@ -15,14 +15,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "SalesProgram",
-						"type": "DataFlowReference",
-						"parameters": {
-							"SalesProgramID1": "'4267d304-831d-eb11-a813-000d3a8ccf2f'",
-							"SalesProgramID2": "'45dde65e-831d-eb11-a813-000d3a8ccf2f'"
-						}
-					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
@@ -50,10 +42,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "EngagementRelated",
-						"type": "DataFlowReference"
-					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
@@ -81,10 +69,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "AccountRelated",
-						"type": "DataFlowReference"
-					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"

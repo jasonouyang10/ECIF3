@@ -62,764 +62,629 @@
 							{
 								"source": {
 									"name": "EDLPExtractId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "EDLPExtractId",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "ReferralId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "ReferralId",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "EngagementId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "EngagementId",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "EngagementName",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "EngagementName",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "AccountId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "AccountId",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "ReferralOrganizationId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "ReferralOrganizationId",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "BusinessProfileId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "BusinessProfileId",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "OrganizationName",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "OrganizationName",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "ExternalReferenceId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "ExternalReferenceId",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "CreatedDateTime",
-									"type": "DateTime",
-									"physicalType": "datetime2"
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "CreatedDateTime",
-									"type": "DateTime",
-									"physicalType": "DateTime"
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
 									"name": "UpdatedDateTime",
-									"type": "DateTime",
-									"physicalType": "datetime2"
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "UpdatedDateTime",
-									"type": "DateTime",
-									"physicalType": "DateTime"
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
 									"name": "ExpirationDateTime",
-									"type": "DateTime",
-									"physicalType": "datetime2"
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "ExpirationDateTime",
-									"type": "DateTime",
-									"physicalType": "DateTime"
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
 									"name": "Status",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Status",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "SubStatus",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "SubStatus",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "ReferralType",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "ReferralType",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "ConsentToToShareInfoWithOthers",
-									"type": "Boolean",
-									"physicalType": "bit"
+									"type": "Boolean"
 								},
 								"sink": {
 									"name": "ConsentToToShareInfoWithOthers",
-									"type": "Boolean",
-									"physicalType": "Boolean"
+									"type": "Boolean"
 								}
 							},
 							{
 								"source": {
 									"name": "ConsentToContact",
-									"type": "Boolean",
-									"physicalType": "bit"
+									"type": "Boolean"
 								},
 								"sink": {
 									"name": "ConsentToContact",
-									"type": "Boolean",
-									"physicalType": "Boolean"
+									"type": "Boolean"
 								}
 							},
 							{
 								"source": {
 									"name": "ConsentToMicrosoftToContactSpecificPartners",
-									"type": "Boolean",
-									"physicalType": "bit"
+									"type": "Boolean"
 								},
 								"sink": {
 									"name": "ConsentToMicrosoftToContactSpecificPartners",
-									"type": "Boolean",
-									"physicalType": "Boolean"
+									"type": "Boolean"
 								}
 							},
 							{
 								"source": {
 									"name": "Notes",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Notes",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "DealValue",
-									"type": "Double",
-									"physicalType": "float"
+									"type": "Double"
 								},
 								"sink": {
 									"name": "DealValue",
-									"type": "Double",
-									"physicalType": "Double"
+									"type": "Double"
 								}
 							},
 							{
 								"source": {
 									"name": "Currency",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Currency",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "ClosingDateTime",
-									"type": "DateTime",
-									"physicalType": "datetime2"
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "ClosingDateTime",
-									"type": "DateTime",
-									"physicalType": "DateTime"
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
 									"name": "ServiceDescription",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "ServiceDescription",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "Industries",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Industries",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "Products",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Products",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "Services",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Services",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "Solutions",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Solutions",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "CustomerRequestedContact",
-									"type": "Boolean",
-									"physicalType": "bit"
+									"type": "Boolean"
 								},
 								"sink": {
 									"name": "CustomerRequestedContact",
-									"type": "Boolean",
-									"physicalType": "Boolean"
+									"type": "Boolean"
 								}
 							},
 							{
 								"source": {
 									"name": "InviteContext_Notes",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "InviteContext_Notes",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "InvitedByAccountId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "InvitedByAccountId",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "InvitedByOrganizationId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "InvitedByOrganizationId",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "InvitedByOrganizationName",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "InvitedByOrganizationName",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "ReferralQualification",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "ReferralQualification",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "StatusReason",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "StatusReason",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "StatusComments",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "StatusComments",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "CustomerOrgName",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "CustomerOrgName",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "CustomerOrgSize",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "CustomerOrgSize",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "City",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "City",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "State",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "State",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "PostalCode",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "PostalCode",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "CountryCode",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "CountryCode",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "CustomerDunsId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "CustomerDunsId",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "CustomerExternalId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "CustomerExternalId",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "IsCreatedByAgent",
-									"type": "Boolean",
-									"physicalType": "bit"
+									"type": "Boolean"
 								},
 								"sink": {
 									"name": "IsCreatedByAgent",
-									"type": "Boolean",
-									"physicalType": "Boolean"
+									"type": "Boolean"
 								}
 							},
 							{
 								"source": {
 									"name": "IsTest",
-									"type": "Boolean",
-									"physicalType": "bit"
+									"type": "Boolean"
 								},
 								"sink": {
 									"name": "IsTest",
-									"type": "Boolean",
-									"physicalType": "Boolean"
+									"type": "Boolean"
 								}
 							},
 							{
 								"source": {
 									"name": "CampaignId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "CampaignId",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "MPNId",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "MPNId",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "SalesStage",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "SalesStage",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "TrackingInfo",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "TrackingInfo",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "AssistanceRequestCode",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "AssistanceRequestCode",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "ReferralProgram",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "ReferralProgram",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "CreatedVia",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "CreatedVia",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "LastModifiedVia",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "LastModifiedVia",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "IncentiveType",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "IncentiveType",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "IncentiveLevel",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "IncentiveLevel",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "AcceptedDateTime",
-									"type": "DateTime",
-									"physicalType": "datetime2"
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "AcceptedDateTime",
-									"type": "DateTime",
-									"physicalType": "DateTime"
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
 									"name": "Tags",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Tags",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "Iot",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Iot",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "ConsentToShareReferralWithMicrosoftSellers",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "ConsentToShareReferralWithMicrosoftSellers",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "EDLPExtractDateTime",
-									"type": "DateTime",
-									"physicalType": "datetime2"
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "EDLPExtractDateTime",
-									"type": "DateTime",
-									"physicalType": "DateTime"
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
 									"name": "EDLPLoadTS",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "EDLPLoadTS",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "EDLPDeltaActionCode",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "EDLPDeltaActionCode",
-									"type": "String",
-									"physicalType": "String"
+									"type": "String"
 								}
 							}
-						],
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
+						]
 					}
 				},
 				"inputs": [
 					{
 						"referenceName": "PartnerReferral",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "partnerReferralVM",
 						"type": "DatasetReference"
 					}
 				]
