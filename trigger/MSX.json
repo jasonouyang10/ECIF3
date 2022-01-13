@@ -9,12 +9,6 @@
 					"referenceName": "Master pipeeline IOT Engagement",
 					"type": "PipelineReference"
 				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "PartnerReferral",
-					"type": "PipelineReference"
-				}
 			}
 		],
 		"type": "ScheduleTrigger",
