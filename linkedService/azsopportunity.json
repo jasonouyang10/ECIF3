@@ -2,7 +2,7 @@
 	"name": "azsopportunity",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
-		"description": "Azure Sphere Opportunity",
+		"description": " Opportunity",
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
