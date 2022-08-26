@@ -1,9 +1,9 @@
 {
-	"name": "msx competitor",
+	"name": "Debug pipeline",
 	"properties": {
 		"activities": [
 			{
-				"name": "msxsystemuser",
+				"name": "MSXOpportunity",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "msxsystemuser",
+						"referenceName": "MSXOpportunity",
 						"type": "DataFlowReference"
 					},
 					"compute": {
