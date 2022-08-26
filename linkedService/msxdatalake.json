@@ -1,6 +1,5 @@
 {
 	"name": "msxdatalake",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureBlobFS",
@@ -17,5 +16,6 @@
 				"secretName": "iotbiappreg"
 			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
