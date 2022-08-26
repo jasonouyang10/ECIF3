@@ -1,6 +1,21 @@
 {
 	"name": "Master pipeeline IOT Engagement",
 	"properties": {
+		"activities": [
+			{
+				"name": "CopyMSXDatatoSQLVM",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CopyMSXDatatoSQLVM",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
 		"folder": {
 			"name": "MSX"
 		},
