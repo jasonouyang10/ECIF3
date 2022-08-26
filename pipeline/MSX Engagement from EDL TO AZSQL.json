@@ -108,10 +108,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "MSXAccount",
-						"type": "DataFlowReference"
-					},
 					"compute": {
 						"coreCount": 16,
 						"computeType": "General"
@@ -218,10 +214,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "msxcampaign",
-						"type": "DataFlowReference"
-					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
@@ -297,10 +289,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "msxtask",
-						"type": "DataFlowReference"
-					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
@@ -322,7 +310,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "msxsystemuser",
+						"referenceName": "GBBMember",
 						"type": "DataFlowReference"
 					},
 					"compute": {

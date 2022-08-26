@@ -43,10 +43,6 @@
 				"userProperties": [],
 				"typeProperties": {
 					"storedProcedureName": "[dbo].[SP_MSX_Run_EDL]"
-				},
-				"linkedServiceName": {
-					"referenceName": "azoedbisqlprod_msx_fy21",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
