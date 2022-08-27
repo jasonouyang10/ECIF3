@@ -1,5 +1,5 @@
 {
-	"name": "MSXEngagementTeam",
+	"name": "MSXOpportunityTeam",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "azoedbisqlprod",
@@ -12,7 +12,7 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"table": "MSXEngagementTeam"
+			"table": "MSXOpportunityTeam"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
