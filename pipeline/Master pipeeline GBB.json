@@ -1,15 +1,15 @@
 {
-	"name": "Master pipeeline IOT Engagement",
+	"name": "Master pipeeline GBB",
 	"properties": {
 		"activities": [
 			{
-				"name": "CopyMSXDatatoSQLVM",
+				"name": "Debug pipeline",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "CopyMSXDatatoSQLVM",
+						"referenceName": "Debug pipeline",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true

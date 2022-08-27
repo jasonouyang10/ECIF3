@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "Master pipeeline IOT Engagement",
+					"referenceName": "Master pipeeline GBB",
 					"type": "PipelineReference"
 				}
 			}
