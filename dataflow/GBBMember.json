@@ -18,7 +18,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "msxsystemuser",
+						"referenceName": "GBBMember",
 						"type": "DatasetReference"
 					},
 					"name": "GBBuser"

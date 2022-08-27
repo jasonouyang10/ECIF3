@@ -16,7 +16,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "msxsystemuser",
+						"referenceName": "GBBMember",
 						"type": "DatasetReference"
 					},
 					"name": "ower"
