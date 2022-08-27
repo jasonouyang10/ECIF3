@@ -2,7 +2,7 @@
 	"name": "msxaccount",
 	"properties": {
 		"folder": {
-			"name": "MSX General"
+			"name": "GBB Opportunity"
 		},
 		"type": "MappingDataFlow",
 		"typeProperties": {

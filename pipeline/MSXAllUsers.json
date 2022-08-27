@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "msxsystemuser_All",
+						"referenceName": "MSXUser",
 						"type": "DataFlowReference"
 					},
 					"compute": {
