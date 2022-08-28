@@ -1,0 +1,41 @@
+{
+	"name": "Master",
+	"properties": {
+		"activities": [
+			{
+				"name": "fromEDLtoAzureSQL",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "fromEDLtoAzureSQL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CopyToSQLDB",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "fromEDLtoAzureSQL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CopyToSQLDB",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": []
+	}
+}
