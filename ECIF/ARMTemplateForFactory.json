@@ -2045,13 +2045,6 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "fromEDLtoAzureSQL",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
 							"referenceName": "Master",
 							"type": "PipelineReference"
 						},
@@ -2070,7 +2063,6 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/fromEDLtoAzureSQL')]",
 				"[concat(variables('factoryId'), '/pipelines/Master')]"
 			]
 		},
