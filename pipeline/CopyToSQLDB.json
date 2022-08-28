@@ -17,6 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select * from tablelist",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -66,7 +67,7 @@
 									"type": "SqlServerSink",
 									"preCopyScript": "if object_id ( '@{ item().targetname}' ) is not null drop table  @{ item().targetname}",
 									"writeBehavior": "insert",
-									"sqlWriterUseTableLock": false,
+									"sqlWriterUseTableLock": true,
 									"tableOption": "autoCreate"
 								},
 								"enableStaging": false,
