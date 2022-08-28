@@ -7,17 +7,21 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ECIF"
 		},
-		"azoedbisqlprod_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod'"
-		},
 		"GBB_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'GBB'"
 		},
+		"azoedbisqlprod_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod'"
+		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://iotbikeyvault.vault.azure.net/"
+		},
+		"GBB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "redmond\\v-jouyang"
 		},
 		"msxdatalake_properties_typeProperties_url": {
 			"type": "string",
@@ -34,10 +38,6 @@
 		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/a311be7b-10b0-4f08-8f71-e8d304e87a18/resourcegroups/IOTBIReportting_Prod/providers/Microsoft.DataFactory/factories/IOTBI-SQL-Agent/integrationruntimes/IRFromVM2"
-		},
-		"GBB_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "redmond\\v-jouyang"
 		},
 		"containerUri": {
 			"type": "string",
@@ -78,6 +78,9 @@
 					"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('integrationRuntime1_properties_typeProperties_linkedInfo_resourceId')]"
 					},
+					"GBB_properties_typeProperties_userName": {
+						"value": "[parameters('GBB_properties_typeProperties_userName')]"
+					},
 					"msxdatalake_properties_typeProperties_url": {
 						"value": "[parameters('msxdatalake_properties_typeProperties_url')]"
 					},
@@ -86,9 +89,6 @@
 					},
 					"msxdatalake_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('msxdatalake_properties_typeProperties_servicePrincipalId')]"
-					},
-					"GBB_properties_typeProperties_userName": {
-						"value": "[parameters('GBB_properties_typeProperties_userName')]"
 					}
 				}
 			},

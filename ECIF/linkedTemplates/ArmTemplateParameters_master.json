@@ -5,14 +5,17 @@
 		"factoryName": {
 			"value": "ECIF"
 		},
-		"azoedbisqlprod_connectionString": {
+		"GBB_connectionString": {
 			"value": ""
 		},
-		"GBB_connectionString": {
+		"azoedbisqlprod_connectionString": {
 			"value": ""
 		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://iotbikeyvault.vault.azure.net/"
+		},
+		"GBB_properties_typeProperties_userName": {
+			"value": "redmond\\v-jouyang"
 		},
 		"msxdatalake_properties_typeProperties_url": {
 			"value": "https://cseoedlprodadlsg2wus201.dfs.core.windows.net/"
@@ -25,9 +28,6 @@
 		},
 		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
 			"value": "/subscriptions/a311be7b-10b0-4f08-8f71-e8d304e87a18/resourcegroups/IOTBIReportting_Prod/providers/Microsoft.DataFactory/factories/IOTBI-SQL-Agent/integrationruntimes/IRFromVM2"
-		},
-		"GBB_properties_typeProperties_userName": {
-			"value": "redmond\\v-jouyang"
 		},
 		"containerUri": {
 			"value": ""
