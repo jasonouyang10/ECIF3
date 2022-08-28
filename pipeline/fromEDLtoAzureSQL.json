@@ -1,5 +1,5 @@
 {
-	"name": "Debug pipeline",
+	"name": "fromEDLtoAzureSQL",
 	"properties": {
 		"activities": [
 			{
