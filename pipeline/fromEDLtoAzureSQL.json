@@ -38,7 +38,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "GBBMember",
+						"activity": "FixedMember",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -65,7 +65,7 @@
 				}
 			},
 			{
-				"name": "GBBMember",
+				"name": "FixedMember",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
