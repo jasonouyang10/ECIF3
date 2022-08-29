@@ -2,7 +2,7 @@
 	"name": "OpportunityTeam",
 	"properties": {
 		"folder": {
-			"name": "GBB Opportunity"
+			"name": "Infra Engagement"
 		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
