@@ -78,7 +78,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "GBBMember",
+						"referenceName": "FixedMember",
 						"type": "DataFlowReference"
 					},
 					"compute": {
