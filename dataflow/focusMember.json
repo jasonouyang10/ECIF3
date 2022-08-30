@@ -1,5 +1,5 @@
 {
-	"name": "FixedMember",
+	"name": "focusMember",
 	"properties": {
 		"folder": {
 			"name": "Infra Engagement"
@@ -25,7 +25,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "GBBMember",
+						"referenceName": "FocusUser",
 						"type": "DatasetReference"
 					},
 					"name": "TargetUser"

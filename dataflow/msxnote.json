@@ -16,7 +16,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "GBBMember",
+						"referenceName": "FocusUser",
 						"type": "DatasetReference"
 					},
 					"name": "ower"

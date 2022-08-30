@@ -1,5 +1,5 @@
 {
-	"name": "GBBMember",
+	"name": "FocusUser",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "azoedbisqlprod",
@@ -13,7 +13,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "",
-			"table": "GBBMember"
+			"table": "FocusMember"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

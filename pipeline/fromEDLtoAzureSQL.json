@@ -78,7 +78,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "FixedMember",
+						"referenceName": "focusMember",
 						"type": "DataFlowReference"
 					},
 					"compute": {
