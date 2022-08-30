@@ -536,7 +536,7 @@
 										"sink": {
 											"type": "SqlServerSink",
 											"preCopyScript": {
-												"value": "if object_id ( '@{ item().targetname}' ) is not null drop table  @{ item().targetname}",
+												"value": "if object_id ( '@{ item().name}' ) is not null drop table  @{ item().name}",
 												"type": "Expression"
 											},
 											"writeBehavior": "insert",
@@ -559,7 +559,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"tablename": {
-													"value": "@item().sourcename",
+													"value": "@item().name",
 													"type": "Expression"
 												}
 											}
@@ -571,7 +571,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"tablename": {
-													"value": "@item().targetname",
+													"value": "@item().name",
 													"type": "Expression"
 												}
 											}
@@ -689,7 +689,7 @@
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
-								"activity": "FixedMember",
+								"activity": "focusMember",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -712,37 +712,6 @@
 									"msxnote": {},
 									"ower": {},
 									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "FixedMember",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "focusMember",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"MSXsystemuser": {},
-									"UserList": {},
-									"TargetUser": {}
 								}
 							},
 							"staging": {},
@@ -906,6 +875,37 @@
 							},
 							"traceLevel": "Fine"
 						}
+					},
+					{
+						"name": "focusMember",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "focusMember",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"MSXsystemuser": {},
+									"UserList": {},
+									"TargetUser": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
 					}
 				],
 				"policy": {
@@ -918,11 +918,11 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/MSXOpportunity')]",
 				"[concat(variables('factoryId'), '/dataflows/msxnote')]",
-				"[concat(variables('factoryId'), '/dataflows/focusMember')]",
 				"[concat(variables('factoryId'), '/dataflows/MSXmilestone')]",
 				"[concat(variables('factoryId'), '/dataflows/OpportunityTeam')]",
 				"[concat(variables('factoryId'), '/dataflows/MSXUser')]",
-				"[concat(variables('factoryId'), '/dataflows/msxaccount')]"
+				"[concat(variables('factoryId'), '/dataflows/msxaccount')]",
+				"[concat(variables('factoryId'), '/dataflows/focusMember')]"
 			]
 		},
 		{
