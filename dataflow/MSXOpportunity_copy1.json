@@ -25,7 +25,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "MSXOpportunity",
+						"referenceName": "MSXOpportunity_copy1",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"

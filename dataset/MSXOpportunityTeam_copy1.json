@@ -1,0 +1,139 @@
+{
+	"name": "MSXOpportunityTeam_copy1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azoedbisqlprod",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "v2"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "EDLPExtractId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CreatedById",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CreatedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "CrmInstanceId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ModifiedById",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ModifiedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "OdsCreatedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "OdsModifiedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "OdsStatus",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "OpportunityId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OpportunityTeamId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SystemUserId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TenantId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "VersionNumber",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "TeamId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EDLPExtractDateTime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "EDLPLoadTS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EDLPModifiedDateTime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "EDLPDeltaActionCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ExtractId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ExtractDateTime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "LoadTS",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "DeltaActionCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PlatformCreatedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "PlatformModifiedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "PlatformModifiedDateAsInt",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"table": "MSXOpportunityTeamv2"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
