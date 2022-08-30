@@ -38,7 +38,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "FixedMember",
+						"activity": "focusMember",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -55,30 +55,6 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "msxnote",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
-				"name": "FixedMember",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "focusMember",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -203,6 +179,30 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "msxaccount",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "focusMember",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "focusMember",
 						"type": "DataFlowReference"
 					},
 					"compute": {

@@ -65,7 +65,10 @@
 								},
 								"sink": {
 									"type": "SqlServerSink",
-									"preCopyScript": "if object_id ( '@{ item().targetname}' ) is not null drop table  @{ item().targetname}",
+									"preCopyScript": {
+										"value": "if object_id ( '@{ item().name}' ) is not null drop table  @{ item().name}",
+										"type": "Expression"
+									},
 									"writeBehavior": "insert",
 									"sqlWriterUseTableLock": true,
 									"tableOption": "autoCreate"
@@ -86,7 +89,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"tablename": {
-											"value": "@item().sourcename",
+											"value": "@item().name",
 											"type": "Expression"
 										}
 									}
@@ -98,7 +101,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"tablename": {
-											"value": "@item().targetname",
+											"value": "@item().name",
 											"type": "Expression"
 										}
 									}
