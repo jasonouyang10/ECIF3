@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=GBB",
+			"connectionString": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure",
 			"userName": "redmond\\v-jouyang",
 			"password": {
 				"type": "AzureKeyVaultSecret",
