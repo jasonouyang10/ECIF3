@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "FixedMember",
+				"name": "MSXOpportunity",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "focusMember",
+						"referenceName": "MSXOpportunity",
 						"type": "DataFlowReference"
 					},
 					"compute": {
