@@ -35,10 +35,6 @@
 			"type": "string",
 			"defaultValue": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
 		},
-		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
-			"type": "string",
-			"defaultValue": "/subscriptions/a311be7b-10b0-4f08-8f71-e8d304e87a18/resourcegroups/IOTBIReportting_Prod/providers/Microsoft.DataFactory/factories/IOTBI-SQL-Agent/integrationruntimes/IRFromVM2"
-		},
 		"ocdm_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://cseoedlprodadlsg2wus203.dfs.core.windows.net"
@@ -50,6 +46,10 @@
 		"ocdm_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
+		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/a311be7b-10b0-4f08-8f71-e8d304e87a18/resourcegroups/IOTBIReportting_Prod/providers/Microsoft.DataFactory/factories/IOTBI-SQL-Agent/integrationruntimes/IRFromVM2"
 		},
 		"containerUri": {
 			"type": "string",
@@ -101,15 +101,6 @@
 					},
 					"msxdatalake_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('msxdatalake_properties_typeProperties_servicePrincipalId')]"
-					},
-					"ocdm_properties_typeProperties_url": {
-						"value": "[parameters('ocdm_properties_typeProperties_url')]"
-					},
-					"ocdm_properties_typeProperties_tenant": {
-						"value": "[parameters('ocdm_properties_typeProperties_tenant')]"
-					},
-					"ocdm_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('ocdm_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},
@@ -128,6 +119,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"ocdm_properties_typeProperties_url": {
+						"value": "[parameters('ocdm_properties_typeProperties_url')]"
+					},
+					"ocdm_properties_typeProperties_tenant": {
+						"value": "[parameters('ocdm_properties_typeProperties_tenant')]"
+					},
+					"ocdm_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('ocdm_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},
