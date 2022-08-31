@@ -39,6 +39,18 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/a311be7b-10b0-4f08-8f71-e8d304e87a18/resourcegroups/IOTBIReportting_Prod/providers/Microsoft.DataFactory/factories/IOTBI-SQL-Agent/integrationruntimes/IRFromVM2"
 		},
+		"ocdm_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://cseoedlprodadlsg2wus203.dfs.core.windows.net"
+		},
+		"ocdm_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"ocdm_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -89,6 +101,15 @@
 					},
 					"msxdatalake_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('msxdatalake_properties_typeProperties_servicePrincipalId')]"
+					},
+					"ocdm_properties_typeProperties_url": {
+						"value": "[parameters('ocdm_properties_typeProperties_url')]"
+					},
+					"ocdm_properties_typeProperties_tenant": {
+						"value": "[parameters('ocdm_properties_typeProperties_tenant')]"
+					},
+					"ocdm_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('ocdm_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},

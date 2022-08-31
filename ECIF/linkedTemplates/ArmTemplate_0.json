@@ -38,6 +38,18 @@
 		"msxdatalake_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
+		"ocdm_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://cseoedlprodadlsg2wus203.dfs.core.windows.net"
+		},
+		"ocdm_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"ocdm_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
 		}
 	},
 	"variables": {
@@ -1610,31 +1622,29 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/target')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/ocdm')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "GBB",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"tablename": {
-						"type": "string"
-					}
-				},
 				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
+				"type": "AzureBlobFS",
 				"typeProperties": {
-					"table": {
-						"value": "@dataset().tablename",
-						"type": "Expression"
+					"url": "[parameters('ocdm_properties_typeProperties_url')]",
+					"tenant": "[parameters('ocdm_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('ocdm_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalCredentialType": "ServicePrincipalKey",
+					"servicePrincipalCredential": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "iotbiappreg"
 					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/GBB')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault')]"
 			]
 		}
 	]
