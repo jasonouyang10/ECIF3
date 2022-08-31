@@ -9,7 +9,7 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"table": "DimOppportunityFromOCDM"
+			"table": "DimOpportunityFromOCDM"
 		}
 	}
 }
