@@ -25,7 +25,7 @@
 				"type": "AzureSqlTable",
 				"schema": [],
 				"typeProperties": {
-					"table": "DimOppFromOCDM"
+					"table": "DimOppportunityFromOCDM"
 				}
 			},
 			"dependsOn": []
