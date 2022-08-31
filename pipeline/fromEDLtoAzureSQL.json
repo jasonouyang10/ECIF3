@@ -23,7 +23,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "MSXOpportunity",
+						"referenceName": "3 MSXOpportunity",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -54,7 +54,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "msxnote",
+						"referenceName": "2 msxnote",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -78,7 +78,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "GBBMember",
+						"referenceName": "1 GBBMember",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -109,7 +109,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "MSXmilestone",
+						"referenceName": "41 MSXmilestone",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -140,7 +140,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "OpportunityTeam",
+						"referenceName": "43 OpportunityTeam",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -171,7 +171,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "MSXUser",
+						"referenceName": "5 MSXUser",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -202,7 +202,38 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "msxaccount",
+						"referenceName": "42 msxaccount",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "44 DimOpportunity",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "MSXOpportunity",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "44 DimOpportunity",
 						"type": "DataFlowReference"
 					},
 					"compute": {

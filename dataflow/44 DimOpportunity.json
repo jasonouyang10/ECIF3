@@ -29,13 +29,24 @@
 					"name": "GBBOpp"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DimOppFromOCDM",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "existsInGBBOpp"
 				},
 				{
 					"name": "existsInSMBGBBOpp"
+				},
+				{
+					"name": "union1"
 				}
 			],
 			"scriptLines": [
@@ -1160,7 +1171,19 @@
 				"     broadcast: 'auto')~> existsInGBBOpp",
 				"DimSMBOpp, GBBOpp exists(DimSMBOpp@opportunityid == GBBOpp@OpportunityId,",
 				"     negate:false,",
-				"     broadcast: 'auto')~> existsInSMBGBBOpp"
+				"     broadcast: 'auto')~> existsInSMBGBBOpp",
+				"existsInGBBOpp, existsInSMBGBBOpp union(byName: true)~> union1",
+				"union1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
 			]
 		}
 	}
