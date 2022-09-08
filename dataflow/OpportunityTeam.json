@@ -1,5 +1,5 @@
 {
-	"name": "OpportunityTeam_copy1",
+	"name": "OpportunityTeam",
 	"properties": {
 		"folder": {
 			"name": "v2"
@@ -25,7 +25,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "MSXOpportunityTeam_copy1",
+						"referenceName": "MSXOpportunityTeam",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"

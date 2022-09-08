@@ -23,7 +23,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "MSXOpportunity_copy1",
+						"referenceName": "MSXOpportunity",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -47,7 +47,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "OpportunityTeam_copy1",
+						"referenceName": "OpportunityTeam",
 						"type": "DataFlowReference"
 					},
 					"compute": {
