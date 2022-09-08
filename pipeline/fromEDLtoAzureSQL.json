@@ -7,7 +7,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "MSXOpportunity_copy1",
+						"activity": "MSXOpportunity",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -34,43 +34,9 @@
 				}
 			},
 			{
-				"name": "OpportunityTeam",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "MSXOpportunity_copy1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
 				"name": "MSXUser",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "OpportunityTeam",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -96,7 +62,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "MSXOpportunity_copy1",
+						"activity": "MSXOpportunity",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -123,7 +89,7 @@
 				}
 			},
 			{
-				"name": "OpportunityTeam_copy1",
+				"name": "OpportunityTeam",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -147,11 +113,11 @@
 				}
 			},
 			{
-				"name": "MSXOpportunity_copy1",
+				"name": "MSXOpportunity",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "OpportunityTeam_copy1",
+						"activity": "OpportunityTeam",
 						"dependencyConditions": [
 							"Succeeded"
 						]
