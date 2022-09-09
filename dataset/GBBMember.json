@@ -10,7 +10,426 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "EDLPExtractId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AccessMode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AccessModeCode",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AccessModeSeqNo",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Address1_AddressId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Address1_City",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Address1_Country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Address1_Fax",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Address1_Line1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Address1_Line2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Address1_Line3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Address1_PostalCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Address1_StateOrProvince",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Address1_Telephone1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Address1_Telephone3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BusinessUnitId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CalType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CalTypeCode",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CalTypeSeqNo",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "CreatedById",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CreatedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "CrmInstanceId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DefaultMailbox",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DomainName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DPNSignDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "dsraction",
+				"type": "nvarchar"
+			},
+			{
+				"name": "dsrdate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "dsrticket",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FirstName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "HomePhone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "InternalEmailAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "InviteStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "InviteStatusCode",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "InviteStatusSeqNo",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "IsDisabled",
+				"type": "bit"
+			},
+			{
+				"name": "IsNotificationSent",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IsNotificationSentCode",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IsNotificationSentSeqNo",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "LastName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MiddleName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MobileAlertEmail",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MobilePhone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ModifiedById",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ModifiedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "OdsCreatedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "OdsModifiedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "OdsStatus",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ParentSystemUserId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PersonalEmailAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PreferredAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PreferredAddressCode",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PreferredAddressSeqNo",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "PreferredPhone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PreferredPhoneCode",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PreferredPhoneSeqNo",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "QueueId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Role",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RoleCode",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RoleSeqNo",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "SiteId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SystemUserId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TenantId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TerritoryId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VersionNumber",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "WindowsLiveId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "areaname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "discipline",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GTMPosition",
+				"type": "nvarchar"
+			},
+			{
+				"name": "industry",
+				"type": "nvarchar"
+			},
+			{
+				"name": "org",
+				"type": "nvarchar"
+			},
+			{
+				"name": "orgdetail",
+				"type": "nvarchar"
+			},
+			{
+				"name": "orgsummary",
+				"type": "nvarchar"
+			},
+			{
+				"name": "profession",
+				"type": "nvarchar"
+			},
+			{
+				"name": "qualifier1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "qualifier2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "regionname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "rolegroup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "roleidentity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RoleSummary",
+				"type": "nvarchar"
+			},
+			{
+				"name": "salesdistrictname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "saleslocationname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "solutionarea",
+				"type": "nvarchar"
+			},
+			{
+				"name": "subregionname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "systemusertype",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EDLPExtractDateTime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "EDLPLoadTS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EDLPModifiedDateTime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "EDLPDeltaActionCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ExtractId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ExtractDateTime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "LoadTS",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "DeltaActionCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PlatformCreatedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "PlatformModifiedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "PlatformModifiedDateAsInt",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "azureactivedirectoryobjectid",
+				"type": "nvarchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "",
 			"table": "GBBMember"
