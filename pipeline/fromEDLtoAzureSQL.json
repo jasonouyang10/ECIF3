@@ -3,37 +3,6 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "MSXOpportunity",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "msxnote",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "3 MSXOpportunity",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
 				"name": "msxnote",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
@@ -93,7 +62,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "MSXOpportunity",
+						"activity": "3 MSXOpportunity",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -124,7 +93,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "MSXOpportunity",
+						"activity": "3 MSXOpportunity",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -186,7 +155,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "MSXOpportunity",
+						"activity": "3 MSXOpportunity",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -217,7 +186,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "MSXOpportunity",
+						"activity": "3 MSXOpportunity",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -273,6 +242,37 @@
 							"text": "update t1\n\nset currentsalesstagemodifiedon =  t2.currentsalesstagemodifiedon\n\nfrom MSXOpportunity t1 left join dimOpportunityFromOCDM t2 on t1.OpportunityId = t2.OpportunityId\nwhere t1.currentsalesstagemodifiedon is null"
 						}
 					]
+				}
+			},
+			{
+				"name": "3 MSXOpportunity",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "msxnote",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "3 MSXOpportunity",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
 				}
 			}
 		],
