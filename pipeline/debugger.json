@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "1 GBBMember",
+				"name": "2 msxnote",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "1 GBBMember",
+						"referenceName": "2 msxnote",
 						"type": "DataFlowReference"
 					},
 					"compute": {
