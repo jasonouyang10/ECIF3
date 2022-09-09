@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "mrmsx"
+		},
+		"GBB_connectionString": {
+			"value": ""
+		},
+		"azoedbisqlprod_connectionString": {
+			"value": ""
+		},
+		"AzureKeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://iotbikeyvault.vault.azure.net/"
+		},
+		"GBB_properties_typeProperties_userName": {
+			"value": "redmond\\v-jouyang"
+		},
+		"msxdatalake_properties_typeProperties_url": {
+			"value": "https://cseoedlprodadlsg2wus201.dfs.core.windows.net/"
+		},
+		"msxdatalake_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"msxdatalake_properties_typeProperties_servicePrincipalId": {
+			"value": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
+		"ocdm_properties_typeProperties_url": {
+			"value": "https://cseoedlprodadlsg2wus203.dfs.core.windows.net"
+		},
+		"ocdm_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"ocdm_properties_typeProperties_servicePrincipalId": {
+			"value": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
+		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
+			"value": "/subscriptions/a311be7b-10b0-4f08-8f71-e8d304e87a18/resourcegroups/IOTBIReportting_Prod/providers/Microsoft.DataFactory/factories/IOTBI-SQL-Agent/integrationruntimes/IRFromVM2"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
