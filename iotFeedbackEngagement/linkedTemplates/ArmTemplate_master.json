@@ -69,11 +69,26 @@
 					"azoedbisqlprod_connectionString": {
 						"value": "[parameters('azoedbisqlprod_connectionString')]"
 					},
+					"GBB_connectionString": {
+						"value": "[parameters('GBB_connectionString')]"
+					},
 					"AzureKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault_properties_typeProperties_baseUrl')]"
 					},
 					"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('integrationRuntime1_properties_typeProperties_linkedInfo_resourceId')]"
+					},
+					"GBB_properties_typeProperties_userName": {
+						"value": "[parameters('GBB_properties_typeProperties_userName')]"
+					},
+					"msxdatalake_properties_typeProperties_url": {
+						"value": "[parameters('msxdatalake_properties_typeProperties_url')]"
+					},
+					"msxdatalake_properties_typeProperties_tenant": {
+						"value": "[parameters('msxdatalake_properties_typeProperties_tenant')]"
+					},
+					"msxdatalake_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('msxdatalake_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},
@@ -92,21 +107,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"GBB_connectionString": {
-						"value": "[parameters('GBB_connectionString')]"
-					},
-					"GBB_properties_typeProperties_userName": {
-						"value": "[parameters('GBB_properties_typeProperties_userName')]"
-					},
-					"msxdatalake_properties_typeProperties_url": {
-						"value": "[parameters('msxdatalake_properties_typeProperties_url')]"
-					},
-					"msxdatalake_properties_typeProperties_tenant": {
-						"value": "[parameters('msxdatalake_properties_typeProperties_tenant')]"
-					},
-					"msxdatalake_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('msxdatalake_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},
