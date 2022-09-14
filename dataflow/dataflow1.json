@@ -1,0 +1,58 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "ocdm",
+						"type": "LinkedServiceReference"
+					},
+					"name": "OpportunitySalesPlayInEDL"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "OpportunitySalesPlay",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          dimsalesplaykey as long,",
+				"          dimopportunitykey as long,",
+				"          OpportunityNumber as string,",
+				"          salesplay as string,",
+				"          IsPrimary as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delta',",
+				"     fileSystem: 'comsme',",
+				"     folderPath: 'datasets/consumption/datasetgroup/prod/sellerinsights/output/dimension/v1/standard/output/opportunitysalesplay/v1') ~> OpportunitySalesPlayInEDL",
+				"OpportunitySalesPlayInEDL filter(lower(salesplay)==lower(\"Innovate Across Hybrid and Edge with Azure Arc and IoT\")) ~> filter1",
+				"filter1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}

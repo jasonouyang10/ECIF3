@@ -3,16 +3,27 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "fromEDLtoAzureSQL",
-				"type": "ExecutePipeline",
+				"name": "dataflow1",
+				"type": "ExecuteDataFlow",
 				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "fromEDLtoAzureSQL",
-						"type": "PipelineReference"
+					"dataflow": {
+						"referenceName": "dataflow1",
+						"type": "DataFlowReference"
 					},
-					"waitOnCompletion": true
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
 				}
 			}
 		],
