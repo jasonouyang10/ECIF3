@@ -92,15 +92,6 @@
 					},
 					"GBB_properties_typeProperties_userName": {
 						"value": "[parameters('GBB_properties_typeProperties_userName')]"
-					},
-					"msxdatalake_properties_typeProperties_url": {
-						"value": "[parameters('msxdatalake_properties_typeProperties_url')]"
-					},
-					"msxdatalake_properties_typeProperties_tenant": {
-						"value": "[parameters('msxdatalake_properties_typeProperties_tenant')]"
-					},
-					"msxdatalake_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('msxdatalake_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},
@@ -119,6 +110,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"msxdatalake_properties_typeProperties_url": {
+						"value": "[parameters('msxdatalake_properties_typeProperties_url')]"
+					},
+					"msxdatalake_properties_typeProperties_tenant": {
+						"value": "[parameters('msxdatalake_properties_typeProperties_tenant')]"
+					},
+					"msxdatalake_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('msxdatalake_properties_typeProperties_servicePrincipalId')]"
 					},
 					"ocdm_properties_typeProperties_url": {
 						"value": "[parameters('ocdm_properties_typeProperties_url')]"
