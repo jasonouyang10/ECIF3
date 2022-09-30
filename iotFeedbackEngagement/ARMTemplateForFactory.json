@@ -311,7 +311,14 @@
 					{
 						"name": "OpportunityTeam",
 						"type": "ExecuteDataFlow",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Teammembership",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 0,
@@ -326,9 +333,9 @@
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"OpportunityTeam": {},
-									"focusMember": {},
-									"sink1": {}
+									"MSXOpportunityTeam": {},
+									"teammembership": {},
+									"OpportunityTeam": {}
 								}
 							},
 							"staging": {},
@@ -408,6 +415,37 @@
 							},
 							"traceLevel": "Fine"
 						}
+					},
+					{
+						"name": "Teammembership",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Teammembership",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Teammembership": {},
+									"focusMember": {},
+									"SellerMembership": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
 					}
 				],
 				"policy": {
@@ -422,7 +460,56 @@
 				"[concat(variables('factoryId'), '/dataflows/msxaccount')]",
 				"[concat(variables('factoryId'), '/dataflows/OpportunityTeam')]",
 				"[concat(variables('factoryId'), '/dataflows/MSXOpportunity')]",
-				"[concat(variables('factoryId'), '/dataflows/msxnote')]"
+				"[concat(variables('factoryId'), '/dataflows/msxnote')]",
+				"[concat(variables('factoryId'), '/dataflows/Teammembership')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "OpportunityTeam",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "OpportunityTeam",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"MSXOpportunityTeam": {},
+									"teammembership": {},
+									"OpportunityTeam": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/OpportunityTeam')]"
 			]
 		},
 		{
@@ -1852,6 +1939,149 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/MSXTeammembership')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "azoedbisqlprod",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "MSX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "EDLPExtractId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CreatedById",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CreatedDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "CrmInstanceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ModifiedById",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ModifiedDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "OdsCreatedDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "OdsModifiedDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "OdsStatus",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OpportunityId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OpportunityTeamId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SystemUserId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TenantId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "VersionNumber",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "TeamId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EDLPExtractDateTime",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "EDLPLoadTS",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EDLPModifiedDateTime",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "EDLPDeltaActionCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ExtractId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ExtractDateTime",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "LoadTS",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "DeltaActionCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PlatformCreatedDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "PlatformModifiedDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "PlatformModifiedDateAsInt",
+						"type": "bigint",
+						"precision": 19
+					}
+				],
+				"typeProperties": {
+					"table": "MSXTeamMemmership"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/azoedbisqlprod')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/UserList')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2473,7 +2703,59 @@
 								"referenceName": "msxdatalake",
 								"type": "LinkedServiceReference"
 							},
+							"name": "MSXOpportunityTeam"
+						},
+						{
+							"dataset": {
+								"referenceName": "MSXTeammembership",
+								"type": "DatasetReference"
+							},
+							"name": "teammembership"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "MSXOpportunityTeam",
+								"type": "DatasetReference"
+							},
 							"name": "OpportunityTeam"
+						}
+					],
+					"transformations": [
+						{
+							"name": "existsIn17SellerTeammembership"
+						},
+						{
+							"name": "asOpportunityObject"
+						}
+					],
+					"script": "source(output(\n\t\tEDLPExtractId as string,\n\t\tAdministratorId as string,\n\t\tBusinessUnitId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tDescription as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tSystemManaged as boolean,\n\t\tTeam as string,\n\t\tTeamId as string,\n\t\tTeamType as string,\n\t\tTeamTypeCode as integer,\n\t\tTeamTypeSeqNo as long,\n\t\tTenantId as integer,\n\t\tTransactionCurrencyId as string,\n\t\tVersionNumber as long,\n\t\tId as string,\n\t\tmembershiptype as long,\n\t\tisdefault as boolean,\n\t\tmodifiedonbehalfby as string,\n\t\tmodifiedonbehalfby_entitytype as string,\n\t\tqueueid as string,\n\t\tqueueid_entitytype as string,\n\t\tcreatedonbehalfby as string,\n\t\tcreatedonbehalfby_entitytype as string,\n\t\ttransactioncurrencyid_entitytype as string,\n\t\tregardingobjectid as string,\n\t\tadministratorid_entitytype as string,\n\t\tbusinessunitid_entitytype as string,\n\t\tmodifiedby_entitytype as string,\n\t\tcreatedby_entitytype as string,\n\t\tteamtemplateid as string,\n\t\tteamtemplateid_entitytype as string,\n\t\ttraversedpath as string,\n\t\ttransactioncurrencyidname as string,\n\t\tqueueidname as string,\n\t\tregardingobjecttypecode as string,\n\t\tstageid as string,\n\t\timportsequencenumber as long,\n\t\torganizationidname as string,\n\t\tazureactivedirectoryobjectid as string,\n\t\tadministratoridname as string,\n\t\tadministratoridyominame as string,\n\t\texchangerate as decimal(10,0),\n\t\tprocessid as string,\n\t\tbusinessunitidname as string,\n\t\toverriddencreatedon as timestamp,\n\t\tregardingobjectid_entitytype as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/msx/hub_vw_team/v1/standard') ~> MSXOpportunityTeam\nsource(output(\n\t\tEDLPExtractId as string,\n\t\tId as string,\n\t\tVersionNumber as long,\n\t\tteammembershipid as string,\n\t\tteamid as string,\n\t\tsystemuserid as string,\n\t\tIsDelete as boolean,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> teammembership\nMSXOpportunityTeam, teammembership exists(MSXOpportunityTeam@TeamId == teammembership@teamid,\n\tnegate:false,\n\tbroadcast: 'auto')~> existsIn17SellerTeammembership\nexistsIn17SellerTeammembership filter(lower(regardingobjectid_entitytype)=='opportunity') ~> asOpportunityObject\nasOpportunityObject sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tEDLPExtractId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOpportunityId as string,\n\t\tOpportunityTeamId as integer,\n\t\tSystemUserId as string,\n\t\tTenantId as integer,\n\t\tVersionNumber as long,\n\t\tTeamId as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> OpportunityTeam"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/msxdatalake')]",
+				"[concat(variables('factoryId'), '/datasets/MSXTeammembership')]",
+				"[concat(variables('factoryId'), '/datasets/MSXOpportunityTeam')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Teammembership')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "v2"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "Teammembership"
 						},
 						{
 							"dataset": {
@@ -2486,27 +2768,24 @@
 					"sinks": [
 						{
 							"dataset": {
-								"referenceName": "MSXOpportunityTeam",
+								"referenceName": "MSXTeammembership",
 								"type": "DatasetReference"
 							},
-							"name": "sink1"
+							"name": "SellerMembership"
 						}
 					],
 					"transformations": [
 						{
-							"name": "Filter1"
-						},
-						{
-							"name": "exists1"
+							"name": "Contains17Seller"
 						}
 					],
-					"script": "source(output(\n\t\tEDLPExtractId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOpportunityId as string,\n\t\tOpportunityTeamId as integer,\n\t\tSystemUserId as string,\n\t\tTenantId as integer,\n\t\tVersionNumber as long,\n\t\tTeamId as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/msx/hub_vw_opportunityteam/v1/standard') ~> OpportunityTeam\nsource(output(\n\t\tEDLPExtractId as string,\n\t\tAccessMode as string,\n\t\tAccessModeCode as integer,\n\t\tAccessModeSeqNo as long,\n\t\tAddress1_AddressId as string,\n\t\tAddress1_City as string,\n\t\tAddress1_Country as string,\n\t\tAddress1_Fax as string,\n\t\tAddress1_Line1 as string,\n\t\tAddress1_Line2 as string,\n\t\tAddress1_Line3 as string,\n\t\tAddress1_PostalCode as string,\n\t\tAddress1_StateOrProvince as string,\n\t\tAddress1_Telephone1 as string,\n\t\tAddress1_Telephone3 as string,\n\t\tBusinessUnitId as string,\n\t\tCalType as string,\n\t\tCalTypeCode as integer,\n\t\tCalTypeSeqNo as long,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tDefaultMailbox as string,\n\t\tDomainName as string,\n\t\tDPNSignDate as timestamp,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tFirstName as string,\n\t\tHomePhone as string,\n\t\tInternalEmailAddress as string,\n\t\tInviteStatus as string,\n\t\tInviteStatusCode as integer,\n\t\tInviteStatusSeqNo as long,\n\t\tIsDisabled as boolean,\n\t\tIsNotificationSent as string,\n\t\tIsNotificationSentCode as integer,\n\t\tIsNotificationSentSeqNo as long,\n\t\tLastName as string,\n\t\tMiddleName as string,\n\t\tMobileAlertEmail as string,\n\t\tMobilePhone as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tParentSystemUserId as string,\n\t\tPersonalEmailAddress as string,\n\t\tPreferredAddress as string,\n\t\tPreferredAddressCode as integer,\n\t\tPreferredAddressSeqNo as long,\n\t\tPreferredPhone as string,\n\t\tPreferredPhoneCode as integer,\n\t\tPreferredPhoneSeqNo as long,\n\t\tQueueId as string,\n\t\tRole as string,\n\t\tRoleCode as integer,\n\t\tRoleSeqNo as long,\n\t\tSiteId as string,\n\t\tSystemUserId as string,\n\t\tTenantId as integer,\n\t\tTerritoryId as string,\n\t\tTitle as string,\n\t\tVersionNumber as long,\n\t\tWindowsLiveId as string,\n\t\tareaname as string,\n\t\tdiscipline as string,\n\t\tGTMPosition as string,\n\t\tindustry as string,\n\t\torg as string,\n\t\torgdetail as string,\n\t\torgsummary as string,\n\t\tprofession as string,\n\t\tqualifier1 as string,\n\t\tqualifier2 as string,\n\t\tregionname as string,\n\t\trolegroup as string,\n\t\troleidentity as string,\n\t\tRoleSummary as string,\n\t\tsalesdistrictname as string,\n\t\tsaleslocationname as string,\n\t\tsolutionarea as string,\n\t\tsubregionname as string,\n\t\tsystemusertype as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\tazureactivedirectoryobjectid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> focusMember\nexists1 filter(OdsStatus==0) ~> Filter1\nOpportunityTeam, focusMember exists(OpportunityTeam@SystemUserId == focusMember@SystemUserId,\n\tnegate:false,\n\tbroadcast: 'auto')~> exists1\nFilter1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tEDLPExtractId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOpportunityId as string,\n\t\tOpportunityTeamId as integer,\n\t\tSystemUserId as string,\n\t\tTenantId as integer,\n\t\tVersionNumber as long,\n\t\tTeamId as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+					"script": "source(output(\n\t\tEDLPExtractId as string,\n\t\tId as string,\n\t\tVersionNumber as long,\n\t\tteammembershipid as string,\n\t\tteamid as string,\n\t\tsystemuserid as string,\n\t\tIsDelete as boolean,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/msx/hub_vw_teammembership/v1/standard') ~> Teammembership\nsource(output(\n\t\tEDLPExtractId as string,\n\t\tAccessMode as string,\n\t\tAccessModeCode as integer,\n\t\tAccessModeSeqNo as long,\n\t\tAddress1_AddressId as string,\n\t\tAddress1_City as string,\n\t\tAddress1_Country as string,\n\t\tAddress1_Fax as string,\n\t\tAddress1_Line1 as string,\n\t\tAddress1_Line2 as string,\n\t\tAddress1_Line3 as string,\n\t\tAddress1_PostalCode as string,\n\t\tAddress1_StateOrProvince as string,\n\t\tAddress1_Telephone1 as string,\n\t\tAddress1_Telephone3 as string,\n\t\tBusinessUnitId as string,\n\t\tCalType as string,\n\t\tCalTypeCode as integer,\n\t\tCalTypeSeqNo as long,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tDefaultMailbox as string,\n\t\tDomainName as string,\n\t\tDPNSignDate as timestamp,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tFirstName as string,\n\t\tHomePhone as string,\n\t\tInternalEmailAddress as string,\n\t\tInviteStatus as string,\n\t\tInviteStatusCode as integer,\n\t\tInviteStatusSeqNo as long,\n\t\tIsDisabled as boolean,\n\t\tIsNotificationSent as string,\n\t\tIsNotificationSentCode as integer,\n\t\tIsNotificationSentSeqNo as long,\n\t\tLastName as string,\n\t\tMiddleName as string,\n\t\tMobileAlertEmail as string,\n\t\tMobilePhone as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tParentSystemUserId as string,\n\t\tPersonalEmailAddress as string,\n\t\tPreferredAddress as string,\n\t\tPreferredAddressCode as integer,\n\t\tPreferredAddressSeqNo as long,\n\t\tPreferredPhone as string,\n\t\tPreferredPhoneCode as integer,\n\t\tPreferredPhoneSeqNo as long,\n\t\tQueueId as string,\n\t\tRole as string,\n\t\tRoleCode as integer,\n\t\tRoleSeqNo as long,\n\t\tSiteId as string,\n\t\tSystemUserId as string,\n\t\tTenantId as integer,\n\t\tTerritoryId as string,\n\t\tTitle as string,\n\t\tVersionNumber as long,\n\t\tWindowsLiveId as string,\n\t\tareaname as string,\n\t\tdiscipline as string,\n\t\tGTMPosition as string,\n\t\tindustry as string,\n\t\torg as string,\n\t\torgdetail as string,\n\t\torgsummary as string,\n\t\tprofession as string,\n\t\tqualifier1 as string,\n\t\tqualifier2 as string,\n\t\tregionname as string,\n\t\trolegroup as string,\n\t\troleidentity as string,\n\t\tRoleSummary as string,\n\t\tsalesdistrictname as string,\n\t\tsaleslocationname as string,\n\t\tsolutionarea as string,\n\t\tsubregionname as string,\n\t\tsystemusertype as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\tazureactivedirectoryobjectid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> focusMember\nTeammembership, focusMember exists(Teammembership@systemuserid == focusMember@SystemUserId,\n\tnegate:false,\n\tbroadcast: 'auto')~> Contains17Seller\nContains17Seller sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tEDLPExtractId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOpportunityId as string,\n\t\tOpportunityTeamId as integer,\n\t\tSystemUserId as string,\n\t\tTenantId as integer,\n\t\tVersionNumber as long,\n\t\tTeamId as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> SellerMembership"
 				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/msxdatalake')]",
 				"[concat(variables('factoryId'), '/datasets/FocusUser')]",
-				"[concat(variables('factoryId'), '/datasets/MSXOpportunityTeam')]"
+				"[concat(variables('factoryId'), '/datasets/MSXTeammembership')]"
 			]
 		},
 		{
