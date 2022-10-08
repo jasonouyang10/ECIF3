@@ -1,0 +1,19 @@
+{
+	"name": "MSXAccountAMMP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azoedbisqlprod",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MSX"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "MSXAccountAMMP"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
