@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "msxaccount",
+				"name": "msxaccount_AMMP",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "msxaccount",
+						"referenceName": "msxaccount_AMMP",
 						"type": "DataFlowReference"
 					},
 					"compute": {
