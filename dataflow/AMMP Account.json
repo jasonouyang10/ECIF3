@@ -1,0 +1,42 @@
+{
+	"name": "AMMP Account",
+	"properties": {
+		"folder": {
+			"name": "Infra Engagement"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "msxdatalake",
+						"type": "LinkedServiceReference"
+					},
+					"name": "msxaccount"
+				},
+				{
+					"linkedService": {
+						"referenceName": "linkedService1",
+						"type": "LinkedServiceReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "MSXAccount_AMMP",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "exists1"
+				}
+			],
+			"script": "source(output(\n\t\tEDLPExtractId as string,\n\t\taccountcreatedby as string,\n\t\tAccountId as string,\n\t\taccountmodifiedby as string,\n\t\tAccountName as string,\n\t\tAccountNumber as string,\n\t\tAddressId as string,\n\t\tCID as string,\n\t\tCity as string,\n\t\tclanumber as string,\n\t\tCountry as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tcreatedonbehalfby as string,\n\t\tCrmInstanceId as string,\n\t\tCurrencyId as string,\n\t\tCustomerSegment as integer,\n\t\tCustomerSubsegment as integer,\n\t\tDescription as string,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tDunsID as string,\n\t\tEligibleForUnifiedSupport as boolean,\n\t\tEndCustomerSegment as string,\n\t\tEndCustomerSegmentSeqNo as long,\n\t\tEndCustomerSubsegment as string,\n\t\tEndCustomerSubsegmentSeqNo as long,\n\t\tenglishtranslatedaccountname as string,\n\t\tFax as string,\n\t\tFYStartMonth as string,\n\t\tFYStartMonthcode as integer,\n\t\tFYStartMonthSeqNo as long,\n\t\tGPID as string,\n\t\tGPName as string,\n\t\tHardwareBuyingStrategy as string,\n\t\tHardwareDecisionMaker as string,\n\t\tIndustry as string,\n\t\tIndustryCode as integer,\n\t\tIndustrySeqNo as long,\n\t\tIndustryVertical as string,\n\t\tIndustryVerticalCode as integer,\n\t\tIndustryVerticalSeqNo as long,\n\t\tisvtechaptitude as string,\n\t\tisvtechaptitudecode as integer,\n\t\tisvtechaptitudeSeqNo as long,\n\t\tLicenseAgreementType as string,\n\t\tLicenseAgreementTypeCode as integer,\n\t\tLicenseAgreementTypeSeqNo as long,\n\t\tLine1 as string,\n\t\tLine2 as string,\n\t\tLine3 as string,\n\t\tMainPhone as string,\n\t\tManagedstatus as string,\n\t\tManagedstatusCode as integer,\n\t\tManagedstatusSeqNo as long,\n\t\tmcapi as string,\n\t\tMDMOrganizationId as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tmodifiedonbehalfby as string,\n\t\tMSP_HQ as boolean,\n\t\tmsp_IncomingATS as string,\n\t\tmsp_OutgoingATS as string,\n\t\tMSSalesId as string,\n\t\tMSSalesTopParentId as string,\n\t\tNumberOfEmployees as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOEMManaged as boolean,\n\t\toemorganizationtype as string,\n\t\toemorganizationtypecode as integer,\n\t\toemorganizationtypeSeqNo as long,\n\t\toemsegmenttype as string,\n\t\toemsegmenttypecode as integer,\n\t\toemsegmenttypeSeqNo as long,\n\t\tOwnerId as string,\n\t\towningBusinessUnit as string,\n\t\tParentAccountId as string,\n\t\tParentingLevel as string,\n\t\tParentingLevelCode as integer,\n\t\tParentingLevelSeqNo as long,\n\t\tPcCount as integer,\n\t\tpevcinvestors as string,\n\t\tpevcownedSeqNo as long,\n\t\tPonId as string,\n\t\tPostalCode as string,\n\t\tpreviousaccountowner as string,\n\t\tServerCount as integer,\n\t\tServicesEngagement as boolean,\n\t\tSmartphoneCount as integer,\n\t\tStateCode as integer,\n\t\tStateOrProvince as string,\n\t\tStatus as string,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tStatusSeqNo as long,\n\t\tTabletCount as integer,\n\t\tTaxId as string,\n\t\tTenantId as integer,\n\t\tTerritoryId as string,\n\t\tVersionNumber as long,\n\t\tVerticalCategory as string,\n\t\tVerticalCategoryCode as integer,\n\t\tVerticalCategorySeqNo as long,\n\t\tWebsiteUrl as string,\n\t\tpevcownedcode as integer,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\tmsp_accountplanid as string,\n\t\tmsp_verticalcode as integer,\n\t\tmsp_subverticalcode as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_account/v1/standard') ~> msxaccount\nsource(output(\n\t\tTPID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'excel',\n\tfileSystem: 'input',\n\tfileName: 'AMMP TPID.xlsx',\n\tsheetName: 'AMMP TPID',\n\tfirstRowAsHeader: true) ~> source1\nmsxaccount, source1 exists(MSSalesTopParentId == TPID,\n\tnegate:false,\n\tbroadcast: 'auto')~> exists1\nexists1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+		}
+	}
+}
