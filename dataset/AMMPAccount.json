@@ -1,0 +1,15 @@
+{
+	"name": "AMMPAccount",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "GBB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "AMMPAccount"
+		}
+	}
+}
