@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod'"
 		},
+		"linkedService1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'linkedService1'"
+		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://iotbikeyvault.vault.azure.net/"
@@ -38,6 +42,10 @@
 		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/a311be7b-10b0-4f08-8f71-e8d304e87a18/resourcegroups/IOTBIReportting_Prod/providers/Microsoft.DataFactory/factories/IOTBI-SQL-Agent/integrationruntimes/IRFromVM2"
+		},
+		"linkedService1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://iotbistorage.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -69,8 +77,8 @@
 					"azoedbisqlprod_connectionString": {
 						"value": "[parameters('azoedbisqlprod_connectionString')]"
 					},
-					"GBB_connectionString": {
-						"value": "[parameters('GBB_connectionString')]"
+					"linkedService1_accountKey": {
+						"value": "[parameters('linkedService1_accountKey')]"
 					},
 					"AzureKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault_properties_typeProperties_baseUrl')]"
@@ -78,8 +86,8 @@
 					"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('integrationRuntime1_properties_typeProperties_linkedInfo_resourceId')]"
 					},
-					"GBB_properties_typeProperties_userName": {
-						"value": "[parameters('GBB_properties_typeProperties_userName')]"
+					"linkedService1_properties_typeProperties_url": {
+						"value": "[parameters('linkedService1_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -98,6 +106,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"GBB_connectionString": {
+						"value": "[parameters('GBB_connectionString')]"
+					},
+					"GBB_properties_typeProperties_userName": {
+						"value": "[parameters('GBB_properties_typeProperties_userName')]"
 					},
 					"msxdatalake_properties_typeProperties_url": {
 						"value": "[parameters('msxdatalake_properties_typeProperties_url')]"
