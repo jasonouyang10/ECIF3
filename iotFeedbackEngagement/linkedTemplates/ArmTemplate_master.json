@@ -27,6 +27,10 @@
 			"type": "string",
 			"defaultValue": "redmond\\v-jouyang"
 		},
+		"linkedService1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://iotbistorage.dfs.core.windows.net/"
+		},
 		"msxdatalake_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://cseoedlprodadlsg2wus201.dfs.core.windows.net/"
@@ -42,10 +46,6 @@
 		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/a311be7b-10b0-4f08-8f71-e8d304e87a18/resourcegroups/IOTBIReportting_Prod/providers/Microsoft.DataFactory/factories/IOTBI-SQL-Agent/integrationruntimes/IRFromVM2"
-		},
-		"linkedService1_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://iotbistorage.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -83,11 +83,11 @@
 					"AzureKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault_properties_typeProperties_baseUrl')]"
 					},
-					"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
-						"value": "[parameters('integrationRuntime1_properties_typeProperties_linkedInfo_resourceId')]"
-					},
 					"linkedService1_properties_typeProperties_url": {
 						"value": "[parameters('linkedService1_properties_typeProperties_url')]"
+					},
+					"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
+						"value": "[parameters('integrationRuntime1_properties_typeProperties_linkedInfo_resourceId')]"
 					}
 				}
 			},
@@ -126,6 +126,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'iotFeedbackEngagement_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "iotFeedbackEngagement_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'iotFeedbackEngagement_ArmTemplate_1')]"
 			]
 		}
 	]
