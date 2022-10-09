@@ -13,6 +13,13 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "source1"
+				},
+				{
+					"linkedService": {
+						"referenceName": "linkedService1",
+						"type": "LinkedServiceReference"
+					},
+					"name": "source2"
 				}
 			],
 			"sinks": [
@@ -24,7 +31,11 @@
 					"name": "sink1"
 				}
 			],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "exists1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          PositionNumber as integer,",
@@ -77,7 +88,21 @@
 				"     format: 'delta',",
 				"     fileSystem: 'cseo',",
 				"     folderPath: 'standardized/masterandreference/calc/eap_vw_cy_activeassignments/v1/standard') ~> source1",
-				"source1 sink(allowSchemaDrift: true,",
+				"source(output(",
+				"          TPID as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'excel',",
+				"     fileSystem: 'input',",
+				"     fileName: 'AMMP TPID.xlsx',",
+				"     sheetName: 'AMMP TPID',",
+				"     firstRowAsHeader: true) ~> source2",
+				"source1, source2 exists(MSSalesTPID == TPID,",
+				"     negate:false,",
+				"     broadcast: 'auto')~> exists1",
+				"exists1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
