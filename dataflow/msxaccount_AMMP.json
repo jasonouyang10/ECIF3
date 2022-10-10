@@ -2,7 +2,7 @@
 	"name": "msxaccount_AMMP",
 	"properties": {
 		"folder": {
-			"name": "Infra Engagement"
+			"name": "AMMP"
 		},
 		"type": "MappingDataFlow",
 		"typeProperties": {

@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "AccountFromCALC",
+				"name": "MSXCurrencyData",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "AccountFromCALC",
+						"referenceName": "MSXCurrencyData",
 						"type": "DataFlowReference"
 					},
 					"compute": {
