@@ -34,6 +34,9 @@
 			"transformations": [
 				{
 					"name": "exists1"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -102,7 +105,12 @@
 				"source1, source2 exists(MSSalesTPID == TPID,",
 				"     negate:false,",
 				"     broadcast: 'auto')~> exists1",
-				"exists1 sink(allowSchemaDrift: true,",
+				"exists1 aggregate(groupBy(AccountName,",
+				"          MSSalesTPID,",
+				"          SubsidiaryName,",
+				"          AreaName),",
+				"     count = count(MSSalesTPID)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
