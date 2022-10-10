@@ -201,6 +201,138 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AccountFromCALC')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "AMMP"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "source1"
+						},
+						{
+							"linkedService": {
+								"referenceName": "linkedService1",
+								"type": "LinkedServiceReference"
+							},
+							"name": "source2"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "MSXAccount_AMMP",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "exists1"
+						},
+						{
+							"name": "aggregate1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          PositionNumber as integer,",
+						"          CustomerSalesAccountID as integer,",
+						"          AccountSellerAssignmentGUID as string,",
+						"          MSSalesTPID as integer,",
+						"          CRMAccountID as string,",
+						"          GSSGUID as string,",
+						"          ContractNumber as string,",
+						"          ContractDerivedID as long,",
+						"          Qualifier1 as string,",
+						"          Qualifier2 as string,",
+						"          Role as string,",
+						"          RoleType as string,",
+						"          AssignmentStartDate as timestamp,",
+						"          AssignmentEndDate as timestamp,",
+						"          AssignmentStatus as string,",
+						"          IsUserActive as boolean,",
+						"          IsTBH as boolean,",
+						"          DataSource as string,",
+						"          AccountName as string,",
+						"          AreaName as string,",
+						"          SubsidiaryName as string,",
+						"          ContractScheduleId as integer,",
+						"          CreatedDate as timestamp,",
+						"          CreatedByAlias as string,",
+						"          LastModifiedDate as timestamp,",
+						"          LastModifiedByAlias as string,",
+						"          AssignmentType as string,",
+						"          PlatformCreatedDate as timestamp,",
+						"          PlatformModifiedDate as timestamp,",
+						"          PlatformModifiedDateAsInt as long,",
+						"          extractid as string,",
+						"          extractdatetime as timestamp,",
+						"          loadts as timestamp,",
+						"          deltaactioncode as string,",
+						"          Role_Summary as string,",
+						"          ReasonCode as string,",
+						"          Justification as string,",
+						"          OrgDesc as string,",
+						"          EDLPExtractId as string,",
+						"          EDLPExtractDateTime as timestamp,",
+						"          EDLPLoadTS as string,",
+						"          EDLPModifiedDateTime as timestamp,",
+						"          EDLPDeltaActionCode as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delta',",
+						"     fileSystem: 'cseo',",
+						"     folderPath: 'standardized/masterandreference/calc/eap_vw_cy_activeassignments/v1/standard') ~> source1",
+						"source(output(",
+						"          TPID as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'excel',",
+						"     fileSystem: 'input',",
+						"     fileName: 'AMMP TPID.xlsx',",
+						"     sheetName: 'AMMP TPID',",
+						"     firstRowAsHeader: true) ~> source2",
+						"source1, source2 exists(MSSalesTPID == TPID,",
+						"     negate:false,",
+						"     broadcast: 'auto')~> exists1",
+						"exists1 aggregate(groupBy(AccountName,",
+						"          MSSalesTPID,",
+						"          SubsidiaryName,",
+						"          AreaName),",
+						"     count = count(MSSalesTPID)) ~> aggregate1",
+						"aggregate1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     recreate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/msxdatalake')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/MSXCurrencyData')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -687,9 +819,12 @@
 						},
 						{
 							"name": "union1"
+						},
+						{
+							"name": "aggregate1"
 						}
 					],
-					"script": "source(output(\n\t\tEDLPExtractId as string,\n\t\taccountcreatedby as string,\n\t\tAccountId as string,\n\t\taccountmodifiedby as string,\n\t\tAccountName as string,\n\t\tAccountNumber as string,\n\t\tAddressId as string,\n\t\tCID as string,\n\t\tCity as string,\n\t\tclanumber as string,\n\t\tCountry as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tcreatedonbehalfby as string,\n\t\tCrmInstanceId as string,\n\t\tCurrencyId as string,\n\t\tCustomerSegment as integer,\n\t\tCustomerSubsegment as integer,\n\t\tDescription as string,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tDunsID as string,\n\t\tEligibleForUnifiedSupport as boolean,\n\t\tEndCustomerSegment as string,\n\t\tEndCustomerSegmentSeqNo as long,\n\t\tEndCustomerSubsegment as string,\n\t\tEndCustomerSubsegmentSeqNo as long,\n\t\tenglishtranslatedaccountname as string,\n\t\tFax as string,\n\t\tFYStartMonth as string,\n\t\tFYStartMonthcode as integer,\n\t\tFYStartMonthSeqNo as long,\n\t\tGPID as string,\n\t\tGPName as string,\n\t\tHardwareBuyingStrategy as string,\n\t\tHardwareDecisionMaker as string,\n\t\tIndustry as string,\n\t\tIndustryCode as integer,\n\t\tIndustrySeqNo as long,\n\t\tIndustryVertical as string,\n\t\tIndustryVerticalCode as integer,\n\t\tIndustryVerticalSeqNo as long,\n\t\tisvtechaptitude as string,\n\t\tisvtechaptitudecode as integer,\n\t\tisvtechaptitudeSeqNo as long,\n\t\tLicenseAgreementType as string,\n\t\tLicenseAgreementTypeCode as integer,\n\t\tLicenseAgreementTypeSeqNo as long,\n\t\tLine1 as string,\n\t\tLine2 as string,\n\t\tLine3 as string,\n\t\tMainPhone as string,\n\t\tManagedstatus as string,\n\t\tManagedstatusCode as integer,\n\t\tManagedstatusSeqNo as long,\n\t\tmcapi as string,\n\t\tMDMOrganizationId as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tmodifiedonbehalfby as string,\n\t\tMSP_HQ as boolean,\n\t\tmsp_IncomingATS as string,\n\t\tmsp_OutgoingATS as string,\n\t\tMSSalesId as string,\n\t\tMSSalesTopParentId as string,\n\t\tNumberOfEmployees as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOEMManaged as boolean,\n\t\toemorganizationtype as string,\n\t\toemorganizationtypecode as integer,\n\t\toemorganizationtypeSeqNo as long,\n\t\toemsegmenttype as string,\n\t\toemsegmenttypecode as integer,\n\t\toemsegmenttypeSeqNo as long,\n\t\tOwnerId as string,\n\t\towningBusinessUnit as string,\n\t\tParentAccountId as string,\n\t\tParentingLevel as string,\n\t\tParentingLevelCode as integer,\n\t\tParentingLevelSeqNo as long,\n\t\tPcCount as integer,\n\t\tpevcinvestors as string,\n\t\tpevcownedSeqNo as long,\n\t\tPonId as string,\n\t\tPostalCode as string,\n\t\tpreviousaccountowner as string,\n\t\tServerCount as integer,\n\t\tServicesEngagement as boolean,\n\t\tSmartphoneCount as integer,\n\t\tStateCode as integer,\n\t\tStateOrProvince as string,\n\t\tStatus as string,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tStatusSeqNo as long,\n\t\tTabletCount as integer,\n\t\tTaxId as string,\n\t\tTenantId as integer,\n\t\tTerritoryId as string,\n\t\tVersionNumber as long,\n\t\tVerticalCategory as string,\n\t\tVerticalCategoryCode as integer,\n\t\tVerticalCategorySeqNo as long,\n\t\tWebsiteUrl as string,\n\t\tpevcownedcode as integer,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\tmsp_accountplanid as string,\n\t\tmsp_verticalcode as integer,\n\t\tmsp_subverticalcode as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/masterandreference/msx/hub_vw_account/v1/standard') ~> msxaccount\nsource(output(\n\t\tTPID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'excel',\n\tfileSystem: 'input',\n\tfileName: 'partnerledammptpid.xlsx',\n\tsheetName: 'Sheet1',\n\tfirstRowAsHeader: true) ~> source1\nmsxaccount, source1 exists(MSSalesTopParentId == TPID,\n\tnegate:false,\n\tbroadcast: 'auto')~> AsMSSalesTopParentID\nmsxaccount, source1 exists(MSSalesId == TPID,\n\tnegate:false,\n\tbroadcast: 'auto')~> AsMSSalesID\nAsMSSalesTopParentID, AsMSSalesID union(byName: true)~> union1\nunion1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+					"script": "source(output(\n\t\tEDLPExtractId as string,\n\t\taccountcreatedby as string,\n\t\tAccountId as string,\n\t\taccountmodifiedby as string,\n\t\tAccountName as string,\n\t\tAccountNumber as string,\n\t\tAddressId as string,\n\t\tCID as string,\n\t\tCity as string,\n\t\tclanumber as string,\n\t\tCountry as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tcreatedonbehalfby as string,\n\t\tCrmInstanceId as string,\n\t\tCurrencyId as string,\n\t\tCustomerSegment as integer,\n\t\tCustomerSubsegment as integer,\n\t\tDescription as string,\n\t\tdsraction as string,\n\t\tdsrdate as timestamp,\n\t\tdsrticket as string,\n\t\tDunsID as string,\n\t\tEligibleForUnifiedSupport as boolean,\n\t\tEndCustomerSegment as string,\n\t\tEndCustomerSegmentSeqNo as long,\n\t\tEndCustomerSubsegment as string,\n\t\tEndCustomerSubsegmentSeqNo as long,\n\t\tenglishtranslatedaccountname as string,\n\t\tFax as string,\n\t\tFYStartMonth as string,\n\t\tFYStartMonthcode as integer,\n\t\tFYStartMonthSeqNo as long,\n\t\tGPID as string,\n\t\tGPName as string,\n\t\tHardwareBuyingStrategy as string,\n\t\tHardwareDecisionMaker as string,\n\t\tIndustry as string,\n\t\tIndustryCode as integer,\n\t\tIndustrySeqNo as long,\n\t\tIndustryVertical as string,\n\t\tIndustryVerticalCode as integer,\n\t\tIndustryVerticalSeqNo as long,\n\t\tisvtechaptitude as string,\n\t\tisvtechaptitudecode as integer,\n\t\tisvtechaptitudeSeqNo as long,\n\t\tLicenseAgreementType as string,\n\t\tLicenseAgreementTypeCode as integer,\n\t\tLicenseAgreementTypeSeqNo as long,\n\t\tLine1 as string,\n\t\tLine2 as string,\n\t\tLine3 as string,\n\t\tMainPhone as string,\n\t\tManagedstatus as string,\n\t\tManagedstatusCode as integer,\n\t\tManagedstatusSeqNo as long,\n\t\tmcapi as string,\n\t\tMDMOrganizationId as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tmodifiedonbehalfby as string,\n\t\tMSP_HQ as boolean,\n\t\tmsp_IncomingATS as string,\n\t\tmsp_OutgoingATS as string,\n\t\tMSSalesId as string,\n\t\tMSSalesTopParentId as string,\n\t\tNumberOfEmployees as integer,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOEMManaged as boolean,\n\t\toemorganizationtype as string,\n\t\toemorganizationtypecode as integer,\n\t\toemorganizationtypeSeqNo as long,\n\t\toemsegmenttype as string,\n\t\toemsegmenttypecode as integer,\n\t\toemsegmenttypeSeqNo as long,\n\t\tOwnerId as string,\n\t\towningBusinessUnit as string,\n\t\tParentAccountId as string,\n\t\tParentingLevel as string,\n\t\tParentingLevelCode as integer,\n\t\tParentingLevelSeqNo as long,\n\t\tPcCount as integer,\n\t\tpevcinvestors as string,\n\t\tpevcownedSeqNo as long,\n\t\tPonId as string,\n\t\tPostalCode as string,\n\t\tpreviousaccountowner as string,\n\t\tServerCount as integer,\n\t\tServicesEngagement as boolean,\n\t\tSmartphoneCount as integer,\n\t\tStateCode as integer,\n\t\tStateOrProvince as string,\n\t\tStatus as string,\n\t\tStatusCode as integer,\n\t\tStatusReason as string,\n\t\tStatusReasonSeqNo as long,\n\t\tStatusSeqNo as long,\n\t\tTabletCount as integer,\n\t\tTaxId as string,\n\t\tTenantId as integer,\n\t\tTerritoryId as string,\n\t\tVersionNumber as long,\n\t\tVerticalCategory as string,\n\t\tVerticalCategoryCode as integer,\n\t\tVerticalCategorySeqNo as long,\n\t\tWebsiteUrl as string,\n\t\tpevcownedcode as integer,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long,\n\t\tmsp_accountplanid as string,\n\t\tmsp_verticalcode as integer,\n\t\tmsp_subverticalcode as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'sed/masterandreference/msx/hub_vw_account/v1/standardtandardiz') ~> msxaccount\nsource(output(\n\t\tTPID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'excel',\n\tfileSystem: 'input',\n\tfileName: 'partnerledammptpid.xlsx',\n\tsheetName: 'Sheet1',\n\tfirstRowAsHeader: true) ~> source1\nmsxaccount, source1 exists(MSSalesTopParentId == TPID,\n\tnegate:false,\n\tbroadcast: 'auto')~> AsMSSalesTopParentID\nmsxaccount, source1 exists(MSSalesId == TPID,\n\tnegate:false,\n\tbroadcast: 'auto')~> AsMSSalesID\nAsMSSalesTopParentID, AsMSSalesID union(byName: true)~> union1\nunion1 aggregate(groupBy(AccountName,\n\t\tMSSalesId,\n\t\tMSSalesTopParentId,\n\t\tCustomerSubsegment,\n\t\tIndustryVertical),\n\tcount = count(MSSalesTopParentId)) ~> aggregate1\naggregate1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
 				}
 			},
 			"dependsOn": [
@@ -1111,54 +1246,6 @@
 				"[concat(variables('factoryId'), '/dataflows/MSXOpportunity')]",
 				"[concat(variables('factoryId'), '/dataflows/msxnote')]",
 				"[concat(variables('factoryId'), '/dataflows/Teammembership')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "msxaccount_AMMP",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "msxaccount_AMMP",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"msxaccount": {},
-									"source1": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/msxaccount_AMMP')]"
 			]
 		}
 	]
