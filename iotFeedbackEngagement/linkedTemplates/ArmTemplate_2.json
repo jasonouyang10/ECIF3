@@ -19,7 +19,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "AccountFromCALC",
+						"name": "MSXCurrencyData",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -32,13 +32,12 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "AccountFromCALC",
+								"referenceName": "MSXCurrencyData",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"source1": {},
-									"source2": {},
-									"sink1": {}
+									"MSXCurrencySource": {},
+									"currencydata": {}
 								}
 							},
 							"staging": {},

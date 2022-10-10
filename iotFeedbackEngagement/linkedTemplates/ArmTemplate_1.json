@@ -781,7 +781,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"folder": {
-					"name": "Infra Engagement"
+					"name": "AMMP"
 				},
 				"type": "MappingDataFlow",
 				"typeProperties": {
@@ -1230,6 +1230,36 @@
 							},
 							"traceLevel": "Fine"
 						}
+					},
+					{
+						"name": "MSXCurrencyData",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MSXCurrencyData",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"MSXCurrencySource": {},
+									"currencydata": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
 					}
 				],
 				"policy": {
@@ -1245,7 +1275,8 @@
 				"[concat(variables('factoryId'), '/dataflows/OpportunityTeam')]",
 				"[concat(variables('factoryId'), '/dataflows/MSXOpportunity')]",
 				"[concat(variables('factoryId'), '/dataflows/msxnote')]",
-				"[concat(variables('factoryId'), '/dataflows/Teammembership')]"
+				"[concat(variables('factoryId'), '/dataflows/Teammembership')]",
+				"[concat(variables('factoryId'), '/dataflows/MSXCurrencyData')]"
 			]
 		}
 	]
