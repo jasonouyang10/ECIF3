@@ -9,7 +9,8 @@
 		},
 		"azoedbisqlprod_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod'"
+			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=iotbireportingsql.database.windows.net;Initial Catalog=InfraEngagement"
 		},
 		"linkedService1_accountKey": {
 			"type": "secureString",

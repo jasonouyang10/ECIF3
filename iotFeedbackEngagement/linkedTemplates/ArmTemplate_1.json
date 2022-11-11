@@ -9,7 +9,8 @@
 		},
 		"GBB_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'GBB'"
+			"metadata": "Secure string for 'connectionString' of 'GBB'",
+			"defaultValue": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
 		},
 		"GBB_properties_typeProperties_userName": {
 			"type": "string",

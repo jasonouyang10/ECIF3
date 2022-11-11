@@ -9,11 +9,13 @@
 		},
 		"GBB_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'GBB'"
+			"metadata": "Secure string for 'connectionString' of 'GBB'",
+			"defaultValue": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
 		},
 		"azoedbisqlprod_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod'"
+			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=iotbireportingsql.database.windows.net;Initial Catalog=InfraEngagement"
 		},
 		"linkedService1_accountKey": {
 			"type": "secureString",
@@ -2499,10 +2501,10 @@
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2022-08-28T02:56:00Z",
-						"timeZone": "UTC"
+						"frequency": "Hour",
+						"interval": 12,
+						"startTime": "2022-11-11T00:56:00",
+						"timeZone": "Pacific Standard Time"
 					}
 				}
 			},

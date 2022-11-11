@@ -6,10 +6,10 @@
 			"value": "iotFeedbackEngagement"
 		},
 		"GBB_connectionString": {
-			"value": ""
+			"value": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
 		},
 		"azoedbisqlprod_connectionString": {
-			"value": ""
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=iotbireportingsql.database.windows.net;Initial Catalog=InfraEngagement"
 		},
 		"linkedService1_accountKey": {
 			"value": ""
