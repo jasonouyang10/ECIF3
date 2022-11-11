@@ -14,10 +14,10 @@
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Day",
-				"interval": 1,
-				"startTime": "2022-08-28T02:56:00Z",
-				"timeZone": "UTC"
+				"frequency": "Hour",
+				"interval": 12,
+				"startTime": "2022-08-28T02:56:00",
+				"timeZone": "Pacific Standard Time"
 			}
 		}
 	}
