@@ -2,7 +2,7 @@
 	"name": "target",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "GBB",
+			"referenceName": "MSX_Infra",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {

@@ -58,7 +58,7 @@
 					"storedProcedureName": "[dbo].[usp_Create_EPMNote]"
 				},
 				"linkedServiceName": {
-					"referenceName": "GBB",
+					"referenceName": "MSX_Infra",
 					"type": "LinkedServiceReference"
 				}
 			}
