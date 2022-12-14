@@ -21,6 +21,11 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'linkedService1'"
 		},
+		"MSX_Infra_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'MSX_Infra'",
+			"defaultValue": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
+		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://iotbikeyvault.vault.azure.net/"
@@ -48,6 +53,10 @@
 		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/a311be7b-10b0-4f08-8f71-e8d304e87a18/resourcegroups/IOTBIReportting_Prod/providers/Microsoft.DataFactory/factories/IOTBI-SQL-Agent/integrationruntimes/IRFromVM2"
+		},
+		"MSX_Infra_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "redmond\\v-jouyang"
 		},
 		"containerUri": {
 			"type": "string",
@@ -112,6 +121,9 @@
 					"GBB_connectionString": {
 						"value": "[parameters('GBB_connectionString')]"
 					},
+					"MSX_Infra_connectionString": {
+						"value": "[parameters('MSX_Infra_connectionString')]"
+					},
 					"GBB_properties_typeProperties_userName": {
 						"value": "[parameters('GBB_properties_typeProperties_userName')]"
 					},
@@ -123,6 +135,9 @@
 					},
 					"msxdatalake_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('msxdatalake_properties_typeProperties_servicePrincipalId')]"
+					},
+					"MSX_Infra_properties_typeProperties_userName": {
+						"value": "[parameters('MSX_Infra_properties_typeProperties_userName')]"
 					}
 				}
 			},

@@ -14,6 +14,9 @@
 		"linkedService1_accountKey": {
 			"value": ""
 		},
+		"MSX_Infra_connectionString": {
+			"value": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
+		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://iotbikeyvault.vault.azure.net/"
 		},
@@ -34,6 +37,9 @@
 		},
 		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
 			"value": "/subscriptions/a311be7b-10b0-4f08-8f71-e8d304e87a18/resourcegroups/IOTBIReportting_Prod/providers/Microsoft.DataFactory/factories/IOTBI-SQL-Agent/integrationruntimes/IRFromVM2"
+		},
+		"MSX_Infra_properties_typeProperties_userName": {
+			"value": "redmond\\v-jouyang"
 		}
 	}
 }

@@ -13,6 +13,267 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/fromEDLtoAzureSQL')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "MSXmilestone",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "MSXOpportunity",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MSXmilestone",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Milestone": {},
+									"Opportunity": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "msxaccount",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "MSXOpportunity",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "msxaccount",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"msxaccount": {},
+									"GBBOpportunity": {},
+									"AccountForGBBOpp": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "OpportunityTeam",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Teammembership",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "OpportunityTeam",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"MSXOpportunityTeam": {},
+									"teammembership": {},
+									"OpportunityTeam": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "MSXOpportunity",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "OpportunityTeam",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MSXOpportunity",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"msxopportunity": {},
+									"OppTeamMap": {},
+									"FocusMember": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "msxnote",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "msxnote",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"msxnote": {},
+									"ower": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "Teammembership",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Teammembership",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Teammembership": {},
+									"focusMember": {},
+									"SellerMembership": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "MSXCurrencyData",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MSXCurrencyData",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"MSXCurrencySource": {},
+									"currencydata": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-04-28T16:53:33Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -121,7 +382,7 @@
 							"storedProcedureName": "[[dbo].[usp_Create_EPMNote]"
 						},
 						"linkedServiceName": {
-							"referenceName": "GBB",
+							"referenceName": "MSX_Infra",
 							"type": "LinkedServiceReference"
 						}
 					}
@@ -132,7 +393,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/fromEDLtoAzureSQL')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/trigger1')]",
