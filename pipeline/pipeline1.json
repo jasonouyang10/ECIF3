@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "MSXCurrencyData",
+				"name": "DimOpportunityFromOCDM",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "MSXCurrencyData",
+						"referenceName": "DimOpportunityFromOCDM",
 						"type": "DataFlowReference"
 					},
 					"compute": {
