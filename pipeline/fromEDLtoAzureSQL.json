@@ -255,7 +255,8 @@
 				"typeProperties": {
 					"scripts": [
 						{
-							"type": "Query"
+							"type": "Query",
+							"text": "delete [MSXOpportunity] where OdsStatus  =1\n\nupdate o\nset CurrentSalesStageModifiedOn = o2.CurrentSalesStageModifiedOn\n\nfrom MSXOpportunity o left join DimOpportunityFromOCDM o2 on o.OpportunityId = o2.OpportunityId\n\nselect distinct opportunityid  from DimOpportunityFromOCDM"
 						}
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
