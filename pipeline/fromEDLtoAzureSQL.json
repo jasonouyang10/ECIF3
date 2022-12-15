@@ -249,7 +249,7 @@
 				},
 				"userProperties": [],
 				"linkedServiceName": {
-					"referenceName": "MSX_Infra",
+					"referenceName": "azoedbisqlprod",
 					"type": "LinkedServiceReference"
 				},
 				"typeProperties": {
