@@ -1190,7 +1190,7 @@
 						},
 						"userProperties": [],
 						"linkedServiceName": {
-							"referenceName": "MSX_Infra",
+							"referenceName": "azoedbisqlprod",
 							"type": "LinkedServiceReference"
 						},
 						"typeProperties": {
@@ -1219,8 +1219,7 @@
 				"[concat(variables('factoryId'), '/dataflows/msxnote')]",
 				"[concat(variables('factoryId'), '/dataflows/Teammembership')]",
 				"[concat(variables('factoryId'), '/dataflows/MSXCurrencyData')]",
-				"[concat(variables('factoryId'), '/dataflows/DimOpportunityFromOCDM')]",
-				"[concat(variables('factoryId'), '/linkedServices/MSX_Infra')]"
+				"[concat(variables('factoryId'), '/dataflows/DimOpportunityFromOCDM')]"
 			]
 		},
 		{
