@@ -12,6 +12,11 @@
 			"metadata": "Secure string for 'connectionString' of 'GBB'",
 			"defaultValue": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
 		},
+		"MSX_Infra_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'MSX_Infra'",
+			"defaultValue": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
+		},
 		"azoedbisqlprod_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod'",
@@ -21,16 +26,15 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'linkedService1'"
 		},
-		"MSX_Infra_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'MSX_Infra'",
-			"defaultValue": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
-		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://iotbikeyvault.vault.azure.net/"
 		},
 		"GBB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "redmond\\v-jouyang"
+		},
+		"MSX_Infra_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "redmond\\v-jouyang"
 		},
@@ -50,13 +54,21 @@
 			"type": "string",
 			"defaultValue": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
 		},
+		"ocdm_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://cseoedlprodadlsg2wus203.dfs.core.windows.net"
+		},
+		"ocdm_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"ocdm_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
 		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/a311be7b-10b0-4f08-8f71-e8d304e87a18/resourcegroups/IOTBIReportting_Prod/providers/Microsoft.DataFactory/factories/IOTBI-SQL-Agent/integrationruntimes/IRFromVM2"
-		},
-		"MSX_Infra_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "redmond\\v-jouyang"
 		},
 		"containerUri": {
 			"type": "string",
@@ -127,6 +139,9 @@
 					"GBB_properties_typeProperties_userName": {
 						"value": "[parameters('GBB_properties_typeProperties_userName')]"
 					},
+					"MSX_Infra_properties_typeProperties_userName": {
+						"value": "[parameters('MSX_Infra_properties_typeProperties_userName')]"
+					},
 					"msxdatalake_properties_typeProperties_url": {
 						"value": "[parameters('msxdatalake_properties_typeProperties_url')]"
 					},
@@ -136,8 +151,14 @@
 					"msxdatalake_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('msxdatalake_properties_typeProperties_servicePrincipalId')]"
 					},
-					"MSX_Infra_properties_typeProperties_userName": {
-						"value": "[parameters('MSX_Infra_properties_typeProperties_userName')]"
+					"ocdm_properties_typeProperties_url": {
+						"value": "[parameters('ocdm_properties_typeProperties_url')]"
+					},
+					"ocdm_properties_typeProperties_tenant": {
+						"value": "[parameters('ocdm_properties_typeProperties_tenant')]"
+					},
+					"ocdm_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('ocdm_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},

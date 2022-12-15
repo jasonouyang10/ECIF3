@@ -8,19 +8,22 @@
 		"GBB_connectionString": {
 			"value": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
 		},
+		"MSX_Infra_connectionString": {
+			"value": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
+		},
 		"azoedbisqlprod_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=iotbireportingsql.database.windows.net;Initial Catalog=InfraEngagement"
 		},
 		"linkedService1_accountKey": {
 			"value": ""
 		},
-		"MSX_Infra_connectionString": {
-			"value": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
-		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://iotbikeyvault.vault.azure.net/"
 		},
 		"GBB_properties_typeProperties_userName": {
+			"value": "redmond\\v-jouyang"
+		},
+		"MSX_Infra_properties_typeProperties_userName": {
 			"value": "redmond\\v-jouyang"
 		},
 		"linkedService1_properties_typeProperties_url": {
@@ -35,11 +38,17 @@
 		"msxdatalake_properties_typeProperties_servicePrincipalId": {
 			"value": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
 		},
+		"ocdm_properties_typeProperties_url": {
+			"value": "https://cseoedlprodadlsg2wus203.dfs.core.windows.net"
+		},
+		"ocdm_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"ocdm_properties_typeProperties_servicePrincipalId": {
+			"value": "3c4bff2e-cd35-4ba1-9a95-476924a4693e"
+		},
 		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
 			"value": "/subscriptions/a311be7b-10b0-4f08-8f71-e8d304e87a18/resourcegroups/IOTBIReportting_Prod/providers/Microsoft.DataFactory/factories/IOTBI-SQL-Agent/integrationruntimes/IRFromVM2"
-		},
-		"MSX_Infra_properties_typeProperties_userName": {
-			"value": "redmond\\v-jouyang"
 		}
 	}
 }

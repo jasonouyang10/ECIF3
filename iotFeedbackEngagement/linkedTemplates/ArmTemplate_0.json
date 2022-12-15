@@ -139,52 +139,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/MSXAccountAMMP')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "azoedbisqlprod",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "MSX"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"table": "MSXAccountAMMP"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/azoedbisqlprod')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/MSXAccount_AMMP')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "azoedbisqlprod",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "MSX"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"table": "MSXAccountAMMP"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/azoedbisqlprod')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/MSXCurrencydata')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1398,6 +1352,1173 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/MSXOpportunityFromOCDM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "azoedbisqlprod",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "MSX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "OpportunityId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AntipiracyEngagementTypeId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CampaignId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ConsentToSendToPartnerBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "LicensingProgramId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OriginatingLeadId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OwnerId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AccountId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PrimarySponsorContactId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ParentOpportunityId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PartnerAccountId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PriceLevelId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CurrencyId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ConsentToSendToPartnerCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ConsentToSendToPartner",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ConsentToSendToPartnerSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "OpportunitySourceCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OpportunitySource",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OpportunitySourceSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "PurchaseTimeFrameCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PurchaseTimeFrame",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PurchaseTimeFrameSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "RecommendationCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Recommendation",
+						"type": "nvarchar"
+					},
+					{
+						"name": "RecommendationSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "SourceSubTypeCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SourceSubType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SourceSubTypeSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "ActualCloseDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "Actualvalue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "AgreedToBuy",
+						"type": "bit"
+					},
+					{
+						"name": "BudgetAmount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "CompleteFinalProposal",
+						"type": "bit"
+					},
+					{
+						"name": "IsOrderComplete",
+						"type": "bit"
+					},
+					{
+						"name": "IsQuoteComplete",
+						"type": "bit"
+					},
+					{
+						"name": "IsConclusionLetterSent",
+						"type": "bit"
+					},
+					{
+						"name": "HasCustomerAgreedToBuy",
+						"type": "bit"
+					},
+					{
+						"name": "Need",
+						"type": "nvarchar"
+					},
+					{
+						"name": "IsELPAgreementSecured",
+						"type": "bit"
+					},
+					{
+						"name": "IsELPUploaded",
+						"type": "bit"
+					},
+					{
+						"name": "EstimatedCloseDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "EstimatedValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "EvaluationPlan",
+						"type": "bit"
+					},
+					{
+						"name": "FinalConsumptionPlan",
+						"type": "bit"
+					},
+					{
+						"name": "ForecastComments",
+						"type": "nvarchar"
+					},
+					{
+						"name": "HighLevelSolutionDesign",
+						"type": "bit"
+					},
+					{
+						"name": "IsIdentifyCompetitorsComplete",
+						"type": "bit"
+					},
+					{
+						"name": "IsIdentifyBuyingTeamComplete",
+						"type": "bit"
+					},
+					{
+						"name": "IsIdentifyLineItemsComplete",
+						"type": "bit"
+					},
+					{
+						"name": "IsIdentifySalesTeamComplete",
+						"type": "bit"
+					},
+					{
+						"name": "InitialBusinessCase",
+						"type": "bit"
+					},
+					{
+						"name": "IsInternalAgreementSecured",
+						"type": "bit"
+					},
+					{
+						"name": "IsRevenueSystemCalculated",
+						"type": "bit"
+					},
+					{
+						"name": "IsLetterOfEngagementAccepted",
+						"type": "bit"
+					},
+					{
+						"name": "Topic",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OpportunityNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "IsPartnerFundingSecured",
+						"type": "bit"
+					},
+					{
+						"name": "PrelimConsumptionPlan",
+						"type": "bit"
+					},
+					{
+						"name": "IsPurchaseArrangementSecured",
+						"type": "bit"
+					},
+					{
+						"name": "CrmInstanceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CreatedById",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CreatedDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "ModifiedById",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ModifiedDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "StateCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Status",
+						"type": "nvarchar"
+					},
+					{
+						"name": "StatusSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "StatusCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "StatusReason",
+						"type": "nvarchar"
+					},
+					{
+						"name": "StatusReasonSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "OdsCreatedDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "OdsModifiedDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "VersionNumber",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "TenantId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NumberOfDials",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OpportunityTenantId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PriorityCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Priority",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PrioritySeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "ProductSKU",
+						"type": "nvarchar"
+					},
+					{
+						"name": "RegistrationDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "SubscriptionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OriginalPartnerModifiedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OpportunityCopyTypeCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OpportunityCopyType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OpportunityCopyTypeSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "OriginatingOpportunity",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SendToPartner",
+						"type": "bit"
+					},
+					{
+						"name": "cosellcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "cosell",
+						"type": "nvarchar"
+					},
+					{
+						"name": "cosellSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "PullForwardDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "OdsStatus",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OpportunityScore",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "partnermotioncode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "partnermotion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "partnermotionSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "closestatuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "closestatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "closestatusSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "PricePointDetails",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BilledRevenue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "complexitycode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "complexity",
+						"type": "nvarchar"
+					},
+					{
+						"name": "complexitySeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "CriticalDeal",
+						"type": "bit"
+					},
+					{
+						"name": "dealtypecode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "dealtype",
+						"type": "nvarchar"
+					},
+					{
+						"name": "dealtypeSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "EnrollmentNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EstROCArrivalDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "LicensingContact",
+						"type": "nvarchar"
+					},
+					{
+						"name": "LSSODMComments",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NoofTenants",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "transactiontypecode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "transactiontype",
+						"type": "nvarchar"
+					},
+					{
+						"name": "transactiontypeSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "operationscontact",
+						"type": "nvarchar"
+					},
+					{
+						"name": "attachedservices",
+						"type": "bit"
+					},
+					{
+						"name": "clanumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "closeplan",
+						"type": "nvarchar"
+					},
+					{
+						"name": "cpumodelseriescode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "cpumodelseries",
+						"type": "nvarchar"
+					},
+					{
+						"name": "cpumodelseriesSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "devicecategorycode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "devicecategory",
+						"type": "nvarchar"
+					},
+					{
+						"name": "devicecategorySeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "microsoftazureiotcertifieddevice",
+						"type": "bit"
+					},
+					{
+						"name": "solutiondesignindate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "solutionstartdate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "owningBusinessUnit",
+						"type": "nvarchar"
+					},
+					{
+						"name": "finaldecisiondate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "IsQualified",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "competethreatlevelcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "competethreatlevel",
+						"type": "nvarchar"
+					},
+					{
+						"name": "competethreatlevelSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "primarycompetitor",
+						"type": "nvarchar"
+					},
+					{
+						"name": "othercompetitor",
+						"type": "nvarchar"
+					},
+					{
+						"name": "rvtvalidationready",
+						"type": "bit"
+					},
+					{
+						"name": "CurrentSalesStageModifiedOn",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "PlatformCreatedDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "PlatformModifiedDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "PlatformModifiedDateAsInt",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "correctedecid",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PartnerReferral",
+						"type": "nvarchar"
+					},
+					{
+						"name": "rvtstatuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "rvtstatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "rvtstatusSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "newenrollmentnumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "lastshipmentdate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "baseopportunitycode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "baseopportunity",
+						"type": "nvarchar"
+					},
+					{
+						"name": "baseopportunitySeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "AdhocSurvey",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SurveyResponseRejectionCounts",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "accessecifcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "accessecif",
+						"type": "nvarchar"
+					},
+					{
+						"name": "accessecifSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "CompleteTechnicalClosePlan",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "CompleteWorkshop",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "ConfirmTrial",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "deliverinitialpitchcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "deliverinitialpitch",
+						"type": "nvarchar"
+					},
+					{
+						"name": "deliverinitialpitchSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "delivertechnicalcasecode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "delivertechnicalcase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "delivertechnicalcaseSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "demonstrateroicode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "demonstrateroi",
+						"type": "nvarchar"
+					},
+					{
+						"name": "demonstrateroiSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "engagefasttrackcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "engagefasttrack",
+						"type": "nvarchar"
+					},
+					{
+						"name": "engagefasttrackSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "EngageServices",
+						"type": "nvarchar"
+					},
+					{
+						"name": "selectsalesplaycode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "selectsalesplay",
+						"type": "nvarchar"
+					},
+					{
+						"name": "selectsalesplaySeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "sharebompricingcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "sharebompricing",
+						"type": "nvarchar"
+					},
+					{
+						"name": "sharebompricingSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "extractid",
+						"type": "nvarchar"
+					},
+					{
+						"name": "extractdatetime",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "loadts",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "deltaactioncode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "bizappssalesplay",
+						"type": "nvarchar"
+					},
+					{
+						"name": "bizappssalesplaycode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "bizappssalesplaySeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "commercialconstructapprovedbycustomer",
+						"type": "nvarchar"
+					},
+					{
+						"name": "commercialconstructapprovedbycustomercode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "commercialconstructapprovedbycustomerSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "CompleteClosePlan",
+						"type": "bit"
+					},
+					{
+						"name": "completejointcatalystengagementplan",
+						"type": "nvarchar"
+					},
+					{
+						"name": "completejointcatalystengagementplancode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "completejointcatalystengagementplanSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "completetechnicalassessment",
+						"type": "nvarchar"
+					},
+					{
+						"name": "completetechnicalassessmentcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "completetechnicalassessmentSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "contractsignaturetype",
+						"type": "nvarchar"
+					},
+					{
+						"name": "contractsignaturetypecode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "contractsignaturetypeSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "createbusinessvalueassessment",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createbusinessvalueassessmentcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "createbusinessvalueassessmentSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "customersignoffonassessments",
+						"type": "nvarchar"
+					},
+					{
+						"name": "customersignoffonassessmentscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "customersignoffonassessmentsSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "customersuccessplanworkshopcomplete",
+						"type": "nvarchar"
+					},
+					{
+						"name": "customersuccessplanworkshopcompletecode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "customersuccessplanworkshopcompleteSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "deliverbusinessvalueenlighten",
+						"type": "nvarchar"
+					},
+					{
+						"name": "deliverbusinessvalueenlightencode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "deliverbusinessvalueenlightenSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "deliverenvisioningworkshop",
+						"type": "nvarchar"
+					},
+					{
+						"name": "deliverenvisioningworkshopcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "deliverenvisioningworkshopSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "delivertailoreddemonstration",
+						"type": "nvarchar"
+					},
+					{
+						"name": "delivertailoreddemonstrationcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "delivertailoreddemonstrationSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "delivertransformationplan",
+						"type": "nvarchar"
+					},
+					{
+						"name": "delivertransformationplancode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "delivertransformationplanSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "engagedwrawrforecif",
+						"type": "nvarchar"
+					},
+					{
+						"name": "engagedwrawrforecifcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "engagedwrawrforecifSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "engagegbb",
+						"type": "nvarchar"
+					},
+					{
+						"name": "engagegbbcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "engagegbbSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "engagemicrosoftexecutivewithcustomercxo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "engagemicrosoftexecutivewithcustomercxocode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "engagemicrosoftexecutivewithcustomercxoSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "HandovertoCSMorPCSM",
+						"type": "bit"
+					},
+					{
+						"name": "salesplay",
+						"type": "nvarchar"
+					},
+					{
+						"name": "salesplaySeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "solutionarea",
+						"type": "nvarchar"
+					},
+					{
+						"name": "solutionareaSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "technicalcapability",
+						"type": "nvarchar"
+					},
+					{
+						"name": "technicalcapabilitySeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "pilotsolutionSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "presentbusinesscaseSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "presentdealoptionsSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "RapidResponse",
+						"type": "bit"
+					},
+					{
+						"name": "transitiontocsupartnerSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "alignonbusinessimpactSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "alignonsolutionapproachSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "ClaimTPID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CompleteDeploymentWorkshop",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "completepredeploymentworkshopSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "completetrialSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "conductpocSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "engagecosellprioritizedpartnerSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "executedigitalimmersionSeqNo",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "identifybusinessdecisionmakersSeqNo",
+						"type": "bigint",
+						"precision": 19
+					}
+				],
+				"typeProperties": {
+					"table": "DimOpportunityFromOCDM"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/azoedbisqlprod')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/MSXOpportunityTeam')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1842,6 +2963,34 @@
 				"typeProperties": {
 					"schema": "",
 					"table": "msxuser"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/azoedbisqlprod')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "azoedbisqlprod",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"tablename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"table": {
+						"value": "@dataset().tablename",
+						"type": "Expression"
+					}
 				}
 			},
 			"dependsOn": [
