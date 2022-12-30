@@ -9,11 +9,20 @@
 		},
 		"GBB_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'GBB'"
+			"metadata": "Secure string for 'connectionString' of 'GBB'",
+			"defaultValue": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=GBB"
 		},
 		"azoedbisqlprod_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'azoedbisqlprod'"
+		},
+		"excel_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'excel'"
+		},
+		"linkedService1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'linkedService1'"
 		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -22,6 +31,14 @@
 		"GBB_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "redmond\\v-jouyang"
+		},
+		"excel_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://iotbistorage.dfs.core.windows.net/"
+		},
+		"linkedService1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://iotbistorage.dfs.core.windows.net/"
 		},
 		"msxdatalake_properties_typeProperties_url": {
 			"type": "string",
@@ -81,26 +98,23 @@
 					"azoedbisqlprod_connectionString": {
 						"value": "[parameters('azoedbisqlprod_connectionString')]"
 					},
-					"GBB_connectionString": {
-						"value": "[parameters('GBB_connectionString')]"
+					"excel_accountKey": {
+						"value": "[parameters('excel_accountKey')]"
+					},
+					"linkedService1_accountKey": {
+						"value": "[parameters('linkedService1_accountKey')]"
 					},
 					"AzureKeyVault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault_properties_typeProperties_baseUrl')]"
 					},
+					"excel_properties_typeProperties_url": {
+						"value": "[parameters('excel_properties_typeProperties_url')]"
+					},
+					"linkedService1_properties_typeProperties_url": {
+						"value": "[parameters('linkedService1_properties_typeProperties_url')]"
+					},
 					"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('integrationRuntime1_properties_typeProperties_linkedInfo_resourceId')]"
-					},
-					"GBB_properties_typeProperties_userName": {
-						"value": "[parameters('GBB_properties_typeProperties_userName')]"
-					},
-					"msxdatalake_properties_typeProperties_url": {
-						"value": "[parameters('msxdatalake_properties_typeProperties_url')]"
-					},
-					"msxdatalake_properties_typeProperties_tenant": {
-						"value": "[parameters('msxdatalake_properties_typeProperties_tenant')]"
-					},
-					"msxdatalake_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('msxdatalake_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},
@@ -120,6 +134,21 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"GBB_connectionString": {
+						"value": "[parameters('GBB_connectionString')]"
+					},
+					"GBB_properties_typeProperties_userName": {
+						"value": "[parameters('GBB_properties_typeProperties_userName')]"
+					},
+					"msxdatalake_properties_typeProperties_url": {
+						"value": "[parameters('msxdatalake_properties_typeProperties_url')]"
+					},
+					"msxdatalake_properties_typeProperties_tenant": {
+						"value": "[parameters('msxdatalake_properties_typeProperties_tenant')]"
+					},
+					"msxdatalake_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('msxdatalake_properties_typeProperties_servicePrincipalId')]"
+					},
 					"ocdm_properties_typeProperties_url": {
 						"value": "[parameters('ocdm_properties_typeProperties_url')]"
 					},
@@ -133,6 +162,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ECIF_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ECIF_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ECIF_ArmTemplate_1')]"
 			]
 		}
 	]

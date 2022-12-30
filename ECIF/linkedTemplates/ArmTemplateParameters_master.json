@@ -6,9 +6,15 @@
 			"value": "ECIF"
 		},
 		"GBB_connectionString": {
-			"value": ""
+			"value": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=GBB"
 		},
 		"azoedbisqlprod_connectionString": {
+			"value": ""
+		},
+		"excel_accountKey": {
+			"value": ""
+		},
+		"linkedService1_accountKey": {
 			"value": ""
 		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
@@ -16,6 +22,12 @@
 		},
 		"GBB_properties_typeProperties_userName": {
 			"value": "redmond\\v-jouyang"
+		},
+		"excel_properties_typeProperties_url": {
+			"value": "https://iotbistorage.dfs.core.windows.net/"
+		},
+		"linkedService1_properties_typeProperties_url": {
+			"value": "https://iotbistorage.dfs.core.windows.net/"
 		},
 		"msxdatalake_properties_typeProperties_url": {
 			"value": "https://cseoedlprodadlsg2wus201.dfs.core.windows.net/"
