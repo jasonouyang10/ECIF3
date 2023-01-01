@@ -5,9 +5,6 @@
 		"factoryName": {
 			"value": "iotFeedbackEngagement"
 		},
-		"GBB_connectionString": {
-			"value": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
-		},
 		"MSX_Infra_connectionString": {
 			"value": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
 		},
@@ -19,9 +16,6 @@
 		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://iotbikeyvault.vault.azure.net/"
-		},
-		"GBB_properties_typeProperties_userName": {
-			"value": "redmond\\v-jouyang"
 		},
 		"MSX_Infra_properties_typeProperties_userName": {
 			"value": "redmond\\v-jouyang"

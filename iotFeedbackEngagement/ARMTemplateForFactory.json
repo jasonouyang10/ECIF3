@@ -7,11 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "iotFeedbackEngagement"
 		},
-		"GBB_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'GBB'",
-			"defaultValue": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
-		},
 		"MSX_Infra_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'MSX_Infra'",
@@ -29,10 +24,6 @@
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://iotbikeyvault.vault.azure.net/"
-		},
-		"GBB_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "redmond\\v-jouyang"
 		},
 		"MSX_Infra_properties_typeProperties_userName": {
 			"type": "string",
@@ -3643,35 +3634,6 @@
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GBB')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('GBB_connectionString')]",
-					"userName": "[parameters('GBB_properties_typeProperties_userName')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "v-jouyang"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault')]"
-			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/MSX_Infra')]",

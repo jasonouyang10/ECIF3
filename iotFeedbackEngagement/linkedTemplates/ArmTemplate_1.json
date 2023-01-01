@@ -7,19 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "iotFeedbackEngagement"
 		},
-		"GBB_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'GBB'",
-			"defaultValue": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
-		},
 		"MSX_Infra_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'MSX_Infra'",
 			"defaultValue": "Integrated Security=True;Data Source=azoedbisqlprod;Initial Catalog=MSX_Engagement_Infrastructure"
-		},
-		"GBB_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "redmond\\v-jouyang"
 		},
 		"MSX_Infra_properties_typeProperties_userName": {
 			"type": "string",
@@ -68,32 +59,6 @@
 				"schema": [],
 				"typeProperties": {
 					"table": "tablelist"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GBB')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('GBB_connectionString')]",
-					"userName": "[parameters('GBB_properties_typeProperties_userName')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "v-jouyang"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": []
@@ -1269,6 +1234,87 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/DimOpportunityFromOCDM')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Master')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "fromEDLtoAzureSQL",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "fromEDLtoAzureSQL",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CopyToSQLDB",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "fromEDLtoAzureSQL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CopyToSQLDB",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Stored procedure1",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "CopyToSQLDB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[usp_Create_EPMNote]"
+						},
+						"linkedServiceName": {
+							"referenceName": "MSX_Infra",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/fromEDLtoAzureSQL')]",
+				"[concat(variables('factoryId'), '/pipelines/CopyToSQLDB')]",
+				"[concat(variables('factoryId'), '/linkedServices/MSX_Infra')]"
 			]
 		}
 	]
