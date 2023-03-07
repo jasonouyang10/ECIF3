@@ -1303,6 +1303,33 @@
 							"referenceName": "MSX_Infra",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Stored procedure Create EPM Note",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "fromEDLtoAzureSQL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[usp_Create_EPMNote]"
+						},
+						"linkedServiceName": {
+							"referenceName": "azoedbisqlprod",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
