@@ -1257,54 +1257,6 @@
 						}
 					},
 					{
-						"name": "CopyToSQLDB",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "fromEDLtoAzureSQL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "CopyToSQLDB",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "Stored procedure1",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "CopyToSQLDB",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_Create_EPMNote]"
-						},
-						"linkedServiceName": {
-							"referenceName": "MSX_Infra",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
 						"name": "Stored procedure Create EPM Note",
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
@@ -1339,9 +1291,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/fromEDLtoAzureSQL')]",
-				"[concat(variables('factoryId'), '/pipelines/CopyToSQLDB')]",
-				"[concat(variables('factoryId'), '/linkedServices/MSX_Infra')]"
+				"[concat(variables('factoryId'), '/pipelines/fromEDLtoAzureSQL')]"
 			]
 		}
 	]
