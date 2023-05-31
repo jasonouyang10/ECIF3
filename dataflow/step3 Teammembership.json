@@ -1,0 +1,45 @@
+{
+	"name": "step3 Teammembership",
+	"properties": {
+		"folder": {
+			"name": "InProgress Opp"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "msxdatalake",
+						"type": "LinkedServiceReference"
+					},
+					"name": "Teammembership"
+				},
+				{
+					"dataset": {
+						"referenceName": "InProgressOpportunityTeam",
+						"type": "DatasetReference"
+					},
+					"name": "OpportunityTeam"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "InProgressTeamMemmership",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "exists1"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"script": "source(output(\n\t\tEDLPExtractId as string,\n\t\tId as string,\n\t\tVersionNumber as long,\n\t\tteammembershipid as string,\n\t\tteamid as string,\n\t\tsystemuserid as string,\n\t\tIsDelete as boolean,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/msx/hub_vw_teammembership/v1/standard') ~> Teammembership\nsource(output(\n\t\topportunityid as string,\n\t\tTeamId as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> OpportunityTeam\nTeammembership, OpportunityTeam exists(Teammembership@teamid == OpportunityTeam@TeamId,\n\tnegate:false,\n\tbroadcast: 'auto')~> exists1\nexists1 select(mapColumn(\n\t\tteamid,\n\t\tsystemuserid,\n\t\tIsDelete\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> select1\nselect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tEDLPExtractId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOpportunityId as string,\n\t\tOpportunityTeamId as integer,\n\t\tSystemUserId as string,\n\t\tTenantId as integer,\n\t\tVersionNumber as long,\n\t\tTeamId as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+		}
+	}
+}

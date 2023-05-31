@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Step2 OpportunityTeam",
+				"name": "step3 Teammembership",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "Step2 OpportunityTeam",
+						"referenceName": "step3 Teammembership",
 						"type": "DataFlowReference"
 					},
 					"compute": {

@@ -1,5 +1,5 @@
 {
-	"name": "InProgressOpportunityTeam",
+	"name": "InProgressTeamMemmership",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "azoedbisqlprod",
@@ -132,7 +132,7 @@
 			}
 		],
 		"typeProperties": {
-			"table": "InProgressOpportunityTeam"
+			"table": "InProgressTeamMemmership"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

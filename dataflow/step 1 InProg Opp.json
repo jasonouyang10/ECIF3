@@ -1,5 +1,5 @@
 {
-	"name": "InProg Opp",
+	"name": "step 1 InProg Opp",
 	"properties": {
 		"folder": {
 			"name": "InProgress Opp"
@@ -25,7 +25,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "MSXOpportunityInProgress",
+						"referenceName": "InProgressOpportunity",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
