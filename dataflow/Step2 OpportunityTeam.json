@@ -16,7 +16,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "MSXOpportunityInProgress",
+						"referenceName": "InProgressOpportunity",
 						"type": "DatasetReference"
 					},
 					"name": "InProgressOpp"
