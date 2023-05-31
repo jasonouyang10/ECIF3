@@ -46,6 +46,75 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/msxtask')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "azoedbisqlprod",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "MSX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"table": "msxtask"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/msxuser')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "azoedbisqlprod",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "MSX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "",
+					"table": "msxuser"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "azoedbisqlprod",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"tablename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"table": {
+						"value": "@dataset().tablename",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/tablelist')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -423,7 +492,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/msxdatalake')]"
+				"[concat(variables('factoryId'), '/linkedServices/msxdatalake')]",
+				"[concat(variables('factoryId'), '/datasets/msxuser')]"
 			]
 		},
 		{
@@ -520,6 +590,62 @@
 						}
 					],
 					"script": "source(output(\n\t\tEDLPExtractId as string,\n\t\tAdministratorId as string,\n\t\tBusinessUnitId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tDescription as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tSystemManaged as boolean,\n\t\tTeam as string,\n\t\tTeamId as string,\n\t\tTeamType as string,\n\t\tTeamTypeCode as integer,\n\t\tTeamTypeSeqNo as long,\n\t\tTenantId as integer,\n\t\tTransactionCurrencyId as string,\n\t\tVersionNumber as long,\n\t\tId as string,\n\t\tmembershiptype as long,\n\t\tisdefault as boolean,\n\t\tmodifiedonbehalfby as string,\n\t\tmodifiedonbehalfby_entitytype as string,\n\t\tqueueid as string,\n\t\tqueueid_entitytype as string,\n\t\tcreatedonbehalfby as string,\n\t\tcreatedonbehalfby_entitytype as string,\n\t\ttransactioncurrencyid_entitytype as string,\n\t\tregardingobjectid as string,\n\t\tadministratorid_entitytype as string,\n\t\tbusinessunitid_entitytype as string,\n\t\tmodifiedby_entitytype as string,\n\t\tcreatedby_entitytype as string,\n\t\tteamtemplateid as string,\n\t\tteamtemplateid_entitytype as string,\n\t\ttraversedpath as string,\n\t\ttransactioncurrencyidname as string,\n\t\tqueueidname as string,\n\t\tregardingobjecttypecode as string,\n\t\tstageid as string,\n\t\timportsequencenumber as long,\n\t\torganizationidname as string,\n\t\tazureactivedirectoryobjectid as string,\n\t\tadministratoridname as string,\n\t\tadministratoridyominame as string,\n\t\texchangerate as decimal(10,0),\n\t\tprocessid as string,\n\t\tbusinessunitidname as string,\n\t\toverriddencreatedon as timestamp,\n\t\tregardingobjectid_entitytype as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/msx/hub_vw_team/v1/standard') ~> MSXOpportunityTeam\nsource(output(\n\t\tEDLPExtractId as string,\n\t\tId as string,\n\t\tVersionNumber as long,\n\t\tteammembershipid as string,\n\t\tteamid as string,\n\t\tsystemuserid as string,\n\t\tIsDelete as boolean,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> teammembership\nMSXOpportunityTeam, teammembership exists(MSXOpportunityTeam@TeamId == teammembership@teamid,\n\tnegate:false,\n\tbroadcast: 'auto')~> existsIn17SellerTeammembership\nexistsIn17SellerTeammembership filter(lower(regardingobjectid_entitytype)=='opportunity') ~> asOpportunityObject\nasOpportunityObject sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tEDLPExtractId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOpportunityId as string,\n\t\tOpportunityTeamId as integer,\n\t\tSystemUserId as string,\n\t\tTenantId as integer,\n\t\tVersionNumber as long,\n\t\tTeamId as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> OpportunityTeam"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/msxdatalake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Step2 OpportunityTeam')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "InProgress Opp"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "msxdatalake",
+								"type": "LinkedServiceReference"
+							},
+							"name": "MSXOpportunityTeam"
+						},
+						{
+							"dataset": {
+								"referenceName": "InProgressOpportunity",
+								"type": "DatasetReference"
+							},
+							"name": "InProgressOpp"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "InProgressOpportunityTeam",
+								"type": "DatasetReference"
+							},
+							"name": "OpportunityTeam"
+						}
+					],
+					"transformations": [
+						{
+							"name": "asOpportunityObject"
+						},
+						{
+							"name": "exists2"
+						},
+						{
+							"name": "filter1"
+						},
+						{
+							"name": "select1"
+						}
+					],
+					"script": "source(output(\n\t\tEDLPExtractId as string,\n\t\tAdministratorId as string,\n\t\tBusinessUnitId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tDescription as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tSystemManaged as boolean,\n\t\tTeam as string,\n\t\tTeamId as string,\n\t\tTeamType as string,\n\t\tTeamTypeCode as integer,\n\t\tTeamTypeSeqNo as long,\n\t\tTenantId as integer,\n\t\tTransactionCurrencyId as string,\n\t\tVersionNumber as long,\n\t\tId as string,\n\t\tmembershiptype as long,\n\t\tisdefault as boolean,\n\t\tmodifiedonbehalfby as string,\n\t\tmodifiedonbehalfby_entitytype as string,\n\t\tqueueid as string,\n\t\tqueueid_entitytype as string,\n\t\tcreatedonbehalfby as string,\n\t\tcreatedonbehalfby_entitytype as string,\n\t\ttransactioncurrencyid_entitytype as string,\n\t\tregardingobjectid as string,\n\t\tadministratorid_entitytype as string,\n\t\tbusinessunitid_entitytype as string,\n\t\tmodifiedby_entitytype as string,\n\t\tcreatedby_entitytype as string,\n\t\tteamtemplateid as string,\n\t\tteamtemplateid_entitytype as string,\n\t\ttraversedpath as string,\n\t\ttransactioncurrencyidname as string,\n\t\tqueueidname as string,\n\t\tregardingobjecttypecode as string,\n\t\tstageid as string,\n\t\timportsequencenumber as long,\n\t\torganizationidname as string,\n\t\tazureactivedirectoryobjectid as string,\n\t\tadministratoridname as string,\n\t\tadministratoridyominame as string,\n\t\texchangerate as decimal(10,0),\n\t\tprocessid as string,\n\t\tbusinessunitidname as string,\n\t\toverriddencreatedon as timestamp,\n\t\tregardingobjectid_entitytype as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delta',\n\tfileSystem: 'cseo',\n\tfolderPath: 'standardized/transactional/msx/hub_vw_team/v1/standard') ~> MSXOpportunityTeam\nsource(output(\n\t\topportunityid as string,\n\t\topportunitynumber as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> InProgressOpp\nfilter1 filter(lower(regardingobjectid_entitytype)=='opportunity') ~> asOpportunityObject\nMSXOpportunityTeam, InProgressOpp exists(regardingobjectid == opportunityid,\n\tnegate:false,\n\tbroadcast: 'auto')~> exists2\nexists2 filter(OdsStatus ==0) ~> filter1\nasOpportunityObject select(mapColumn(\n\t\topportunityid = regardingobjectid,\n\t\tTeamId\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> select1\nselect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tEDLPExtractId as string,\n\t\tCreatedById as string,\n\t\tCreatedDate as timestamp,\n\t\tCrmInstanceId as string,\n\t\tModifiedById as string,\n\t\tModifiedDate as timestamp,\n\t\tOdsCreatedDate as timestamp,\n\t\tOdsModifiedDate as timestamp,\n\t\tOdsStatus as integer,\n\t\tOpportunityId as string,\n\t\tOpportunityTeamId as integer,\n\t\tSystemUserId as string,\n\t\tTenantId as integer,\n\t\tVersionNumber as long,\n\t\tTeamId as string,\n\t\tEDLPExtractDateTime as timestamp,\n\t\tEDLPLoadTS as string,\n\t\tEDLPModifiedDateTime as timestamp,\n\t\tEDLPDeltaActionCode as string,\n\t\tExtractId as string,\n\t\tExtractDateTime as timestamp,\n\t\tLoadTS as timestamp,\n\t\tDeltaActionCode as string,\n\t\tPlatformCreatedDate as timestamp,\n\t\tPlatformModifiedDate as timestamp,\n\t\tPlatformModifiedDateAsInt as long\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\trecreate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> OpportunityTeam"
 				}
 			},
 			"dependsOn": [
@@ -715,583 +841,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/msxdatalake')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyToSQLDB')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Lookup",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "tablelist",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"firstRowOnly": false
-						}
-					},
-					{
-						"name": "ForEach1",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "Lookup",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Lookup').output.value",
-								"type": "Expression"
-							},
-							"activities": [
-								{
-									"name": "Copy data1",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "AzureSqlSource",
-											"queryTimeout": "02:00:00",
-											"partitionOption": "None"
-										},
-										"sink": {
-											"type": "SqlServerSink",
-											"preCopyScript": {
-												"value": "if object_id ( '@{ item().name}' ) is not null drop table  @{ item().name}",
-												"type": "Expression"
-											},
-											"writeBehavior": "insert",
-											"sqlWriterUseTableLock": true,
-											"tableOption": "autoCreate"
-										},
-										"enableStaging": false,
-										"translator": {
-											"type": "TabularTranslator",
-											"typeConversion": true,
-											"typeConversionSettings": {
-												"allowDataTruncation": true,
-												"treatBooleanAsNumber": false
-											}
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "source",
-											"type": "DatasetReference",
-											"parameters": {
-												"tablename": {
-													"value": "@item().name",
-													"type": "Expression"
-												}
-											}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "target",
-											"type": "DatasetReference",
-											"parameters": {
-												"tablename": {
-													"value": "@item().name",
-													"type": "Expression"
-												}
-											}
-										}
-									]
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/tablelist')]",
-				"[concat(variables('factoryId'), '/datasets/target')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/fromEDLtoAzureSQL')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "MSXmilestone",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "MSXOpportunity",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "MSXmilestone",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"Milestone": {},
-									"Opportunity": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "msxaccount",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "MSXOpportunity",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "msxaccount",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"msxaccount": {},
-									"GBBOpportunity": {},
-									"AccountForGBBOpp": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "OpportunityTeam",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "Teammembership",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "OpportunityTeam",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"MSXOpportunityTeam": {},
-									"teammembership": {},
-									"OpportunityTeam": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "MSXOpportunity",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "OpportunityTeam",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "MSXOpportunity",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"msxopportunity": {},
-									"OppTeamMap": {},
-									"FocusMember": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "msxnote",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "msxnote",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"msxnote": {},
-									"ower": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "Teammembership",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "Teammembership",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"Teammembership": {},
-									"focusMember": {},
-									"SellerMembership": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "MSXCurrencyData",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "MSXCurrencyData",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"MSXCurrencySource": {},
-									"currencydata": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "DimOpportunityFromOCDM",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "MSXOpportunity",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "DimOpportunityFromOCDM",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"DimOppFromOCDM": {},
-									"Opp": {},
-									"DimSMBOppfromOCDM": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "Script1",
-						"type": "Script",
-						"dependsOn": [
-							{
-								"activity": "DimOpportunityFromOCDM",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"linkedServiceName": {
-							"referenceName": "azoedbisqlprod",
-							"type": "LinkedServiceReference"
-						},
-						"typeProperties": {
-							"scripts": [
-								{
-									"type": "Query",
-									"text": "delete [MSXOpportunity] where OdsStatus  =1\n\nupdate o\nset CurrentSalesStageModifiedOn = o2.CurrentSalesStageModifiedOn\n\nfrom MSXOpportunity o left join DimOpportunityFromOCDM o2 on o.OpportunityId = o2.OpportunityId\n\nselect distinct opportunityid  from DimOpportunityFromOCDM"
-								}
-							],
-							"scriptBlockExecutionTimeout": "02:00:00"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-04-28T16:53:33Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/MSXmilestone')]",
-				"[concat(variables('factoryId'), '/dataflows/msxaccount')]",
-				"[concat(variables('factoryId'), '/dataflows/OpportunityTeam')]",
-				"[concat(variables('factoryId'), '/dataflows/MSXOpportunity')]",
-				"[concat(variables('factoryId'), '/dataflows/msxnote')]",
-				"[concat(variables('factoryId'), '/dataflows/Teammembership')]",
-				"[concat(variables('factoryId'), '/dataflows/MSXCurrencyData')]",
-				"[concat(variables('factoryId'), '/dataflows/DimOpportunityFromOCDM')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "DimOpportunityFromOCDM",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "DimOpportunityFromOCDM",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"DimOppFromOCDM": {},
-									"Opp": {},
-									"DimSMBOppfromOCDM": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/DimOpportunityFromOCDM')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Master')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "fromEDLtoAzureSQL",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "fromEDLtoAzureSQL",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "Stored procedure Create EPM Note",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "fromEDLtoAzureSQL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_Create_EPMNote]"
-						},
-						"linkedServiceName": {
-							"referenceName": "azoedbisqlprod",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/fromEDLtoAzureSQL')]"
 			]
 		}
 	]
