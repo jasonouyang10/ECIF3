@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "DimOpportunityFromOCDM",
+				"name": "Step2 OpportunityTeam",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "DimOpportunityFromOCDM",
+						"referenceName": "Step2 OpportunityTeam",
 						"type": "DataFlowReference"
 					},
 					"compute": {
