@@ -1569,6 +1569,30 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/InProgressUser')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "azoedbisqlprod",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "InProgressOpp"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "",
+					"table": "InProgressUser"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/azoedbisqlprod')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/MSXAccount')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -4346,29 +4370,6 @@
 				"schema": [],
 				"typeProperties": {
 					"table": "MSXNote"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/azoedbisqlprod')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/msxprocessstage')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "azoedbisqlprod",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "MSX"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"table": "MSXProcessStage"
 				}
 			},
 			"dependsOn": [
