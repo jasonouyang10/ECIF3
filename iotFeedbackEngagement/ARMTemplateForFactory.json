@@ -255,6 +255,54 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/debugger')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "focusMember",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "focusMember",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"MSXsystemuser": {},
+									"UserList": {},
+									"TargetUser": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/focusMember')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/fromEDLtoAzureSQL')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -759,54 +807,6 @@
 				"[concat(variables('factoryId'), '/dataflows/step3 Teammembership')]",
 				"[concat(variables('factoryId'), '/dataflows/step 1 InProg Opp')]",
 				"[concat(variables('factoryId'), '/dataflows/Step2 OpportunityTeam')]",
-				"[concat(variables('factoryId'), '/dataflows/Step4 user')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1_copy1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Step4 user",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "Step4 user",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"MSXsystemuser": {},
-									"source1": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/Step4 user')]"
 			]
 		},
