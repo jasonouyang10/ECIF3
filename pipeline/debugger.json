@@ -1,9 +1,9 @@
 {
-	"name": "pipeline1_copy1",
+	"name": "debugger",
 	"properties": {
 		"activities": [
 			{
-				"name": "Step4 user",
+				"name": "focusMember",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "Step4 user",
+						"referenceName": "focusMember",
 						"type": "DataFlowReference"
 					},
 					"compute": {
